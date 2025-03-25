@@ -1,18 +1,33 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   main.c                                             :+:      :+:    :+:   */
+/*   ft_strdup.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: aakritah <aakritah@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2025/03/25 13:18:28 by aakritah          #+#    #+#             */
-/*   Updated: 2025/03/25 14:30:19 by aakritah         ###   ########.fr       */
+/*   Created: 2024/10/25 18:52:05 by aakritah          #+#    #+#             */
+/*   Updated: 2024/11/04 14:05:07 by aakritah         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include <stdio.h>
+#include "libft.h"
 
-int main()
+char	*ft_strdup(const char *s1)
 {
-    printf("hwoeij");
+	size_t	i;
+	size_t	s;
+	char	*t;
+
+	s = ft_strlen(s1);
+	t = malloc((s + 1) * 1);
+	if (!t)
+		return (NULL);
+	i = 0;
+	while (s1[i])
+	{
+		t[i] = s1[i];
+		i++;
+	}
+	t[i] = '\0';
+	return (t);
 }

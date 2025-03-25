@@ -1,18 +1,25 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   main.c                                             :+:      :+:    :+:   */
+/*   ft_memset.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: aakritah <aakritah@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2025/03/25 13:18:28 by aakritah          #+#    #+#             */
-/*   Updated: 2025/03/25 14:30:19 by aakritah         ###   ########.fr       */
+/*   Created: 2024/10/24 15:09:12 by aakritah          #+#    #+#             */
+/*   Updated: 2024/10/24 16:49:19 by aakritah         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include <stdio.h>
+#include "libft.h"
 
-int main()
+void	*ft_memset(void *b, int c, size_t len)
 {
-    printf("hwoeij");
+	size_t			i;
+	unsigned char	*t;
+
+	t = b;
+	i = 0;
+	while (i < len)
+		t[i++] = (unsigned char)c;
+	return (b);
 }
