@@ -4,21 +4,26 @@ CFLAGS = -Wall -Werror -Wextra
 SRC = main.c
 OBJC = $(SRC:%.c=%.o)
 
-NAME = minishell
+libft_Dir = ./42_libft
+libft = $(libft_Dir)/libft.a
 
+NAME = minishell
 
 all: $(NAME)
 
 $(NAME): $(OBJC)
-	$(CC) $(CFLAGS) $(OBJC) -o $(NAME)
+#	make -C $(libft_Dir)
+	$(CC) $(CFLAGS) $(OBJC) -o $(NAME) $(libft)
 
 %.o: %.c main.h
 	$(CC) $(CFLAGS) -c $< -o $@
 
 clean:
+#	make -C $(libft_Dir) clean
 	rm -rf $(OBJC) 
 
 fclean: clean
+#	make -C $(libft_Dir) fclean
 	rm -rf $(NAME)
 
 re: fclean all

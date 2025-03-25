@@ -6,7 +6,16 @@
 /*   By: aakritah <aakritah@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/25 13:18:26 by aakritah          #+#    #+#             */
-/*   Updated: 2025/03/25 13:18:27 by aakritah         ###   ########.fr       */
+/*   Updated: 2025/03/25 15:04:25 by aakritah         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
+#ifndef MAIN_H
+#define MAIN_H
+
+#include "./42_Libft/libft.h"
+#include <stdio.h>
+#include <unistd.h>
+
+
+#endif
