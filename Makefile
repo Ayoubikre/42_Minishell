@@ -1,15 +1,21 @@
-CC = gcc
-# CFLAGS = -Wall -Werror -Wextra -I./readline/include
-CFLAGS = -Wall -I./readline/include
-RDFLAGS = -L./readline/lib -lreadline
+CC = cc
 
-SRC = main.c
+# CFLAGS = -Wall -Werror -Wextra -I./readline/include
+CFLAGS =-I./libs/readline/include
+RDFLAGS = -L./libs/readline/lib -lreadline
+
+headers  = ./include/main.h \
+			./include/parse.h \
+
+SRC  = ./main.c \
+		./parsing/parse.c \
+
 OBJC = $(SRC:%.c=%.o)
 
-libft_Dir = ./42_libft
+libft_Dir = ./libs/42_libft
 libft = $(libft_Dir)/libft.a
 
-NAME = a
+NAME = Minishell
 
 all: $(NAME) clean
 
@@ -17,7 +23,7 @@ $(NAME): $(OBJC)
 #	make -C $(libft_Dir)
 	@$(CC) $(CFLAGS) $(OBJC) -o $(NAME) $(libft) $(RDFLAGS) && ./$(NAME)
 
-%.o: %.c main.h
+%.o: %.c $(headers)
 	@$(CC) $(CFLAGS) -c $< -o $@
 
 clean:
