@@ -11,14 +11,14 @@ libft = $(libft_Dir)/libft.a
 
 NAME = a
 
-all: $(NAME)
+all: $(NAME) clean
 
 $(NAME): $(OBJC)
 #	make -C $(libft_Dir)
-	$(CC) $(CFLAGS) $(OBJC) -o $(NAME) $(libft) $(RDFLAGS)
+	@$(CC) $(CFLAGS) $(OBJC) -o $(NAME) $(libft) $(RDFLAGS) && ./$(NAME)
 
 %.o: %.c main.h
-	$(CC) $(CFLAGS) -c $< -o $@
+	@$(CC) $(CFLAGS) -c $< -o $@
 
 clean:
 #	make -C $(libft_Dir) clean
