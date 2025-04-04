@@ -6,34 +6,33 @@
 /*   By: aakritah <aakritah@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/25 13:18:28 by aakritah          #+#    #+#             */
-/*   Updated: 2025/04/03 05:55:31 by aakritah         ###   ########.fr       */
+/*   Updated: 2025/04/04 07:02:22 by aakritah         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "./include/main.h"
 #include "./include/parse.h"
 
-void	leaks(void)
-{
-	system("leaks -q Minishell");
-}
-
 int	main(int ac, char **av, char **env)
 {
-	char	*t;
+	char	*str;
 	int		i;
 
 	atexit(leaks);
 	i = 0;
 	while (i < 1)
 	{
-		t = readline("Minishell > ");
-		if (!t)
+		str = readline("Minishell > ");
+		if (str && str[0])
+		{
+			ft_parse(str);
+			add_history(str);
+		}
+		else if(!str) 
 			break ;
-		ft_parse(t);
-		add_history(t);
-		free(t);
+		free(str);
 		i++;
 	}
+	
 	return (0);
 }

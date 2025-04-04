@@ -1,19 +1,26 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   lexing.c                                           :+:      :+:    :+:   */
+/*   utils1.c                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: aakritah <aakritah@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2025/04/03 07:07:00 by aakritah          #+#    #+#             */
-/*   Updated: 2025/04/03 07:09:59 by aakritah         ###   ########.fr       */
+/*   Created: 2025/04/04 02:59:30 by aakritah          #+#    #+#             */
+/*   Updated: 2025/04/04 09:06:51 by aakritah         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../include/main.h"
 #include "../../include/parse.h"
 
-void ft_lexing(char *t, t_token *data)
+void ft_free(char **t)
 {
+    int i=0;
+    while(t[i])
+    {
+        free(t[i]);
+        i++;
+    }
+    free(t);
     
 }
