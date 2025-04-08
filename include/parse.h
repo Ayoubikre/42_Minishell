@@ -6,7 +6,7 @@
 /*   By: aakritah <aakritah@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/03 02:45:32 by aakritah          #+#    #+#             */
-/*   Updated: 2025/04/04 13:47:16 by aakritah         ###   ########.fr       */
+/*   Updated: 2025/04/08 19:04:52 by aakritah         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -52,6 +52,7 @@ void ft_free_list(t_token **data);
 
                         //utils
 char	**ft_split2(char const *s, char c);
+// char	**ft_split3(char const *s);
 char	**ft_split3(char const *s);
 void ft_free(char **t);
 

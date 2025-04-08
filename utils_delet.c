@@ -6,7 +6,7 @@
 /*   By: aakritah <aakritah@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/04 02:49:05 by aakritah          #+#    #+#             */
-/*   Updated: 2025/04/04 03:10:40 by aakritah         ###   ########.fr       */
+/*   Updated: 2025/04/08 19:03:31 by aakritah         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -40,7 +40,7 @@ void print_tab(char **t)
         ft_printf("----------------\n");
     while(t[i])
     {
-        ft_printf(">%s<\n",t[i]);
+        ft_printf("> %s <\n",t[i]);
         i++;
     }
         ft_printf("----------------\n");

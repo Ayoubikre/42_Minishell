@@ -6,7 +6,7 @@
 /*   By: aakritah <aakritah@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/25 13:18:28 by aakritah          #+#    #+#             */
-/*   Updated: 2025/04/04 07:02:22 by aakritah         ###   ########.fr       */
+/*   Updated: 2025/04/08 21:36:52 by aakritah         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,21 +18,23 @@ int	main(int ac, char **av, char **env)
 	char	*str;
 	int		i;
 
-	atexit(leaks);
-	i = 0;
-	while (i < 1)
-	{
-		str = readline("Minishell > ");
-		if (str && str[0])
-		{
-			ft_parse(str);
-			add_history(str);
-		}
-		else if(!str) 
-			break ;
-		free(str);
-		i++;
-	}
-	
+	// atexit(leaks);
+	// i = 0;
+	// while (i < 1)
+	// {
+	// 	str = readline("Minishell > ");
+	// 	if (str && str[0])
+	// 	{
+	// 		ft_parse(str);
+	// 		add_history(str);
+	// 	}
+	// 	else if(!str) 
+	// 		break ;
+	// 	free(str);
+	// 	i++;
+	// }
+	//  char **t=ft_split3("hellothis is me");
+	print_tab(ft_split3(" c>>>|>>>at|ls|<<< < << >>>"));
+    // print_tab(t);
 	return (0);
 }
