@@ -6,7 +6,7 @@
 /*   By: aakritah <aakritah@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/25 13:18:28 by aakritah          #+#    #+#             */
-/*   Updated: 2025/04/09 21:26:26 by aakritah         ###   ########.fr       */
+/*   Updated: 2025/04/09 21:51:56 by aakritah         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -36,3 +36,9 @@ int	main(int ac, char **av, char **env)
 	// print_tab(t);
 	return (0);
 }
+
+
+/*
+	fix : "lkewfj|" <sdf
+
+*/
