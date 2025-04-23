@@ -6,7 +6,7 @@
 /*   By: aakritah <aakritah@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/03 02:45:32 by aakritah          #+#    #+#             */
-/*   Updated: 2025/04/12 18:45:34 by aakritah         ###   ########.fr       */
+/*   Updated: 2025/04/23 21:35:46 by aakritah         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,6 +26,13 @@ typedef enum e_token_type
     cmd_arg_t,       // 8 
     end_t            // 9 
 }   t_token_type;
+
+typedef enum e_token_precedence
+{
+    end_p,            // 0     
+    pipe_p,           // 1           
+    redirect_t        // 2    
+}   t_token_precedence;
 
 typedef struct s_token 
 {
