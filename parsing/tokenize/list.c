@@ -6,7 +6,7 @@
 /*   By: noctis <noctis@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/03 07:10:20 by aakritah          #+#    #+#             */
-/*   Updated: 2025/04/24 00:11:54 by noctis           ###   ########.fr       */
+/*   Updated: 2025/04/24 09:03:10 by noctis           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -84,7 +84,7 @@ t_token *ft_last_list(t_token **data)
 	t_token	*ptr;
 
 	if (!data)
-		return ;
+		return NULL;
 	ptr=*data;
 	while(ptr->next)
 		ptr=ptr->next;

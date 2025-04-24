@@ -1,19 +1,5 @@
 #               ----------------      MAC :    ----------------
 
-CC = cc
-
-# CFLAGS = -Wall -Werroro -Wextra -I./readline/include
-
-# CFLAGS = -fsanitize=address -g -I./libs/readline/include
-
-CFLAGS = -I./libs/readline/include
-
-RDFLAGS = -L./libs/readline/lib -lreadline
-
-
-#               ----------------      LNX :    ----------------
-
-
 # CC = cc
 
 # # CFLAGS = -Wall -Werroro -Wextra -I./readline/include
@@ -22,7 +8,21 @@ RDFLAGS = -L./libs/readline/lib -lreadline
 
 # CFLAGS = -I./libs/readline/include
 
-# RDFLAGS = -lreadline -lncurses
+# RDFLAGS = -L./libs/readline/lib -lreadline
+
+
+#               ----------------      LNX :    ----------------
+
+
+CC = cc
+
+# CFLAGS = -Wall -Werroro -Wextra -I./readline/include
+
+# CFLAGS = -fsanitize=address -g -I./libs/readline/include
+
+CFLAGS = -I./libs/readline/include
+
+RDFLAGS = -lreadline -lncurses
 
 
 #               ----------------                ----------------
@@ -37,7 +37,6 @@ SRC  = ./main.c \
 		./parsing/tokenize/tokenize.c \
 		./parsing/tokenize/list.c \
 		./parsing/Yard/shunting_yard.c  \
-		./parsing/Yard/list.c \
 		./parsing/utils/ft_split2.c \
 		./parsing/utils/ft_split3.c \
 		./parsing/utils/utils1.c \

@@ -6,7 +6,7 @@
 /*   By: noctis <noctis@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/03 02:45:32 by aakritah          #+#    #+#             */
-/*   Updated: 2025/04/24 00:21:11 by noctis           ###   ########.fr       */
+/*   Updated: 2025/04/24 09:06:19 by noctis           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -63,6 +63,10 @@ void ft_add_list_front(t_token **data, t_token *n);
 void ft_add_list_end(t_token **data, t_token *n);
 void ft_free_list(t_token **data);
 t_token *ft_last_list(t_token **data);
+
+                        //yard
+void ft_shunting_yard(t_token **data);
+
 
                         //utils
 char	**ft_split2(char const *s, char c);

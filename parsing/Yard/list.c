@@ -6,19 +6,10 @@
 /*   By: noctis <noctis@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/23 23:52:48 by noctis            #+#    #+#             */
-/*   Updated: 2025/04/23 23:53:33 by noctis           ###   ########.fr       */
+/*   Updated: 2025/04/24 08:52:39 by noctis           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../include/main.h"
 #include "../../include/parse.h"
 
-void ft_push()
-{
-
-}
-
-void ft_pop()
-{
-    
-}
