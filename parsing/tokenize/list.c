@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   list.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: aakritah <aakritah@student.42.fr>          +#+  +:+       +#+        */
+/*   By: noctis <noctis@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/03 07:10:20 by aakritah          #+#    #+#             */
-/*   Updated: 2025/04/04 08:14:02 by aakritah         ###   ########.fr       */
+/*   Updated: 2025/04/24 00:11:54 by noctis           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -77,4 +77,16 @@ void	ft_free_list(t_token **data)
 		free(ptr->value);
 		free(ptr);
 	}
+}
+
+t_token *ft_last_list(t_token **data)
+{
+	t_token	*ptr;
+
+	if (!data)
+		return ;
+	ptr=*data;
+	while(ptr->next)
+		ptr=ptr->next;
+	return ptr;
 }

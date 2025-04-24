@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   parse.h                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: aakritah <aakritah@student.42.fr>          +#+  +:+       +#+        */
+/*   By: noctis <noctis@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/03 02:45:32 by aakritah          #+#    #+#             */
-/*   Updated: 2025/04/23 21:35:46 by aakritah         ###   ########.fr       */
+/*   Updated: 2025/04/24 00:21:11 by noctis           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,14 +30,16 @@ typedef enum e_token_type
 typedef enum e_token_precedence
 {
     end_p,            // 0     
-    pipe_p,           // 1           
-    redirect_t        // 2    
+    string_p,         // 1   
+    pipe_p,           // 2        
+    redirect_p        // 3    
 }   t_token_precedence;
 
 typedef struct s_token 
 {
    char *value;
    t_token_type type;
+   t_token_precedence prec;
    int prc;
    struct s_token *next;
    struct s_token *prev; 
@@ -60,6 +62,7 @@ t_token *ft_creat_new_list(char *str, t_token_type type);
 void ft_add_list_front(t_token **data, t_token *n);
 void ft_add_list_end(t_token **data, t_token *n);
 void ft_free_list(t_token **data);
+t_token *ft_last_list(t_token **data);
 
                         //utils
 char	**ft_split2(char const *s, char c);
