@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   parse.h                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: noctis <noctis@student.42.fr>              +#+  +:+       +#+        */
+/*   By: aakritah <aakritah@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/03 02:45:32 by aakritah          #+#    #+#             */
-/*   Updated: 2025/04/24 09:06:19 by noctis           ###   ########.fr       */
+/*   Updated: 2025/04/24 20:53:04 by aakritah         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -47,7 +47,7 @@ typedef struct s_token
 
 
                         // parsing :
-void ft_parse(char *str);
+t_token * ft_parse(char *str);
 
                         // tokenizing
 int ft_tokenize(char *str, t_token **data);
@@ -62,15 +62,17 @@ t_token *ft_creat_new_list(char *str, t_token_type type);
 void ft_add_list_front(t_token **data, t_token *n);
 void ft_add_list_end(t_token **data, t_token *n);
 void ft_free_list(t_token **data);
-t_token *ft_last_list(t_token **data);
+t_token *ft_last_list(t_token *data);
 
                         //yard
-void ft_shunting_yard(t_token **data);
+void	ft_shunting_yard(t_token **data);
+void	set_precedence(t_token **data);
+void	ft_push(t_token **data, t_token **a);
+void	ft_pop(t_token **b, t_token **a);
 
 
                         //utils
 char	**ft_split2(char const *s, char c);
-
 char	**ft_split3(char const *s);
 
 void ft_free(char **t);

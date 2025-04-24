@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   utils_delet.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: noctis <noctis@student.42.fr>              +#+  +:+       +#+        */
+/*   By: aakritah <aakritah@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/04 02:49:05 by aakritah          #+#    #+#             */
-/*   Updated: 2025/04/24 09:43:09 by noctis           ###   ########.fr       */
+/*   Updated: 2025/04/24 21:16:08 by aakritah         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,22 +20,29 @@ void	leaks(void)
 
 void	ft_print_list(t_token *data)
 {
+	ft_printf(RED "\n Printf list data :\n\n" RESET);
 	if (!data)
+	{
+		ft_printf("nothing\n");
 		return ;
-	ft_printf("----------------\n");
+	}
 	while (data)
 	{
-		ft_printf( "cmd : %s , token : %d , precd : %d", data->value, data->type, data->prec);
-		ft_printf("\n----------------\n");
+		ft_printf( "\tCMD : %s", data->value);
+		ft_printf(RED "  -|-  " RESET);
+		ft_printf( "Token : %d", data->type);
+		ft_printf(RED "  -|-  " RESET);
+		ft_printf( "Precd : %d\n\n", data->prec);
 		data = data->next;
 	}
+	ft_printf(RED" > done <\n"RESET);
 }
 
 void	ft_print_list2(t_token *data)
 {
 	FILE *fd = fopen("./test/out.txt", "w+");
 	if (!fd)
-		return ; // handle fopen failure
+		return ;
 	fprintf(fd,"----------------\n");
 	while (data)
 	{
@@ -44,8 +51,24 @@ void	ft_print_list2(t_token *data)
 		data = data->next;
 	}
 	fclose(fd);
+	ft_printf("\n");
 }
 
+void	ft_print_list3(t_token *data)
+{
+	if (!data)
+	{
+		ft_printf("nothing\n");
+		return ;
+	}
+	ft_printf("\n----------------\n");
+	while (data->next)
+	{
+		ft_printf( " %s ", data->value);
+		data = data->next;
+	}
+	ft_printf("\n----------------\n");
+}
 
 void	print_tab(char **t)
 {
