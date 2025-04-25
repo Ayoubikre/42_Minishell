@@ -6,7 +6,7 @@
 /*   By: aakritah <aakritah@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/04 02:49:05 by aakritah          #+#    #+#             */
-/*   Updated: 2025/04/24 21:16:08 by aakritah         ###   ########.fr       */
+/*   Updated: 2025/04/25 21:36:57 by aakritah         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,7 +32,11 @@ void	ft_print_list(t_token *data)
 		ft_printf(RED "  -|-  " RESET);
 		ft_printf( "Token : %d", data->type);
 		ft_printf(RED "  -|-  " RESET);
-		ft_printf( "Precd : %d\n\n", data->prec);
+		ft_printf( "Precd : %d", data->prec);
+		ft_printf(RED "  -|-  " RESET);
+		ft_printf( "\n \t arg : \n");
+		ft_print_list2(data->c_arg);
+		ft_printf( "\n\n");
 		data = data->next;
 	}
 	ft_printf(RED" > done <\n"RESET);
@@ -40,18 +44,23 @@ void	ft_print_list(t_token *data)
 
 void	ft_print_list2(t_token *data)
 {
-	FILE *fd = fopen("./test/out.txt", "w+");
-	if (!fd)
+	if (!data)
+	{
+		ft_printf("\t\tnothing\n");
 		return ;
-	fprintf(fd,"----------------\n");
+	}
 	while (data)
 	{
-		fprintf(fd, "cmd : %s , token : %d , precd : %d\n", data->value, data->type, data->prec);
-		fprintf(fd,"----------------\n");
+		ft_printf( "\t\tCMD : %s", data->value);
+		ft_printf(RED "  -|-  " RESET);
+		ft_printf( "Token : %d", data->type);
+		ft_printf(RED "  -|-  " RESET);
+		ft_printf( "Precd : %d", data->prec);
+		ft_printf(RED "  -|-  " RESET);
+		ft_printf( "\n \t\t arg : \n");
+		ft_printf( "\n\n", data->prec);	
 		data = data->next;
 	}
-	fclose(fd);
-	ft_printf("\n");
 }
 
 void	ft_print_list3(t_token *data)
@@ -70,18 +79,16 @@ void	ft_print_list3(t_token *data)
 	ft_printf("\n----------------\n");
 }
 
-void	print_tab(char **t)
-{
-	int	i;
+// void	print_tab(char **t)
+// {
+// 	int	i;
 
-	i = 0;
-	if (!t)
-		return ;
-	ft_printf("----------------\n");
-	while (t[i])
-	{
-		ft_printf("> %s <\n", t[i]);
-		i++;
-	}
-	ft_printf("----------------\n");
-}
+// 	i = 0;
+// 	if (!t)
+// 		return ;
+// 	while (t[i])
+// 	{
+// 		ft_printf("\n\t\t > %s <\n", t[i]);
+// 		i++;
+// 	}
+// }

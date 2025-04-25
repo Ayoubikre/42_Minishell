@@ -6,7 +6,7 @@
 /*   By: aakritah <aakritah@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/03 02:45:32 by aakritah          #+#    #+#             */
-/*   Updated: 2025/04/24 20:53:04 by aakritah         ###   ########.fr       */
+/*   Updated: 2025/04/25 21:08:50 by aakritah         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -40,7 +40,7 @@ typedef struct s_token
    char *value;
    t_token_type type;
    t_token_precedence prec;
-   int prc;
+   struct s_token *c_arg;
    struct s_token *next;
    struct s_token *prev; 
 }   t_token;
@@ -70,13 +70,16 @@ void	set_precedence(t_token **data);
 void	ft_push(t_token **data, t_token **a);
 void	ft_pop(t_token **b, t_token **a);
 
+                        //filter
+void ft_filter_list(t_token **data);
+
+
 
                         //utils
 char	**ft_split2(char const *s, char c);
 char	**ft_split3(char const *s);
-
-void ft_free(char **t);
-void ft_put_error(char *t, int fd);
+void    ft_free(char **t);
+void    ft_put_error(char *t, int fd);
 char	**ft_set_charset(void);
 
 #endif

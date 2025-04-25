@@ -6,7 +6,7 @@
 /*   By: aakritah <aakritah@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/23 23:43:02 by noctis            #+#    #+#             */
-/*   Updated: 2025/04/24 21:11:47 by aakritah         ###   ########.fr       */
+/*   Updated: 2025/04/25 21:21:36 by aakritah         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,8 +24,6 @@ void	set_precedence(t_token **data)
 	{
 		if (ptr->type == 0)
 			ptr->prec = pipe_p;
-		else if (ptr->type == 9)
-			ptr->prec = end_p;
 		else if (0 < ptr->type && ptr->type < 5)
 			ptr->prec = redirect_p;
 		else
@@ -68,8 +66,6 @@ void	ft_shunting_yard(t_token **data)
 	}
 	while (b)
 		ft_pop(&b, &a);
-	if ((*data)->type == end_t)
-		ft_push(data, &a);
 	ft_free_list(&b);
 	ft_free_list(data);
 	*data = a;

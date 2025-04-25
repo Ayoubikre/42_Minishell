@@ -37,6 +37,7 @@ SRC  = ./main.c \
 		./parsing/tokenize/tokenize.c \
 		./parsing/tokenize/list.c \
 		./parsing/Yard/shunting_yard.c  \
+		./parsing/Yard/filter.c  \
 		./parsing/Yard/list.c  \
 		./parsing/utils/ft_split2.c \
 		./parsing/utils/ft_split3.c \

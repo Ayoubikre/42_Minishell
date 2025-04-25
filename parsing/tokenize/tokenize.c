@@ -6,7 +6,7 @@
 /*   By: aakritah <aakritah@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/03 07:07:00 by aakritah          #+#    #+#             */
-/*   Updated: 2025/04/24 21:36:18 by aakritah         ###   ########.fr       */
+/*   Updated: 2025/04/25 21:08:40 by aakritah         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,15 +18,14 @@ int	ft_tokenize(char *str, t_token **data)
 	char	**t;
 
 	if (ft_initialize_list(str, data) < 0)
-		return (ft_put_error("minishell: syntax error: unclosed quotes\n", 2), -1);
+		return (ft_put_error("minishell: syntax error: unclosed quotes\n", 2),
+			-1);
 	ft_set_tokens(data);
 	if (ft_validat_list(data) < 0)
 		return (-1);
-	
 		
-	// fix cmd token like " > out ls"		
-	// fix cmd token like " < in  ls"	
-		
+
+	// echo "hello"'world'  : should be a whole world insted of 2
 	return (0);
 }
 
@@ -52,7 +51,7 @@ int	ft_initialize_list(char *str, t_token **data)
 			ft_add_list_end(data, ft_creat_new_list(t2[j], string_t));
 			j++;
 		}
-		(ft_free(t2),i++) ;
+		(ft_free(t2), i++);
 	}
 	ft_free(t1);
 	ft_add_list_end(data, ft_creat_new_list(NULL, end_t));
@@ -76,6 +75,26 @@ void	ft_set_tokens(t_token **data)
 			f = 1;
 		else
 			f = 2;
+		ptr = ptr->next;
+	}
+	ptr = *data;
+	while (ptr)
+	{
+		if (ptr->type == infile_t || ptr->type == heredoc_t
+			|| ptr->type == outfile_t || ptr->type == append_t)
+		{
+			if (ptr->prev == NULL || (ptr->prev && ptr->prev->type == pipe_t))
+			{
+				if (ptr->next && ptr->next->next
+					&& ptr->next->next->type == cmd_arg_t)
+				{
+					if (ft_check_buildin_cmd(ptr->next->next->value) == -1)
+						ptr->next->next->type = cmd_t;
+					else
+						ptr->next->next->type = b_cmd_t;
+				}
+			}
+		}
 		ptr = ptr->next;
 	}
 }
@@ -134,38 +153,47 @@ int	ft_validat_list(t_token **data)
 
 	ptr = *data;
 	while (ptr)
-	{	
-		if(ptr->type == pipe_t)
+	{
+		if (ptr->type == pipe_t)
 		{
-			if (ptr->prev==NULL || ptr->prev->type <5  )
+			if (ptr->prev == NULL || ptr->prev->type < 5)
 			{
-				 return (ft_put_error(RED"minishell: syntax error near unexpected token `|'\n"RESET, 2), -1);
+				return (ft_put_error(RED "minishell: syntax error near unexpected token `|'\n" RESET,
+						2), -1);
 			}
 			if (ptr->next->type == end_t)
 			{
-				 return (ft_put_error(RED"minishell: syntax error: unexpected end of file\n"RESET, 2), -1);
+				return (ft_put_error(RED "minishell: syntax error: unexpected end of file\n" RESET,
+						2), -1);
 			}
-			if((0< ptr->next->type && ptr->next->type <5 )&& ptr->next->next->type == end_t  )
+			if ((0 < ptr->next->type && ptr->next->type < 5)
+				&& ptr->next->next->type == end_t)
 			{
-				 return (ft_put_error(RED"minishell: syntax error near unexpected token `newline'\n"RESET, 2), -1);
+				return (ft_put_error(RED "minishell: syntax error near unexpected token `newline'\n" RESET,
+						2), -1);
 			}
 		}
-		else if(0< ptr->type  && ptr->type <5)
+		else if (0 < ptr->type && ptr->type < 5)
 		{
-			if(ptr->next->type == end_t)
+			if (ptr->next->type == end_t)
 			{
-				 return (ft_put_error(RED"minishell: syntax error near unexpected token `newline'\n"RESET, 2), -1);
+				return (ft_put_error(RED "minishell: syntax error near unexpected token `newline'\n" RESET,
+						2), -1);
 			}
-			if((0< ptr->next->type && ptr->next->type <5 ))
+			if ((0 < ptr->next->type && ptr->next->type < 5))
 			{
 				if (ptr->next->type == append_t)
-				 return (ft_put_error(RED"minishell: syntax error near unexpected token `>>'\n"RESET, 2), -1);
+					return (ft_put_error(RED "minishell: syntax error near unexpected token `>>'\n" RESET,
+							2), -1);
 				if (ptr->next->type == heredoc_t)
-				 return (ft_put_error(RED"minishell: syntax error near unexpected token `<<'\n"RESET, 2), -1);
+					return (ft_put_error(RED "minishell: syntax error near unexpected token `<<'\n" RESET,
+							2), -1);
 				if (ptr->next->type == outfile_t)
-				 return (ft_put_error(RED"minishell: syntax error near unexpected token `>'\n"RESET, 2), -1);
+					return (ft_put_error(RED "minishell: syntax error near unexpected token `>'\n" RESET,
+							2), -1);
 				if (ptr->next->type == infile_t)
-				 return (ft_put_error(RED"minishell: syntax error near unexpected token `<'\n"RESET, 2), -1);
+					return (ft_put_error(RED "minishell: syntax error near unexpected token `<'\n" RESET,
+							2), -1);
 			}
 		}
 		ptr = ptr->next;

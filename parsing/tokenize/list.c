@@ -6,7 +6,7 @@
 /*   By: aakritah <aakritah@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/03 07:10:20 by aakritah          #+#    #+#             */
-/*   Updated: 2025/04/24 21:30:34 by aakritah         ###   ########.fr       */
+/*   Updated: 2025/04/25 18:55:36 by aakritah         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,6 +26,7 @@ t_token	*ft_creat_new_list(char *str, t_token_type type)
 		n->value = ft_strdup(str);
 	n->type = type;
 	n->prec = -1;
+	n->c_arg = NULL;
 	n->next = NULL;
 	n->prev = NULL;
 	return (n);
