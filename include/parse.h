@@ -6,7 +6,7 @@
 /*   By: aakritah <aakritah@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/03 02:45:32 by aakritah          #+#    #+#             */
-/*   Updated: 2025/04/25 21:08:50 by aakritah         ###   ########.fr       */
+/*   Updated: 2025/04/26 15:45:27 by aakritah         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -40,7 +40,7 @@ typedef struct s_token
    char *value;
    t_token_type type;
    t_token_precedence prec;
-   struct s_token *c_arg;
+   char **c_arg;
    struct s_token *next;
    struct s_token *prev; 
 }   t_token;
@@ -49,37 +49,42 @@ typedef struct s_token
                         // parsing :
 t_token * ft_parse(char *str);
 
+
                         // tokenizing
 int ft_tokenize(char *str, t_token **data);
 int	ft_initialize_list(char *str, t_token **data);
-int	ft_check_word(char *t1, char *t2);
-int	ft_check_buildin_cmd(char *t);
-t_token_type	ft_get_token_type(char *t, int f);
 void  ft_set_tokens(t_token **data);
+void ft_fix_cmd_pos_token(t_token **data);
+t_token_type	ft_get_token_type(char *t, int f);
+int	ft_check_buildin_cmd(char *t);
+int	ft_check_word(char *t1, char *t2);
 int  ft_validat_list(t_token **data);
-
+int	ft_validat_list_2(t_token *ptr);
+void	ft_put_error_tokens(int f, int fd);
 t_token *ft_creat_new_list(char *str, t_token_type type);
 void ft_add_list_front(t_token **data, t_token *n);
 void ft_add_list_end(t_token **data, t_token *n);
-void ft_free_list(t_token **data);
 t_token *ft_last_list(t_token *data);
+void ft_free_list(t_token **data);
 
-                        //yard
+                        //Shunting yard
 void	ft_shunting_yard(t_token **data);
 void	set_precedence(t_token **data);
+void	ft_move_list_shunting_yard(t_token **data, t_token **a, t_token **b);
 void	ft_push(t_token **data, t_token **a);
 void	ft_pop(t_token **b, t_token **a);
 
                         //filter
-void ft_filter_list(t_token **data);
-
-
+int     ft_filter_list(t_token **data);
+void	ft_remove_end_token(t_token **data);
+long	ft_count_arg_node(t_token *ptr);
+int	    ft_copy_arg_node(t_token *ptr);
+void	ft_free_arg_node(t_token **data);
 
                         //utils
 char	**ft_split2(char const *s, char c);
 char	**ft_split3(char const *s);
 void    ft_free(char **t);
-void    ft_put_error(char *t, int fd);
 char	**ft_set_charset(void);
 
 #endif

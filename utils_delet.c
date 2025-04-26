@@ -6,7 +6,7 @@
 /*   By: aakritah <aakritah@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/04 02:49:05 by aakritah          #+#    #+#             */
-/*   Updated: 2025/04/25 21:36:57 by aakritah         ###   ########.fr       */
+/*   Updated: 2025/04/26 12:15:11 by aakritah         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -35,7 +35,7 @@ void	ft_print_list(t_token *data)
 		ft_printf( "Precd : %d", data->prec);
 		ft_printf(RED "  -|-  " RESET);
 		ft_printf( "\n \t arg : \n");
-		ft_print_list2(data->c_arg);
+		print_tab(data->c_arg);
 		ft_printf( "\n\n");
 		data = data->next;
 	}
@@ -71,7 +71,7 @@ void	ft_print_list3(t_token *data)
 		return ;
 	}
 	ft_printf("\n----------------\n");
-	while (data->next)
+	while (data)
 	{
 		ft_printf( " %s ", data->value);
 		data = data->next;
@@ -79,16 +79,16 @@ void	ft_print_list3(t_token *data)
 	ft_printf("\n----------------\n");
 }
 
-// void	print_tab(char **t)
-// {
-// 	int	i;
+void	print_tab(char **t)
+{
+	int	i;
 
-// 	i = 0;
-// 	if (!t)
-// 		return ;
-// 	while (t[i])
-// 	{
-// 		ft_printf("\n\t\t > %s <\n", t[i]);
-// 		i++;
-// 	}
-// }
+	i = 0;
+	if (!t)
+		return ;
+	while (t[i])
+	{
+		ft_printf("\n\t\t > %s <\n", t[i]);
+		i++;
+	}
+}

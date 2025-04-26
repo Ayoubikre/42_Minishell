@@ -6,7 +6,7 @@
 /*   By: aakritah <aakritah@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/04 02:37:10 by aakritah          #+#    #+#             */
-/*   Updated: 2025/04/12 15:27:26 by aakritah         ###   ########.fr       */
+/*   Updated: 2025/04/26 13:20:17 by aakritah         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -87,7 +87,7 @@ char	**ft_split2(char const *s, char c)
 	if (!s)
 		return (NULL);
 	if ((ft_count(s, c)) == -1)
-		return (NULL);	
+		return (NULL);
 	t = malloc((ft_count(s, c) + 1) * sizeof(char *));
 	if (!t)
 		return (NULL);
@@ -102,4 +102,3 @@ char	**ft_split2(char const *s, char c)
 	t[k] = NULL;
 	return (t);
 }
-

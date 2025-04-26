@@ -6,7 +6,7 @@
 /*   By: aakritah <aakritah@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/04 12:45:20 by aakritah          #+#    #+#             */
-/*   Updated: 2025/04/12 15:18:05 by aakritah         ###   ########.fr       */
+/*   Updated: 2025/04/26 16:34:49 by aakritah         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -79,7 +79,7 @@ static int	ft_count(char const *str, char **charset)
 				copy++;
 				f = 0;
 				x++;
-				if(k<2)
+				if (k < 2)
 					x++;
 			}
 		}
@@ -107,6 +107,9 @@ static char	*ft_copy(char const *str, char **charset, int *x)
 			(*x)++;
 		(*x)++;
 	}
+ 
+	// 
+
 	else if (2 <= k && k <= 4)
 		(*x)++;
 	else if (k >= 0)
@@ -148,9 +151,9 @@ char	**ft_split3(char const *str)
 	{
 		t[i] = ft_copy(str, charset, &x);
 		if (!t[i])
-			return (ft_free(charset),ft_free(t),NULL); 
+			return (ft_free(charset), ft_free(t), NULL);
 		i++;
 	}
 	t[i] = NULL;
-	return (free(charset),t);
+	return (free(charset), t);
 }
