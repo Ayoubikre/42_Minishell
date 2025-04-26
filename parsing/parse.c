@@ -6,7 +6,7 @@
 /*   By: aakritah <aakritah@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/03 02:15:07 by aakritah          #+#    #+#             */
-/*   Updated: 2025/04/26 17:38:46 by aakritah         ###   ########.fr       */
+/*   Updated: 2025/04/26 21:17:30 by aakritah         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,22 +23,13 @@ t_token	*ft_parse(char *str)
 		ft_free_list(&data);
 		return (NULL);
 	}
-	ft_print_list3(data);
-
 	if (ft_filter_list(&data) < 0)
 	{
 		ft_free_list(&data);
 		return (NULL);
 	}
-
-	ft_print_list3(data);
-
-	ft_print_list(data);
-	
-	ft_shunting_yard(&data);
-	
+	// ft_shunting_yard(&data);
 	// ft_tree(&data);
-	ft_print_list3(data);
 	return (data);
 }
 

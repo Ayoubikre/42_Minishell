@@ -6,7 +6,7 @@
 /*   By: aakritah <aakritah@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/04 12:45:20 by aakritah          #+#    #+#             */
-/*   Updated: 2025/04/26 16:34:49 by aakritah         ###   ########.fr       */
+/*   Updated: 2025/04/26 21:10:01 by aakritah         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -107,9 +107,6 @@ static char	*ft_copy(char const *str, char **charset, int *x)
 			(*x)++;
 		(*x)++;
 	}
- 
-	// 
-
 	else if (2 <= k && k <= 4)
 		(*x)++;
 	else if (k >= 0)
