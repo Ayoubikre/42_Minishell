@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   utils_delet.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: aakritah <aakritah@student.42.fr>          +#+  +:+       +#+        */
+/*   By: noctis <noctis@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/04 02:49:05 by aakritah          #+#    #+#             */
-/*   Updated: 2025/04/26 12:15:11 by aakritah         ###   ########.fr       */
+/*   Updated: 2025/04/28 04:16:54 by noctis           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,8 +32,8 @@ void	ft_print_list(t_token *data)
 		ft_printf(RED "  -|-  " RESET);
 		ft_printf("Token : %d", data->type);
 		ft_printf(RED "  -|-  " RESET);
-		ft_printf("Precd : %d", data->prec);
-		ft_printf(RED "  -|-  " RESET);
+		// ft_printf("Precd : %d", data->prec);
+		// ft_printf(RED "  -|-  " RESET);
 		ft_printf("\n \t arg : \n");
 		print_tab(data->c_arg);
 		ft_printf("\n\n");

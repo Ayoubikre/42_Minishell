@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   parse.h                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: aakritah <aakritah@student.42.fr>          +#+  +:+       +#+        */
+/*   By: noctis <noctis@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/03 02:45:32 by aakritah          #+#    #+#             */
-/*   Updated: 2025/04/26 21:16:31 by aakritah         ###   ########.fr       */
+/*   Updated: 2025/04/28 08:53:41 by noctis           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -41,6 +41,7 @@ typedef struct s_token
 	t_token_type		type;
 	t_token_precedence	prec;
 	char				**c_arg;
+	char				**c_red;
 	struct s_token		*next;
 	struct s_token		*prev;
 }						t_token;
@@ -79,6 +80,11 @@ void					ft_remove_end_token(t_token **data);
 long					ft_count_arg_node(t_token *ptr);
 int						ft_copy_arg_node(t_token *ptr);
 void					ft_free_arg_node(t_token **data);
+
+// tree
+
+void ft_tree(t_token **data);
+
 
 // utils
 char					**ft_split2(char const *s, char c);

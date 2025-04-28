@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   list.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: aakritah <aakritah@student.42.fr>          +#+  +:+       +#+        */
+/*   By: noctis <noctis@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/03 07:10:20 by aakritah          #+#    #+#             */
-/*   Updated: 2025/04/26 15:18:59 by aakritah         ###   ########.fr       */
+/*   Updated: 2025/04/28 08:54:08 by noctis           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,6 +27,7 @@ t_token	*ft_creat_new_list(char *str, t_token_type type)
 	n->type = type;
 	n->prec = -1;
 	n->c_arg = NULL;
+	n->c_red = NULL;
 	n->next = NULL;
 	n->prev = NULL;
 	return (n);
