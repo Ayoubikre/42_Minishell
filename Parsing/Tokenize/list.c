@@ -91,9 +91,9 @@ void	ft_free_list(t_token **data)
 		(*data) = (*data)->next;
 		if (ptr->value)
 			free(ptr->value);
-		if(ptr->c_arg)
+		if (ptr->c_arg)
 			ft_free(ptr->c_arg);
-		if(ptr->c_red)
+		if (ptr->c_red)
 			ft_free(ptr->c_red);
 		free(ptr);
 	}

@@ -18,15 +18,16 @@ int	ft_filter_list(t_token **data)
 	t_token	*ptr;
 
 	if (!data || !*data)
-        return (-1);
-	if(ft_remove_end_token(data)==-1)
-		return -1;
+		return (-1);
+	if (ft_remove_end_token(data) == -1)
+		return (-1);
 	ptr = *data;
 	while (ptr)
 	{
 		if (ptr->type == cmd_t || ptr->type == b_cmd_t)
 		{
-			ptr->c_arg = malloc(sizeof(char *) * (ft_count_arg_node(ptr, 1) + 1));
+			ptr->c_arg = malloc(sizeof(char *) * (ft_count_arg_node(ptr, 1)
+						+ 1));
 			if (!ptr->c_arg)
 				return (-1);
 			if (ft_copy_arg_node(ptr) == -1)
@@ -43,9 +44,8 @@ int	ft_remove_end_token(t_token **data)
 	t_token	*ptr;
 	t_token	*tmp;
 
-
-	if(!data || (*data && (*data)->type==end_t))
-		return -1;
+	if (!data || (*data && (*data)->type == end_t))
+		return (-1);
 	ptr = *data;
 	while (ptr->next && ptr->next->type != end_t)
 		ptr = ptr->next;
@@ -60,7 +60,7 @@ long	ft_count_arg_node(t_token *ptr, int f)
 {
 	long	count;
 
-	if(f==1)
+	if (f == 1)
 	{
 		count = 1;
 		while (ptr && ptr->type != pipe_t)
@@ -70,13 +70,13 @@ long	ft_count_arg_node(t_token *ptr, int f)
 			ptr = ptr->next;
 		}
 	}
-	else 
+	else
 	{
 		count = 0;
 		while (ptr && ptr->type != pipe_t)
 		{
-			if (0< ptr->type  && ptr->type <= 5)
-			count++;
+			if (0 < ptr->type && ptr->type <= 5)
+				count++;
 			ptr = ptr->next;
 		}
 	}
@@ -124,12 +124,12 @@ void	ft_free_arg_node(t_token **data)
 				tmp->prev = ptr->prev;
 			if (ptr->value)
 				free(ptr->value);
-			if(ptr->c_arg)
+			if (ptr->c_arg)
 				ft_free(ptr->c_arg);
-			if(ptr->c_red)
+			if (ptr->c_red)
 				ft_free(ptr->c_red);
 			free(ptr);
 		}
-		ptr= tmp;
+		ptr = tmp;
 	}
 }

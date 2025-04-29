@@ -13,8 +13,6 @@
 #include "../../include/main.h"
 #include "../../include/parse.h"
 
-
-
 void	ft_move_list_shunting_yard(t_token **data, t_token **a, t_token **b)
 {
 	if ((*data)->prec == string_p)

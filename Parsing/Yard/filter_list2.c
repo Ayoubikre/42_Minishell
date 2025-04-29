@@ -43,8 +43,8 @@ int	ft_filter_list2(t_token **data)
 
 int	ft_filter_search(t_token *ptr)
 {
-	int		f1;
-	int		f2;
+	int	f1;
+	int	f2;
 
 	if (!ptr)
 		return (0);
@@ -151,6 +151,6 @@ void	ft_free_arg_node2(t_token **data)
 				ft_free(ptr->c_red);
 			free(ptr);
 		}
-		ptr= tmp;
+		ptr = tmp;
 	}
 }

@@ -18,7 +18,7 @@ void	ft_set_tokens(t_token **data)
 	t_token	*ptr;
 	int		f;
 
-	if(!data)
+	if (!data)
 		return ;
 	ptr = *data;
 	f = 0;
