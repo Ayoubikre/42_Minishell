@@ -6,7 +6,7 @@
 /*   By: noctis <noctis@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/03 07:10:20 by aakritah          #+#    #+#             */
-/*   Updated: 2025/04/28 08:54:08 by noctis           ###   ########.fr       */
+/*   Updated: 2025/04/29 00:53:19 by noctis           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -82,7 +82,6 @@ t_token	*ft_last_list(t_token *data)
 void	ft_free_list(t_token **data)
 {
 	t_token	*ptr;
-	int		i;
 
 	if (!data)
 		return ;
@@ -90,17 +89,12 @@ void	ft_free_list(t_token **data)
 	{
 		ptr = (*data);
 		(*data) = (*data)->next;
-		free(ptr->value);
-		if (ptr->c_arg)
-		{
-			i = 0;
-			while (ptr->c_arg[i])
-			{
-				free(ptr->c_arg[i]);
-				i++;
-			}
-			free(ptr->c_arg);
-		}
+		if (ptr->value)
+			free(ptr->value);
+		if(ptr->c_arg)
+			ft_free(ptr->c_arg);
+		if(ptr->c_red)
+			ft_free(ptr->c_red);
 		free(ptr);
 	}
 }

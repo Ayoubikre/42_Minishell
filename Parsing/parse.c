@@ -6,7 +6,7 @@
 /*   By: noctis <noctis@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/03 02:15:07 by aakritah          #+#    #+#             */
-/*   Updated: 2025/04/28 08:56:31 by noctis           ###   ########.fr       */
+/*   Updated: 2025/04/29 00:36:46 by noctis           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,19 +23,19 @@ t_token	*ft_parse(char *str)
 		ft_free_list(&data);
 		return (NULL);
 	}
-	ft_print_list(data);
+	// ft_print_list(data);
 	if (ft_filter_list(&data) < 0)
 	{
 		ft_free_list(&data);
 		return (NULL);
 	}
+	// ft_print_list(data);
 	if (ft_filter_list2(&data) < 0)
 	{
 		ft_free_list(&data);
 		return (NULL);
 	}
-
-	ft_print_list3(data);
+	// ft_print_list(data);
 	ft_shunting_yard(&data);
 	ft_print_list3(data);
 	

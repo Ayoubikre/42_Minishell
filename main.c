@@ -6,7 +6,7 @@
 /*   By: noctis <noctis@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/25 13:18:28 by aakritah          #+#    #+#             */
-/*   Updated: 2025/04/28 04:11:01 by noctis           ###   ########.fr       */
+/*   Updated: 2025/04/29 00:36:55 by noctis           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,9 +25,12 @@ int	main(int ac, char **av, char **env)
 		if (str && str[0])
 		{
 			data = ft_parse(str);
-			// ft_print_list(data);
+			if(data)
+			{
+				// ft_print_list(data);
+				ft_free_list(&data);
+			}
 			add_history(str);
-			ft_free_list(&data);
 		}
 		else if (!str)
 			break ;

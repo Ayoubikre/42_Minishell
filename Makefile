@@ -2,7 +2,7 @@
 
 # CC = cc
 
-# # CFLAGS = -Wall -Werroro -Wextra -I./readline/include
+# # CFLAGS = -Wall -Werror -Wextra -I./libs/readline/include
 
 # # CFLAGS = -fsanitize=address -g -I./libs/readline/include
 
@@ -16,11 +16,11 @@
 
 CC = cc
 
-# CFLAGS = -Wall -Werroro -Wextra -I./readline/include
+# CFLAGS = -Wall -Werror -Wextra -I./libs/readline/include
 
-# CFLAGS = -fsanitize=address -g -I./libs/readline/include
+CFLAGS = -fsanitize=address -g -I./libs/readline/include
 
-CFLAGS = -I./libs/readline/include
+# CFLAGS = -I./libs/readline/include
 
 RDFLAGS = -lreadline -lncurses
 
@@ -40,6 +40,7 @@ SRC  = ./main.c \
 		./Parsing/Tokenize/list.c \
 		./Parsing/Yard/shunting_yard.c  \
 		./Parsing/Yard/filter_list.c  \
+		./Parsing/Yard/filter_list2.c  \
 		./Parsing/Yard/moves.c  \
 		./Parsing/Tree/tree.c  \
 		./Parsing/Utils/ft_split2.c \

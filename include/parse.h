@@ -6,7 +6,7 @@
 /*   By: noctis <noctis@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/03 02:45:32 by aakritah          #+#    #+#             */
-/*   Updated: 2025/04/28 08:53:41 by noctis           ###   ########.fr       */
+/*   Updated: 2025/04/29 01:02:34 by noctis           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,10 +29,8 @@ typedef enum e_token_type
 
 typedef enum e_token_precedence
 {
-	end_p,     // 0
-	string_p,  // 1
-	pipe_p,    // 2
-	redirect_p // 3
+	string_p,  // 0
+	pipe_p,    // 1
 }						t_token_precedence;
 
 typedef struct s_token
@@ -74,12 +72,19 @@ void					ft_move_list_shunting_yard(t_token **data, t_token **a,
 void					ft_push(t_token **data, t_token **a);
 void					ft_pop(t_token **b, t_token **a);
 
-// filter
+// filter 1 :
 int						ft_filter_list(t_token **data);
-void					ft_remove_end_token(t_token **data);
-long					ft_count_arg_node(t_token *ptr);
+int					ft_remove_end_token(t_token **data);
+long					ft_count_arg_node(t_token *ptr, int f);
 int						ft_copy_arg_node(t_token *ptr);
 void					ft_free_arg_node(t_token **data);
+
+// filter 2 :
+int						ft_filter_list2(t_token **data);
+int	ft_filter_search(t_token *ptr);
+int	ft_filter_cas_1(t_token **ptr);
+int	ft_filter_cas_2(t_token **ptr);
+void	ft_free_arg_node2(t_token **data);
 
 // tree
 

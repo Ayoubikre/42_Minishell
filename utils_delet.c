@@ -6,7 +6,7 @@
 /*   By: noctis <noctis@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/04 02:49:05 by aakritah          #+#    #+#             */
-/*   Updated: 2025/04/28 04:16:54 by noctis           ###   ########.fr       */
+/*   Updated: 2025/04/28 23:15:26 by noctis           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,7 +28,8 @@ void	ft_print_list(t_token *data)
 	}
 	while (data)
 	{
-		ft_printf("\tCMD : %s", data->value);
+		// if(data->value)
+			ft_printf("\tCMD : %s", data->value);
 		ft_printf(RED "  -|-  " RESET);
 		ft_printf("Token : %d", data->type);
 		ft_printf(RED "  -|-  " RESET);
@@ -36,6 +37,8 @@ void	ft_print_list(t_token *data)
 		// ft_printf(RED "  -|-  " RESET);
 		ft_printf("\n \t arg : \n");
 		print_tab(data->c_arg);
+		ft_printf("\n \t red : \n");
+		print_tab(data->c_red);
 		ft_printf("\n\n");
 		data = data->next;
 	}
