@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   filter_list.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: noctis <noctis@student.42.fr>              +#+  +:+       +#+        */
+/*   By: aakritah <aakritah@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/25 18:47:36 by aakritah          #+#    #+#             */
-/*   Updated: 2025/04/29 00:55:21 by noctis           ###   ########.fr       */
+/*   Updated: 2025/04/30 17:25:58 by aakritah         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -54,6 +54,7 @@ int	ft_remove_end_token(t_token **data)
 	tmp->prev = NULL;
 	tmp->next = NULL;
 	ft_free_list(&tmp);
+	return (0);
 }
 
 long	ft_count_arg_node(t_token *ptr, int f)
