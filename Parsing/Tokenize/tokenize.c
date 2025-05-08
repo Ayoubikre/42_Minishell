@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   tokenize.c                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: aakritah <aakritah@student.42.fr>          +#+  +:+       +#+        */
+/*   By: noctis <noctis@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/03 07:07:00 by aakritah          #+#    #+#             */
-/*   Updated: 2025/05/08 10:10:17 by aakritah         ###   ########.fr       */
+/*   Updated: 2025/05/08 12:40:52 by noctis           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,7 +21,7 @@ int	ft_tokenize(char *str, t_token **data, t_env *env_list)
 		return (-1);
 	// ft_set_tokens(data);
 	// if (ft_validat_list(data) < 0)
-	// 	return (-1);
+		// return (-1);
 	return (0);
 }
 

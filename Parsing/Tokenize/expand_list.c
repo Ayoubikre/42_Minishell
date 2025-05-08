@@ -3,19 +3,29 @@
 /*                                                        :::      ::::::::   */
 /*   expand_list.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: aakritah <aakritah@student.42.fr>          +#+  +:+       +#+        */
+/*   By: noctis <noctis@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/08 09:31:09 by aakritah          #+#    #+#             */
-/*   Updated: 2025/05/08 10:46:34 by aakritah         ###   ########.fr       */
+/*   Updated: 2025/05/08 13:36:56 by noctis           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../include/main.h"
 #include "../../include/parse.h"
 
+int	ft_check(char *t)
+{
+	int	i;
 
-
-
+	i = 0;
+	while (t[i])
+	{
+		if (t[i] == '$')
+			return (1);
+		i++;
+	}
+	return (0);
+}
 
 int	ft_strcmp(const char *s1, const char *s2)
 {
@@ -26,8 +36,6 @@ int	ft_strcmp(const char *s1, const char *s2)
 	}
 	return (*(unsigned char *)s1 - *(unsigned char *)s2);
 }
-
-//--------------------------- new func :
 
 int	ft_check_ptr_value(char c, int f)
 {
@@ -69,7 +77,7 @@ int	ft_calcul_var_len(char *ptr)
 	return (s);
 }
 
-void	ft_print_expanded_variable(t_env *env_list, char *var_name , char *t, int *i)
+int	ft_calculs_exp_len(t_env *env_list, char *var_name)
 {
 	t_env	*env;
 
@@ -78,37 +86,54 @@ void	ft_print_expanded_variable(t_env *env_list, char *var_name , char *t, int *
 	{
 		if (ft_strcmp(var_name, env->name) == 0)
 		{
-			int j=0;
-            while(env->value[j])
-            {
-                t[*i]=env->value[j];
-                j++;
-                (*i)++;
-            }
+			return (ft_strlen(env->value));
+		}
+		env = env->next;
+	}
+	return (0);
+}
+
+void	ft_get_expand_value(t_env *env_list, char *var_name, char *t, int *i)
+{
+	t_env	*env;
+	int		j;
+
+	env = env_list;
+	while (env)
+	{
+		if (ft_strcmp(var_name, env->name) == 0)
+		{
+			j = 0;
+			while (env->value[j])
+			{
+				t[*i] = env->value[j];
+				j++;
+				(*i)++;
+			}
 			break ;
 		}
 		env = env->next;
 	}
 }
 
-int	ft_toggle_quote(char **ptr, int *in_single_quote, int *in_double_quote)
+int	ft_toggle_quote(char **ptr, int *s_q, int *d_q)
 {
-	if (**ptr == '\'' && !(*in_double_quote))
+	if (**ptr == '\'' && !(*d_q))
 	{
-		*in_single_quote = !(*in_single_quote);
+		*s_q = !(*s_q);
 		(*ptr)++;
 		return (1);
 	}
-	if (**ptr == '"' && !(*in_single_quote))
+	if (**ptr == '"' && !(*s_q))
 	{
-		*in_double_quote = !(*in_double_quote);
+		*d_q = !(*d_q);
 		(*ptr)++;
 		return (1);
 	}
 	return (0);
 }
 
-char	*ft_copy_expand_var(char **ptr, int *f)
+char	*ft_get_expand_name(char **ptr, int *f)
 {
 	char	*var_name;
 	int		j;
@@ -116,7 +141,7 @@ char	*ft_copy_expand_var(char **ptr, int *f)
 	j = 0;
 	var_name = malloc(ft_calcul_var_len(*ptr) + 1);
 	if (!var_name)
-		return (NULL); // return NULL to signal allocation failure
+		return (NULL);
 	if (ft_check_ptr_value(**ptr, 1))
 	{
 		var_name[j++] = *(*ptr)++;
@@ -141,7 +166,6 @@ void	ft_handle_special_char(char *var_name)
 	return ;
 }
 
-//--------------------------- end .
 
 int	ft_is_n_flag(char *str)
 {
@@ -159,74 +183,87 @@ int	ft_is_n_flag(char *str)
 	return (1);
 }
 
-char *ft_expand(char *ptr, t_env *env_list)
+int	ft_calcul_total_len(int s, char *ptr, t_env *env_list)
 {
-	char *var_name; // fix static , a.k.a segfault ....
-	char t[1000000];
-    int i=0;
-    int j=0;
-	int(in_single_quote), (in_double_quote), f = 0;
-	in_single_quote = 0;
-	in_double_quote = 0;
-	if (!ptr)
-		return NULL;
+	char	*var_name;
+
+	int(s_q), (d_q), f = 0;
+	s_q = 0;
+	d_q = 0;
 	while (*ptr)
 	{
-		if (ft_toggle_quote(&ptr, &in_single_quote, &in_double_quote))
+		if (ft_toggle_quote(&ptr, &s_q, &d_q))
 			continue ;
-		if (*ptr == '$' && ft_check_ptr_value(*(ptr + 1), 0)
-			&& !in_single_quote)
+		if (*ptr == '$' && ft_check_ptr_value(*(ptr + 1), 0) && !s_q)
 		{
-			var_name = (ptr++, ft_copy_expand_var(&ptr, &f));
+			var_name = (ptr++, ft_get_expand_name(&ptr, &f));
 			if (!var_name)
-				return NULL; // we may need to return -1 or not ...
-			// if (f == 1)
-			// 	ft_handle_special_char(var_name);
-            ft_print_expanded_variable(env_list, var_name, t, &i);
-			// free(var_name);
+				return (0);
+			// if(f==1)
+			// ft_handle_special_char();
+			// else
+				s += ft_calculs_exp_len(env_list, var_name);
+			free(var_name);
 		}
 		else
-		{
-          t[i]=*ptr;
-          i++;
-          ptr++;   
-        }
+			(s++, ptr++);
 	}
-    t[i]='\0';
-            // printf("\n>%s<\n",t);
-    if(i==0)
-        return NULL;
-    return (ft_strdup(t));
+	return (s);
 }
 
-int ft_check(char *t)
+char	*ft_expand(int i, char *ptr, t_env *env_list)
 {
-    int i=0;
-    while(t[i])
-    {
-        if(t[i]=='$')
-            return 1;
-        i++;
-    }
-    return 0;
+	char	*var_name;
+	char	*t;
+
+	int (s_q), (d_q), f = 0;
+	s_q = 0;
+	d_q = 0;
+	t = malloc(ft_calcul_total_len(0, ptr, env_list) + 1);
+	if (!t)
+		return (NULL);
+	while (*ptr)
+	{
+		if (ft_toggle_quote(&ptr, &s_q, &d_q))
+			continue ;
+		if (*ptr == '$' && ft_check_ptr_value(*(ptr + 1), 0) && !s_q)
+		{
+			var_name = (ptr++, ft_get_expand_name(&ptr, &f));
+			if (!var_name)
+				return (NULL);
+			// if (f == 1)
+			// 	ft_handle_special_char(var_name);
+			// else
+			ft_get_expand_value(env_list, var_name, t, &i);
+			free(var_name);
+		}
+		else
+			t[i++] = *(ptr++);
+	}
+	t[i] = '\0';
+	if (i == 0)
+		return (free(t), NULL);
+	return (t);
 }
 
-int ft_expand_list(t_token **data, t_env *env_list)
+int	ft_expand_list(t_token **data, t_env *env_list)
 {
 	t_token	*ptr;
-    char *t;
-    
-    ptr=*data;
-    while(ptr->type!=end_t)
-    {
-        if(ft_check(ptr->value))
-        {
-            t=ft_strdup(ptr->value);
-            free(ptr->value);
-            ptr->value=ft_expand(t,env_list);
-            free(t);
-        }
-        ptr=ptr->next;
-    }
-    return 0;
+	char	*t;
+
+	ptr = *data;
+	while (ptr->type != end_t)
+	{
+		if (ft_check(ptr->value))
+		{
+			t = ft_strdup(ptr->value);
+			if (!t)
+				return (-1);
+			free(ptr->value);
+			ptr->value = ft_expand(0, t, env_list);
+			free(t);
+		}
+		ptr = ptr->next;
+	}
+	return (0);
 }
