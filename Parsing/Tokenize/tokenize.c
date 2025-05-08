@@ -3,23 +3,25 @@
 /*                                                        :::      ::::::::   */
 /*   tokenize.c                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: noctis <noctis@student.42.fr>              +#+  +:+       +#+        */
+/*   By: aakritah <aakritah@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/03 07:07:00 by aakritah          #+#    #+#             */
-/*   Updated: 2025/04/29 00:21:34 by noctis           ###   ########.fr       */
+/*   Updated: 2025/05/08 10:10:17 by aakritah         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../include/main.h"
 #include "../../include/parse.h"
 
-int	ft_tokenize(char *str, t_token **data)
+int	ft_tokenize(char *str, t_token **data, t_env *env_list)
 {
 	if (ft_initialize_list(str, data) < 0)
 		return (ft_put_error_tokens(0, 2), -1);
-	ft_set_tokens(data);
-	if (ft_validat_list(data) < 0)
+	if(ft_expand_list(data, env_list) < 0)
 		return (-1);
+	// ft_set_tokens(data);
+	// if (ft_validat_list(data) < 0)
+	// 	return (-1);
 	return (0);
 }
 

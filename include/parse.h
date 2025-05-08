@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   parse.h                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: anktiri <anktiri@student.42.fr>            +#+  +:+       +#+        */
+/*   By: aakritah <aakritah@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/03 02:45:32 by aakritah          #+#    #+#             */
-/*   Updated: 2025/05/01 20:18:12 by anktiri          ###   ########.fr       */
+/*   Updated: 2025/05/08 09:35:17 by aakritah         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -53,10 +53,10 @@ typedef struct s_token
 }						t_token;
 
 //------------------------------ Parsing :
-t_token					*ft_parse(char *str);
+t_token					*ft_parse(char *str, t_env	*env_list);
 
 //------------------------------Ttokenizing :
-int						ft_tokenize(char *str, t_token **data);
+int						ft_tokenize(char *str, t_token **data, t_env *env_list);
 int						ft_initialize_list(char *str, t_token **data);
 void					ft_set_tokens(t_token **data);
 void					ft_fix_cmd_pos_token(t_token **data);
@@ -71,6 +71,9 @@ void					ft_add_list_front(t_token **data, t_token *n);
 void					ft_add_list_end(t_token **data, t_token *n);
 t_token					*ft_last_list(t_token *data);
 void					ft_free_list(t_token **data);
+
+//------------------------------ Expanding :
+int ft_expand_list(t_token **data, t_env *env_list);
 
 //------------------------------ Shunting Yard :
 void					ft_shunting_yard(t_token **data);

@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   main.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: anktiri <anktiri@student.42.fr>            +#+  +:+       +#+        */
+/*   By: aakritah <aakritah@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/25 13:18:28 by aakritah          #+#    #+#             */
-/*   Updated: 2025/05/06 21:49:26 by anktiri          ###   ########.fr       */
+/*   Updated: 2025/05/08 09:29:00 by aakritah         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,13 +26,13 @@ int	main(int ac, char **av, char **env)
 		str = readline(MAGENTA "Minishell > " RESET);
 		if (str && str[0])
 		{
-			data = ft_parse(str);
+			data = ft_parse(str, env_list);
 			if (data)
 			{
-				data->env_list = env_list;
-				// ft_print_list(data);
-				if (data->type == b_cmd_t)
-				exec_builtin(data);
+				// data->env_list = env_list;
+				ft_print_list(data);
+				// if (data->type == b_cmd_t)
+					// exec_builtin(data);
 				add_history(str);
 				ft_free_list(&data);
 			}

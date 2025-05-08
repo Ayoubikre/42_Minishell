@@ -2,11 +2,11 @@
 
 CC = cc
 
-CFLAGS = -Wall -Werror -Wextra -I./libs/readline/include
+# CFLAGS = -Wall -Werror -Wextra -I./libs/readline/include
 
 # CFLAGS = -fsanitize=address -g -I./libs/readline/include
 
-# CFLAGS = -I./libs/readline/include
+CFLAGS = -I./libs/readline/include
 
 RDFLAGS = -L./libs/readline/lib -lreadline
 
@@ -36,6 +36,7 @@ PARSING  =	./main.c \
 			./utils_delet.c \
 			./Parsing/parse.c \
 			./Parsing/Tokenize/tokenize.c \
+			./Parsing/Tokenize/expand_list.c \
 			./Parsing/Tokenize/set_token.c\
 			./Parsing/Tokenize/validate_list.c \
 			./Parsing/Tokenize/list.c \
@@ -47,10 +48,10 @@ PARSING  =	./main.c \
 			./Parsing/Utils/utils1.c \
 
 EXECUTION =	./execution/builtins.c \
-			./execution/echo.c \
 			./execution/environment.c \
 			./execution/split_env.c \
 			./execution/export.c \
+			./execution/echo.c \
 
 SRC =	${PARSING} \
 		${EXECUTION} \
