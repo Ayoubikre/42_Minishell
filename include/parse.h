@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   parse.h                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: aakritah <aakritah@student.42.fr>          +#+  +:+       +#+        */
+/*   By: anktiri <anktiri@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/03 02:45:32 by aakritah          #+#    #+#             */
-/*   Updated: 2025/05/01 18:49:34 by aakritah         ###   ########.fr       */
+/*   Updated: 2025/05/01 20:18:12 by anktiri          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,11 +33,19 @@ typedef enum e_token_precedence
 	pipe_p,
 }						t_token_precedence;
 
+typedef struct s_env
+{
+	char				*name;
+	char				*value;
+	struct				s_env *next;
+}						t_env;
+
 typedef struct s_token
 {
 	char				*value;
 	t_token_type		type;
 	t_token_precedence	prec;
+	t_env				*env_list;
 	char				**c_arg;
 	char				**c_red;
 	struct s_token		*next;

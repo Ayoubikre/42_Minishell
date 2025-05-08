@@ -28,22 +28,32 @@ RDFLAGS = -L./libs/readline/lib -lreadline
 #               ----------------                ----------------
 
 
-headers  = ./include/main.h \
+headers  =	./include/main.h \
 			./include/parse.h \
+			./include/builtins.h \
 
-SRC  = ./main.c \
-		./utils_delet.c \
-		./Parsing/parse.c \
-		./Parsing/Tokenize/tokenize.c \
-		./Parsing/Tokenize/set_token.c\
-		./Parsing/Tokenize/validate_list.c \
-		./Parsing/Tokenize/list.c \
-		./Parsing/Yard/shunting_yard.c  \
-		./Parsing/Yard/filter_list.c  \
-		./Parsing/Yard/filter_list2.c  \
-		./Parsing/Utils/ft_split2.c \
-		./Parsing/Utils/ft_split3.c \
-		./Parsing/Utils/utils1.c \
+PARSING  =	./main.c \
+			./utils_delet.c \
+			./Parsing/parse.c \
+			./Parsing/Tokenize/tokenize.c \
+			./Parsing/Tokenize/set_token.c\
+			./Parsing/Tokenize/validate_list.c \
+			./Parsing/Tokenize/list.c \
+			./Parsing/Yard/shunting_yard.c  \
+			./Parsing/Yard/filter_list.c  \
+			./Parsing/Yard/filter_list2.c  \
+			./Parsing/Utils/ft_split2.c \
+			./Parsing/Utils/ft_split3.c \
+			./Parsing/Utils/utils1.c \
+
+EXECUTION =	./execution/builtins.c \
+			./execution/echo.c \
+			./execution/environment.c \
+			./execution/split_env.c \
+			./execution/export.c \
+
+SRC =	${PARSING} \
+		${EXECUTION} \
 
 OBJC = $(SRC:%.c=%.o)
 

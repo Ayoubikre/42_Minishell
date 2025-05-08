@@ -3,23 +3,24 @@
 /*                                                        :::      ::::::::   */
 /*   main.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: aakritah <aakritah@student.42.fr>          +#+  +:+       +#+        */
+/*   By: anktiri <anktiri@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/25 13:18:28 by aakritah          #+#    #+#             */
-/*   Updated: 2025/05/01 18:44:53 by aakritah         ###   ########.fr       */
+/*   Updated: 2025/05/06 21:49:26 by anktiri          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "./include/main.h"
-#include "./include/parse.h"
 
 int	main(int ac, char **av, char **env)
 {
 	char	*str;
 	t_token	*data;
+	t_env	*env_list;
 
-	((void)ac, (void)av, (void)env);
 	atexit(leaks);
+	env_list = create_env_list(env);
+	((void)ac, (void)av);
 	while (1)
 	{
 		str = readline(MAGENTA "Minishell > " RESET);
@@ -28,14 +29,18 @@ int	main(int ac, char **av, char **env)
 			data = ft_parse(str);
 			if (data)
 			{
-				ft_print_list(data);
+				data->env_list = env_list;
+				// ft_print_list(data);
+				if (data->type == b_cmd_t)
+				exec_builtin(data);
+				add_history(str);
 				ft_free_list(&data);
 			}
-			add_history(str);
 		}
 		else if (!str)
 			break ;
 		free(str);
 	}
+	free_env_list(&env_list);
 	return (0);
 }
