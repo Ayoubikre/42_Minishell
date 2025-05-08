@@ -6,168 +6,203 @@
 /*   By: aakritah <aakritah@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/27 07:32:22 by anktiri           #+#    #+#             */
-/*   Updated: 2025/05/08 01:47:45 by aakritah         ###   ########.fr       */
+/*   Updated: 2025/05/08 05:22:38 by aakritah         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../include/builtins.h"
 
-int is_n_flag(char *str)
+//    add later to libft
+int	ft_strcmp(const char *s1, const char *s2)
 {
-    if (!str || str[0] != '-')
-        return (0);
-    str++;
-    if (!*str)
-        return (0);
-    while (*str)
-    {
-        if (*str != 'n')
-            return (0);
-        str++;
-    }
-    return (1);
+	while (*s1 && *s2 && *s1 == *s2)
+	{
+		s1++;
+		s2++;
+	}
+	return (*(unsigned char *)s1 - *(unsigned char *)s2);
 }
 
-// add later to libft 
-int ft_strcmp(const char *s1, const char *s2)
+//--------------------------- new func :
+
+int	ft_check_ptr_value(char c, int f)
 {
-    while (*s1 && *s2 && *s1 == *s2)
-    {
-        s1++;
-        s2++;
-    }
-    return (*(unsigned char *)s1 - *(unsigned char *)s2);
+	if (f == 0)
+	{
+		if (c && (c == '?' || c == '@' || c == '_' || ft_isalnum(c)))
+			return (1);
+	}
+	if (f == 1)
+	{
+		if (c && (c == '?' || c == '@' || ft_isdigit(c)))
+			return (1);
+	}
+	else if (f == 2)
+	{
+		if (c && (ft_isalnum(c) || c == '_'))
+			return (1);
+	}
+	return (0);
 }
 
-int ft_calcul_var_len(char *ptr)
+int	ft_calcul_var_len(char *ptr)
 {
-    int s=0;
-    
-    if (*ptr == '?')
-    {
-        return 1;
-    }
-    else
-    {
-        while (*ptr && (ft_isalnum(*ptr) || *ptr == '_'))
-        {
-            s++;
-            ptr++;
-        }
-    }
-    return s;
+	int	s;
+
+	s = 0;
+	if (ft_check_ptr_value(*ptr, 1))
+	{
+		return (1);
+	}
+	else
+	{
+		while (ft_check_ptr_value(*ptr, 2))
+		{
+			s++;
+			ptr++;
+		}
+	}
+	return (s);
 }
 
-void print_expanded_arg(char *arg, t_env *env_list)
+void	ft_print_expanded_variable(t_env *env_list, char *var_name)
 {
-    char *ptr = arg;
-    char *var_name;
-    int j;
-    int in_single_quote = 0;
-    int in_double_quote = 0;
+	t_env	*env;
 
-    if (!arg)
-        return;
-
-    while (*ptr)
-    {
-        // Toggle quote states
-        if (*ptr == '\'' && !in_double_quote)
-        {
-            in_single_quote = !in_single_quote;
-            ptr++;
-            continue;
-        }
-        if (*ptr == '"' && !in_single_quote)
-        {
-            in_double_quote = !in_double_quote;
-            ptr++;
-            continue;
-        }
-
-        // Handle variable expansion outside single quotes
-        if (*ptr == '$' && *(ptr + 1) && (ft_isalnum(*(ptr + 1)) || *(ptr + 1) == '?') && !in_single_quote)
-        {
-            ptr++;
-            j = 0;
-
-
-            var_name=malloc(ft_calcul_var_len(ptr)+1);
-            if(!var_name)
-                return ; // change the return type to int so we can return -1; , or keep it  void, no idea
-
-
-            if (*ptr == '?')
-            {
-                var_name[j++] = *ptr++;
-            }
-            else
-            {
-                while (*ptr && (ft_isalnum(*ptr) || *ptr == '_'))
-                    var_name[j++] = *ptr++;
-            }
-            var_name[j] = '\0';
-
-            if (ft_strcmp(var_name, "?") == 0)
-            {
-                // extern int g_exit_status;
-                // ft_putnbr(g_exit_status);
-            }
-            else
-            {
-                t_env *env = env_list;
-                while (env)
-                {
-                    if (ft_strcmp(var_name, env->name) == 0)
-                    {
-                        ft_putstr(env->value);
-                        break;
-                    }
-                    env = env->next;
-                }
-            }
-            free(var_name);
-        }
-        else
-        {
-            ft_putchar(*ptr);
-            ptr++;
-        }
-    }
+	env = env_list;
+	while (env)
+	{
+		if (ft_strcmp(var_name, env->name) == 0)
+		{
+			ft_putstr(env->value);
+			break ;
+		}
+		env = env->next;
+	}
 }
 
-int ft_echo(t_token *data)
+int	ft_toggle_quote(char **ptr, int *in_single_quote, int *in_double_quote)
 {
-    int newline = 1;
-    int i = 1;
-    int first_arg = 1;
+	if (**ptr == '\'' && !(*in_double_quote))
+	{
+		*in_single_quote = !(*in_single_quote);
+		(*ptr)++;
+		return (1);
+	}
+	if (**ptr == '"' && !(*in_single_quote))
+	{
+		*in_double_quote = !(*in_double_quote);
+		(*ptr)++;
+		return (1);
+	}
+	return (0);
+}
 
-    if (!data || !data->c_arg || !data->c_arg[0])
-    {
-        ft_putstr("\n");
-        return (0);
-    }
+char	*ft_copy_expand_var(char **ptr, int *f)
+{
+	char	*var_name;
+	int		j;
 
-    // Check for -n flags
-    while (data->c_arg[i] && is_n_flag(data->c_arg[i]))
-    {
-        newline = 0;
-        i++;
-    }
+	j = 0;
+	var_name = malloc(ft_calcul_var_len(*ptr) + 1);
+	if (!var_name)
+		return (NULL); // return NULL to signal allocation failure
+	if (ft_check_ptr_value(**ptr, 1))
+	{
+		var_name[j++] = *(*ptr)++;
+		*f == 1;
+	}
+	else
+	{
+		while (ft_check_ptr_value(**ptr, 2))
+			var_name[j++] = *(*ptr)++;
+	}
+	var_name[j] = '\0';
+	return (var_name);
+}
 
-    // Process each argument
-    while (data->c_arg[i])
-    {
-        if (!first_arg)
-            ft_putstr(" ");
-        print_expanded_arg(data->c_arg[i], data->env_list);
-        first_arg = 0;
-        i++;
-    }
+void	ft_handle_special_char(char *var_name)
+{
+	// if (ft_strcmp(var_name, "?") == 0)
+	// {
+	// 	// extern int g_exit_status;
+	// 	// ft_putnbr(g_exit_status);
+	// }
+	return ;
+}
 
-    // Print newline if -n is not specified
-    if (newline)
-        ft_putstr("\n");
+//--------------------------- end .
 
-    return (0);
+int	ft_is_n_flag(char *str)
+{
+	if (!str || str[0] != '-')
+		return (0);
+	str++;
+	if (!*str)
+		return (0);
+	while (*str)
+	{
+		if (*str != 'n')
+			return (0);
+		str++;
+	}
+	return (1);
+}
+
+void	ft_print_expanded_arg(char *ptr, t_env *env_list)
+{
+	char *var_name; // fix static , a.k.a segfault ....
+	int(in_single_quote), (in_double_quote), f = 0;
+	in_single_quote = 0;
+	in_double_quote = 0;
+	if (!ptr)
+		return ;
+	while (*ptr)
+	{
+		if (ft_toggle_quote(&ptr, &in_single_quote, &in_double_quote))
+			continue ;
+		if (*ptr == '$' && ft_check_ptr_value(*(ptr + 1), 0)
+			&& !in_single_quote)
+		{
+			var_name = (ptr++, ft_copy_expand_var(&ptr, &f));
+			if (!var_name)
+				return ; // we may need to return -1 or not ...
+			if (f == 1)
+				ft_handle_special_char(var_name);
+			else
+				ft_print_expanded_variable(env_list, var_name);
+			free(var_name);
+		}
+		else
+			(ft_putchar(*ptr), ptr++);
+	}
+}
+
+int	ft_echo(t_token *data)
+{
+	int	newline;
+	int	i;
+	int	first_arg;
+
+	newline = 1;
+	i = 1;
+	first_arg = 1;
+	if (!data || !data->c_arg || !data->c_arg[0])
+		return (ft_putstr("\n"), 0);
+	while (data->c_arg[i] && ft_is_n_flag(data->c_arg[i]))
+	{
+		newline = 0;
+		i++;
+	}
+	while (data->c_arg[i])
+	{
+		if (!first_arg)
+			ft_putstr(" ");
+		ft_print_expanded_arg(data->c_arg[i], data->env_list);
+		first_arg = 0;
+		i++;
+	}
+	if (newline)
+		ft_putstr("\n");
+	return (0);
 }
