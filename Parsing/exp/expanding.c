@@ -1,12 +1,12 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   expand_list.c                                      :+:      :+:    :+:   */
+/*   expanding.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: noctis <noctis@student.42.fr>              +#+  +:+       +#+        */
+/*   By: aakritah <aakritah@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/08 09:31:09 by aakritah          #+#    #+#             */
-/*   Updated: 2025/05/08 13:36:56 by noctis           ###   ########.fr       */
+/*   Updated: 2025/05/09 17:41:57 by aakritah         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -246,12 +246,18 @@ char	*ft_expand(int i, char *ptr, t_env *env_list)
 	return (t);
 }
 
-int	ft_expand_list(t_token **data, t_env *env_list)
-{
-	t_token	*ptr;
-	char	*t;
 
+
+// 			------------------------	main :
+
+int	ft_expanding(t_token **data,t_extra *x)
+{
+	char	*t;
+	t_token	*ptr;
+	t_env  *env_list;
+	
 	ptr = *data;
+	env_list=x->env_list;
 	while (ptr->type != end_t)
 	{
 		if (ft_check(ptr->value))
@@ -260,7 +266,7 @@ int	ft_expand_list(t_token **data, t_env *env_list)
 			if (!t)
 				return (-1);
 			free(ptr->value);
-			ptr->value = ft_expand(0, t, env_list);
+			// ptr->value = ft_expand(0, t, env_list);
 			free(t);
 		}
 		ptr = ptr->next;

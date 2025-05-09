@@ -1,19 +1,5 @@
 #               ----------------      MAC :    ----------------
 
-# CC = cc
-
-# # CFLAGS = -Wall -Werror -Wextra -I./libs/readline/include
-
-# # CFLAGS = -fsanitize=address -g -I./libs/readline/include
-
-# CFLAGS = -I./libs/readline/include
-
-# RDFLAGS = -L./libs/readline/lib -lreadline
-
-
-#               ----------------      LNX :    ----------------
-
-
 CC = cc
 
 # CFLAGS = -Wall -Werror -Wextra -I./libs/readline/include
@@ -22,7 +8,21 @@ CC = cc
 
 CFLAGS = -I./libs/readline/include
 
-RDFLAGS = -lreadline -lncurses
+RDFLAGS = -L./libs/readline/lib -lreadline
+
+
+#               ----------------      LNX :    ----------------
+
+
+# CC = cc
+
+# # CFLAGS = -Wall -Werror -Wextra -I./libs/readline/include
+
+# # CFLAGS = -fsanitize=address -g -I./libs/readline/include
+
+# CFLAGS = -I./libs/readline/include
+
+# RDFLAGS = -lreadline -lncurses
 
 
 #               ----------------                ----------------
@@ -36,10 +36,10 @@ PARSING  =	./main.c \
 			./utils_delet.c \
 			./Parsing/parse.c \
 			./Parsing/Tokenize/tokenize.c \
-			./Parsing/Tokenize/expand_list.c \
 			./Parsing/Tokenize/set_token.c\
 			./Parsing/Tokenize/validate_list.c \
 			./Parsing/Tokenize/list.c \
+			./Parsing/exp/expanding.c \
 			./Parsing/Yard/shunting_yard.c  \
 			./Parsing/Yard/filter_list.c  \
 			./Parsing/Yard/filter_list2.c  \

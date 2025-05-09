@@ -6,7 +6,7 @@
 /*   By: aakritah <aakritah@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/03 02:45:32 by aakritah          #+#    #+#             */
-/*   Updated: 2025/05/08 09:35:17 by aakritah         ###   ########.fr       */
+/*   Updated: 2025/05/09 17:34:42 by aakritah         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -40,6 +40,13 @@ typedef struct s_env
 	struct				s_env *next;
 }						t_env;
 
+typedef struct s_extra
+{
+	t_env *env_list;
+	int exit_num;
+	
+}				t_extra;
+
 typedef struct s_token
 {
 	char				*value;
@@ -53,10 +60,10 @@ typedef struct s_token
 }						t_token;
 
 //------------------------------ Parsing :
-t_token					*ft_parse(char *str, t_env	*env_list);
+t_token					*ft_parse(char *str, t_extra *x);
 
 //------------------------------Ttokenizing :
-int						ft_tokenize(char *str, t_token **data, t_env *env_list);
+int						ft_tokenize(char *str, t_token **data, t_extra *x);
 int						ft_initialize_list(char *str, t_token **data);
 void					ft_set_tokens(t_token **data);
 void					ft_fix_cmd_pos_token(t_token **data);
@@ -73,7 +80,7 @@ t_token					*ft_last_list(t_token *data);
 void					ft_free_list(t_token **data);
 
 //------------------------------ Expanding :
-int ft_expand_list(t_token **data, t_env *env_list);
+int 					ft_expanding(t_token **data, t_extra *x);
 
 //------------------------------ Shunting Yard :
 void					ft_shunting_yard(t_token **data);

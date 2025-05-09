@@ -3,22 +3,22 @@
 /*                                                        :::      ::::::::   */
 /*   parse.c                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: noctis <noctis@student.42.fr>              +#+  +:+       +#+        */
+/*   By: aakritah <aakritah@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/03 02:15:07 by aakritah          #+#    #+#             */
-/*   Updated: 2025/05/08 12:40:41 by noctis           ###   ########.fr       */
+/*   Updated: 2025/05/09 17:37:34 by aakritah         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../include/main.h"
 #include "../include/parse.h"
 
-t_token	*ft_parse(char *str, t_env	*env_list)
+t_token	*ft_parse(char *str, t_extra *x)
 {
 	t_token	*data;
 
 	data = NULL;
-	if (ft_tokenize(str, &data,env_list) < 0)
+	if (ft_tokenize(str, &data, x) < 0)
 	{
 		ft_free_list(&data);
 		return (NULL);
