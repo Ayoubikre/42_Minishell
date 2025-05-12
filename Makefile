@@ -1,19 +1,5 @@
 #               ----------------      MAC :    ----------------
 
-CC = cc
-
-# CFLAGS = -Wall -Werror -Wextra -I./libs/readline/include
-
-# CFLAGS = -fsanitize=address -g -I./libs/readline/include
-
-CFLAGS = -I./libs/readline/include
-
-RDFLAGS = -L./libs/readline/lib -lreadline
-
-
-#               ----------------      LNX :    ----------------
-
-
 # CC = cc
 
 # # CFLAGS = -Wall -Werror -Wextra -I./libs/readline/include
@@ -22,7 +8,21 @@ RDFLAGS = -L./libs/readline/lib -lreadline
 
 # CFLAGS = -I./libs/readline/include
 
-# RDFLAGS = -lreadline -lncurses
+# RDFLAGS = -L./libs/readline/lib -lreadline
+
+
+#               ----------------      LNX :    ----------------
+
+
+CC = cc
+
+# CFLAGS = -Wall -Werror -Wextra -I./libs/readline/include
+
+# CFLAGS = -fsanitize=address -g -I./libs/readline/include
+
+CFLAGS = -I./libs/readline/include
+
+RDFLAGS = -lreadline -lncurses
 
 
 #               ----------------                ----------------
@@ -39,7 +39,14 @@ PARSING  =	./main.c \
 			./Parsing/Tokenize/set_token.c\
 			./Parsing/Tokenize/validate_list.c \
 			./Parsing/Tokenize/list.c \
-			./Parsing/exp/expanding.c \
+			./Parsing/Exp/expand.c \
+			./Parsing/Exp/swap_value.c \
+			./Parsing/Exp/swap_utils.c \
+			./Parsing/Exp/fix_list.c \
+			./Parsing/Exp/fix_cas_1.c \
+			./Parsing/Exp/fix_cas_2.c \
+			./Parsing/Exp/set_token.c \
+			./Parsing/Exp/utils.c \
 			./Parsing/Yard/shunting_yard.c  \
 			./Parsing/Yard/filter_list.c  \
 			./Parsing/Yard/filter_list2.c  \
@@ -67,7 +74,8 @@ all: $(NAME) clean
 
 $(NAME): $(OBJC)
 #	make -C $(libft_Dir)
-	@$(CC) $(CFLAGS) $(OBJC) -o $(NAME) $(libft) $(RDFLAGS)  && ./$(NAME)
+	@$(CC) $(CFLAGS) $(OBJC) -o $(NAME) $(libft) $(RDFLAGS) && ./$(NAME) 
+#	@$(CC) $(CFLAGS) $(OBJC) -o $(NAME) $(libft) $(RDFLAGS)  
 
 %.o: %.c $(headers)
 	@$(CC) $(CFLAGS) -c $< -o $@

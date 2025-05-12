@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   main.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: aakritah <aakritah@student.42.fr>          +#+  +:+       +#+        */
+/*   By: noctis <noctis@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/25 13:18:28 by aakritah          #+#    #+#             */
-/*   Updated: 2025/05/09 17:30:04 by aakritah         ###   ########.fr       */
+/*   Updated: 2025/05/12 12:16:52 by noctis           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,7 +16,7 @@ int	main(int ac, char **av, char **env)
 {
 	char	*str;
 	t_token	*data;
-	t_extra  x;
+	t_extra	x;
 
 	atexit(leaks);
 	x.env_list = create_env_list(env);
@@ -32,7 +32,7 @@ int	main(int ac, char **av, char **env)
 			{
 				ft_print_list(data);
 				// if (data->type == b_cmd_t)
-					// exec_builtin(data);
+				// 	exec_builtin(data);
 				add_history(str);
 				ft_free_list(&data);
 			}

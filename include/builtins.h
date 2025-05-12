@@ -13,11 +13,11 @@
 #ifndef BUILTINS_H
 # define BUILTINS_H
 
-# include <stdlib.h>
-# include <stdio.h>
-# include <unistd.h>
-# include <string.h>
 # include "main.h"
+# include <stdio.h>
+# include <stdlib.h>
+# include <string.h>
+# include <unistd.h>
 
 // Struct for environment variables
 // typedef struct s_env
@@ -32,18 +32,18 @@
 # define ERROR 1
 
 // Built-in function prototypes
-int ft_echo(t_token	*data);
+int		ft_echo(t_token *data);
 // int ft_cd(t_token	*data, t_env *env_list);
-int ft_pwd(void);
-int ft_export(t_token	*data);
+int		ft_pwd(void);
+int		ft_export(t_token *data);
 // int ft_unset(t_token	*data, t_env **env_list);
-int ft_env(t_token	*data);
-int ft_exit(t_token	*data);
+int		ft_env(t_token *data);
+int		ft_exit(t_token *data);
 
 // //	Helper functions
 int		exec_builtin(t_token *data);
 t_env	*create_env_list(char **env);
-void	free_env_list( t_extra *x);
+void	free_env_list(t_extra *x);
 char	**ft_split_env(char const *s, char c);
 // char *get_env_value(t_env *env_list, char *name);
 
