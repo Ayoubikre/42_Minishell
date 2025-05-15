@@ -1,28 +1,28 @@
 #               ----------------      MAC :    ----------------
 
-# CC = cc
+CC = cc
 
-# # CFLAGS = -Wall -Werror -Wextra -I./libs/readline/include
+CFLAGS = -Wall -Werror -Wextra -I./libs/readline/include
 
-# # CFLAGS = -fsanitize=address -g -I./libs/readline/include
+# CFLAGS = -fsanitize=address -g -I./libs/readline/include
 
 # CFLAGS = -I./libs/readline/include
 
-# RDFLAGS = -L./libs/readline/lib -lreadline
+RDFLAGS = -L./libs/readline/lib -lreadline
 
 
 #               ----------------      LNX :    ----------------
 
 
-CC = cc
+# CC = cc
 
 # CFLAGS = -Wall -Werror -Wextra -I./libs/readline/include
 
-# CFLAGS = -fsanitize=address -g -I./libs/readline/include
+# # CFLAGS = -fsanitize=address -g -I./libs/readline/include
 
-CFLAGS = -I./libs/readline/include
+# # CFLAGS = -I./libs/readline/include
 
-RDFLAGS = -lreadline -lncurses
+# RDFLAGS = -lreadline -lncurses
 
 
 #               ----------------                ----------------
@@ -55,10 +55,10 @@ PARSING  =	./main.c \
 			./Parsing/Utils/utils1.c \
 
 EXECUTION =	./execution/builtins.c \
+			./execution/echo.c \
 			./execution/environment.c \
 			./execution/split_env.c \
 			./execution/export.c \
-			./execution/echo.c \
 
 SRC =	${PARSING} \
 		${EXECUTION} \
@@ -74,8 +74,7 @@ all: $(NAME) clean
 
 $(NAME): $(OBJC)
 #	make -C $(libft_Dir)
-	@$(CC) $(CFLAGS) $(OBJC) -o $(NAME) $(libft) $(RDFLAGS) && ./$(NAME) 
-#	@$(CC) $(CFLAGS) $(OBJC) -o $(NAME) $(libft) $(RDFLAGS)  
+	@$(CC) $(CFLAGS) $(OBJC) -o $(NAME) $(libft) $(RDFLAGS)  && ./$(NAME)
 
 %.o: %.c $(headers)
 	@$(CC) $(CFLAGS) -c $< -o $@
