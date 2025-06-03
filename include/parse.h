@@ -6,7 +6,7 @@
 /*   By: anktiri <anktiri@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/03 02:45:32 by aakritah          #+#    #+#             */
-/*   Updated: 2025/05/12 17:49:45 by anktiri          ###   ########.fr       */
+/*   Updated: 2025/05/31 19:53:11 by anktiri          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -41,6 +41,7 @@ typedef struct s_env
 {
 	char				*name;
 	char				*value;
+	int					original;
 	struct s_env		*next;
 }						t_env;
 
@@ -48,7 +49,14 @@ typedef struct s_extra
 {
 	t_env				*env_list;
 	int					exit_status;
-
+	char				*cmd_path;
+	char				**env;
+	int					stdin_backup;
+    int					stdout_backup;
+    int					pipe_count;
+    int					cmd_index;
+    int					**pipefd;
+    int					prev_pipe_read;
 }						t_extra;
 
 typedef struct s_token
@@ -57,7 +65,6 @@ typedef struct s_token
 	t_token_type		type;
 	t_token_precedence	prec;
 	int					f;
-	t_env				*env_list;
 	int					arg_s;
 	char				**c_arg;
 	int					red_s;

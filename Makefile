@@ -2,9 +2,9 @@
 
 CC = cc
 
-CFLAGS = -Wall -Werror -Wextra -I./libs/readline/include
+# CFLAGS = -Wall -Werror -Wextra -I./libs/readline/include
 
-# CFLAGS = -fsanitize=address -g -I./libs/readline/include
+CFLAGS = -fsanitize=address -g -I./libs/readline/include
 
 # CFLAGS = -I./libs/readline/include
 
@@ -54,11 +54,26 @@ PARSING  =	./main.c \
 			./Parsing/Utils/ft_split3.c \
 			./Parsing/Utils/utils1.c \
 
-EXECUTION =	./execution/builtins.c \
-			./execution/echo.c \
-			./execution/environment.c \
-			./execution/split_env.c \
-			./execution/export.c \
+BUILTINS =	./execution/builtins/builtins.c \
+			./execution/builtins/cd.c \
+			./execution/builtins/echo.c \
+			./execution/builtins/environment.c \
+			./execution/builtins/exit.c \
+			./execution/builtins/export.c \
+			./execution/builtins/unset.c \
+			./execution/builtins_utils/cd_utils.c \
+			./execution/builtins_utils/export_utils.c \
+			./execution/builtins_utils/export_utils2.c \
+			./execution/builtins_utils/split_env.c \
+
+EXEC = 		./execution/exec/execution.c \
+			./execution/exec/exec_single.c \
+			./execution/exec/helpers.c \
+			./execution/exec/redirection.c \
+			./execution/exec/heredoc.c \
+
+EXECUTION = ${BUILTINS} \
+			${EXEC} \
 
 SRC =	${PARSING} \
 		${EXECUTION} \
@@ -68,7 +83,7 @@ OBJC = $(SRC:%.c=%.o)
 libft_Dir = ./libs/42_Libft
 libft = $(libft_Dir)/libft.a
 
-NAME = Minishell
+NAME = minishell
 
 all: $(NAME) clean
 

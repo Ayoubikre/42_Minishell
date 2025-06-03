@@ -3,27 +3,12 @@
                 |------------ export : ------------|
 
 
-export $1=test
-minishell: export: `$1=test': not a valid identifier
-
-bash-3.2$ export $1=test
-bash: export: `=test': not a valid identifier
-
 
 status : not fixed
 
 
 ------------------------------------------------------------------
 
-Minishell > export t="|"
-minishell: export: `|` : not a valid identifier
-
-Minishell > export t=">"
-minishell: export: `>`: not a valid identifier
-
-[noctis@Ayoubikre Desktop]$ export t="|"
-[noctis@Ayoubikre Desktop]$ echo $t
-    |
 
 status : not fixed
 
