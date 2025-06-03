@@ -6,7 +6,7 @@
 /*   By: aakritah <aakritah@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/26 15:02:14 by aakritah          #+#    #+#             */
-/*   Updated: 2025/04/26 15:11:17 by aakritah         ###   ########.fr       */
+/*   Updated: 2025/06/03 16:52:44 by aakritah         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -81,5 +81,6 @@ void	ft_put_error_tokens(int f, int fd)
 			ft_putstr_fd(RED "near unexpected token `<'\n" RESET, 2);
 		else
 			ft_putstr_fd(RED "minishell: unknown error\n" RESET, 2);
+		x->exit_status=258;
 	}
 }

@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   main.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: anktiri <anktiri@student.42.fr>            +#+  +:+       +#+        */
+/*   By: aakritah <aakritah@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/25 13:18:28 by aakritah          #+#    #+#             */
-/*   Updated: 2025/06/01 17:43:39 by anktiri          ###   ########.fr       */
+/*   Updated: 2025/06/03 16:18:36 by aakritah         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -48,10 +48,11 @@ int	main(int ac, char **av, char **env)
 			data = ft_parse(str, &x);
 			if (data)
 			{
-				// ft_print_list(data);
-				exec_cmd(data, &x);
+				ft_print_list(data);
+			// 	exec_cmd(data, &x);
 				ft_free_list(&data);
 			}
+			printf("\n > exit status : %d < \n", x.exit_status);
 			add_history(str);
 		}
 		else if (!str)
