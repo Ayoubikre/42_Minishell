@@ -4,9 +4,9 @@ CC = cc
 
 # CFLAGS = -Wall -Werror -Wextra -I./libs/readline/include
 
-CFLAGS = -fsanitize=address -g -I./libs/readline/include
+# CFLAGS = -fsanitize=address -g -I./libs/readline/include
 
-# CFLAGS = -I./libs/readline/include
+CFLAGS = -I./libs/readline/include
 
 RDFLAGS = -L./libs/readline/lib -lreadline
 
@@ -14,15 +14,15 @@ RDFLAGS = -L./libs/readline/lib -lreadline
 #               ----------------      LNX :    ----------------
 
 
-# CC = cc
+CC = cc
 
 # CFLAGS = -Wall -Werror -Wextra -I./libs/readline/include
 
-# # CFLAGS = -fsanitize=address -g -I./libs/readline/include
+# CFLAGS = -fsanitize=address -g -I./libs/readline/include
 
-# # CFLAGS = -I./libs/readline/include
+CFLAGS = -I./libs/readline/include
 
-# RDFLAGS = -lreadline -lncurses
+RDFLAGS = -lreadline -lncurses
 
 
 #               ----------------                ----------------
@@ -66,14 +66,13 @@ BUILTINS =	./execution/builtins/builtins.c \
 			./execution/builtins_utils/export_utils2.c \
 			./execution/builtins_utils/split_env.c \
 
-EXEC = 		./execution/exec/execution.c \
-			./execution/exec/exec_single.c \
-			./execution/exec/helpers.c \
-			./execution/exec/redirection.c \
-			./execution/exec/heredoc.c \
+# EXEC = 		./execution/exec/execution.c \
+# 			./execution/exec/exec_single.c \
+# 			./execution/exec/helpers.c \
+# 			./execution/exec/redirection.c \
+# 			./execution/exec/heredoc.c \
 
 EXECUTION = ${BUILTINS} \
-			${EXEC} \
 
 SRC =	${PARSING} \
 		${EXECUTION} \

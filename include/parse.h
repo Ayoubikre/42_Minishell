@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   parse.h                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: anktiri <anktiri@student.42.fr>            +#+  +:+       +#+        */
+/*   By: noctis <noctis@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/03 02:45:32 by aakritah          #+#    #+#             */
-/*   Updated: 2025/05/31 19:53:11 by anktiri          ###   ########.fr       */
+/*   Updated: 2025/06/05 00:16:40 by noctis           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -77,16 +77,16 @@ typedef struct s_token
 t_token					*ft_parse(char *str, t_extra *x);
 
 //------------------------------Ttokenizing :
-int						ft_tokenize(char *str, t_token **data);
+int						ft_tokenize(char *str, t_token **data, t_extra *x);
 int						ft_initialize_list(char *str, t_token **data);
 void					ft_set_tokens_befor_expanding(t_token **data);
 void					ft_fix_cmd_pos_token(t_token **data);
 t_token_type			ft_get_token_type(char *t, int f);
 int						ft_check_buildin_cmd(char *t);
 int						ft_check_word(char *t1, char *t2);
-int						ft_validat_list(t_token **data);
-int						ft_validat_list_2(t_token *ptr);
-void					ft_put_error_tokens(int f, int fd);
+int						ft_validat_list(t_token **data, t_extra *x);
+int						ft_validat_list_2(t_token *ptr, t_extra *x);
+void					ft_put_error_tokens(int f, int fd, t_extra *x);
 t_token					*ft_creat_new_list(char *str, t_token_type type);
 void					ft_add_list_front(t_token **data, t_token *n);
 void					ft_add_list_end(t_token **data, t_token *n);
