@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   main.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: noctis <noctis@student.42.fr>              +#+  +:+       +#+        */
+/*   By: aakritah <aakritah@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/25 13:18:28 by aakritah          #+#    #+#             */
-/*   Updated: 2025/06/05 00:30:17 by noctis           ###   ########.fr       */
+/*   Updated: 2025/06/06 10:42:24 by aakritah         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -43,7 +43,7 @@ int	main(int ac, char **av, char **env)
 	while (1)
 	{
 		str = readline(MAGENTA "minishell > " RESET);
-		if (str && str[0])
+		if (str && ft_check_string(str))
 		{
 			data = ft_parse(str, &x);
 			if (data)

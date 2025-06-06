@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   parse.h                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: noctis <noctis@student.42.fr>              +#+  +:+       +#+        */
+/*   By: aakritah <aakritah@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/03 02:45:32 by aakritah          #+#    #+#             */
-/*   Updated: 2025/06/05 00:16:40 by noctis           ###   ########.fr       */
+/*   Updated: 2025/06/06 10:35:15 by aakritah         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -79,6 +79,7 @@ t_token					*ft_parse(char *str, t_extra *x);
 //------------------------------Ttokenizing :
 int						ft_tokenize(char *str, t_token **data, t_extra *x);
 int						ft_initialize_list(char *str, t_token **data);
+int ft_check_string(char *str);
 void					ft_set_tokens_befor_expanding(t_token **data);
 void					ft_fix_cmd_pos_token(t_token **data);
 t_token_type			ft_get_token_type(char *t, int f);
