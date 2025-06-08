@@ -6,7 +6,7 @@
 /*   By: aakritah <aakritah@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/03 02:45:32 by aakritah          #+#    #+#             */
-/*   Updated: 2025/06/06 10:35:15 by aakritah         ###   ########.fr       */
+/*   Updated: 2025/06/08 18:08:12 by aakritah         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,8 +16,8 @@
 typedef enum e_token_type
 {
 	pipe_t,
-	append_t,
 	heredoc_t,
+	append_t,
 	outfile_t,
 	infile_t,
 	string_t,
@@ -73,6 +73,13 @@ typedef struct s_token
 	struct s_token		*prev;
 }						t_token;
 
+
+typedef struct s_norm
+{
+	char	*var;
+	char	*t;
+} 		t_norm;
+
 //------------------------------ Parsing :
 t_token					*ft_parse(char *str, t_extra *x);
 
@@ -97,18 +104,20 @@ void					ft_free_list(t_token **data);
 //------------------------------ Expanding :
 int						ft_expand(t_token **data, t_extra *x);
 int						ft_expanding_list(t_token **data, t_extra *x);
-char					*ft_swap_value(int i, char *ptr, t_extra *x);
+char					*ft_swap_value(int i, char *ptr, t_extra *x, int f);
+int  ft_swap_value_fix_norm(int f ,  t_extra *x,t_norm  *n_data, int *i);
 int						ft_check_ptr_value(char c, int f);
 char					*ft_get_expand_name(char **ptr, int *f);
 void					ft_copy_exp_value(t_env *env_list, char *var, char *t,
 							int *i);
-void					ft_handle_special_char(t_extra *x, char *var,
-							char *t, int *i);
+int	ft_handle_special_char(t_extra *x, char *var, char *t, int *i);
+
 int						ft_toggle_quote(char **ptr, int *s_q, int *d_q);
 int						ft_calculs_exp_len(t_env *env_list, char *var);
-int						ft_calcul_total_len(int s, char *ptr, t_extra *x);
+int						ft_calcul_total_len(int s, char *ptr, t_extra *x, int f);
+int ft_calcul_total_len_fix_norm(t_extra *x, int f, int *s, char **ptr);
 int						ft_calcul_var_len(char *ptr);
-int						ft_calcul_sepcial_len(char *var, t_env *env_list);
+int						ft_calcul_sepcial_len(char *var, t_extra *x);
 int						ft_fix_list(t_token **data);
 int						ft_handle_cas_1(t_token **data, t_token *ptr);
 int						ft_add_nodes(char *t, t_token *ptr, t_token **data);
@@ -121,7 +130,8 @@ void					ft_free_arg_node3(t_token **data);
 void					ft_fix_cmd_pos_token2(t_token **data);
 t_token_type			ft_get_token_type2(char *t, int f, int exp);
 void					ft_set_tokens_after_expanding(t_token **data);
-int						ft_check(char *t);
+int						ft_check_dollar(char *t);
+int						ft_check_dollar_2(char *t);
 int						ft_strlen_2(char **t);
 int						ft_strcmp(const char *s1, const char *s2);
 
@@ -166,5 +176,9 @@ int						ft_is_special(const char *str, char **charset,
 void					ft_free(char **t);
 void					ft_free2(char **t, int s);
 char					**ft_set_charset(void);
+
+char		**ft_split4(char const *str);
+int			ft_count_split4(char const *s);
+char		*ft_copy_split4(char const *s, int *k);
 
 #endif

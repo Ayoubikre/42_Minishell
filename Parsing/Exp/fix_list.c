@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   fix_list.c                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: noctis <noctis@student.42.fr>              +#+  +:+       +#+        */
+/*   By: aakritah <aakritah@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/11 23:37:24 by noctis            #+#    #+#             */
-/*   Updated: 2025/05/12 12:11:25 by noctis           ###   ########.fr       */
+/*   Updated: 2025/06/08 16:54:01 by aakritah         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -55,7 +55,7 @@ int	ft_fix_list(t_token **data)
 		{
 			if (ptr->value && ptr->value[0] != '\0')
 			{
-				ft_handle_cas_1(data, ptr);
+				// ft_handle_cas_1(data, ptr);
 			}
 			else if (!ptr->value || ptr->value[0] == '\0')
 			{

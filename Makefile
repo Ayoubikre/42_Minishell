@@ -42,6 +42,7 @@ PARSING  =	./main.c \
 			./Parsing/Exp/expand.c \
 			./Parsing/Exp/swap_value.c \
 			./Parsing/Exp/swap_utils.c \
+			./Parsing/Exp/swap_utils2.c \
 			./Parsing/Exp/fix_list.c \
 			./Parsing/Exp/fix_cas_1.c \
 			./Parsing/Exp/fix_cas_2.c \
@@ -52,6 +53,7 @@ PARSING  =	./main.c \
 			./Parsing/Yard/filter_list2.c  \
 			./Parsing/Utils/ft_split2.c \
 			./Parsing/Utils/ft_split3.c \
+			./Parsing/Utils/ft_split4.c \
 			./Parsing/Utils/utils1.c \
 
 BUILTINS =	./execution/builtins/builtins.c \

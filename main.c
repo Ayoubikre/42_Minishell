@@ -6,7 +6,7 @@
 /*   By: aakritah <aakritah@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/25 13:18:28 by aakritah          #+#    #+#             */
-/*   Updated: 2025/06/06 10:42:24 by aakritah         ###   ########.fr       */
+/*   Updated: 2025/06/08 12:54:33 by aakritah         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -38,7 +38,7 @@ int	main(int ac, char **av, char **env)
 
 	atexit(leaks);
 	(void)ac, (void)av;
-	signal_init();
+	// signal_init();
 	init_extra(&x, env);
 	while (1)
 	{

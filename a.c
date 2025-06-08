@@ -6,7 +6,7 @@
 /*   By: aakritah <aakritah@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/06/06 13:29:56 by aakritah          #+#    #+#             */
-/*   Updated: 2025/06/06 15:45:05 by aakritah         ###   ########.fr       */
+/*   Updated: 2025/06/08 17:22:13 by aakritah         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,6 +15,7 @@
 #include <stdlib.h>
 #include <string.h>
 #include <unistd.h>
+
 void	ft_free(char **t);
 
 
@@ -30,79 +31,36 @@ void	ft_fix_norminet_2(long *n2, long *n1)
 	(*n2)++;
 }
 
-// long	ft_count_split4(char const *s)
-// {
-// 	long	i;
-// 	long	f;
-// 	long	i_c;
-// 	char	q;
-// 	long	count;
-
-// 	i = 0;
-// 	f = 0;
-// 	i_c = 0;
-// 	count = 0;
-// 	while (s[i])
-// 	{
-//         if ((s[i] == '\'' || s[i] == '\"') && i_c == 0)
-//         {
-//             (f) = !(f);
-//             q=s[i];            
-//         	(i_c) = !(i_c);
-//             // i++;
-//         }
-//         else if (i_c == 1 && s[i] == q)
-//         {
-//             (f) = !(f);           
-//         	(i_c) = !(i_c);
-//             i++;
-//         }
-//         if(f==0)
-//         {
-//             f=1;
-// 		    printf("\n\t\t > %c <\n", s[i]);
-//             count++;
-//         }
-//         i++;   
-//     }
-// 	return (count);
-// }
-
-long ft_count_split4(char const *s)
+long	ft_count_split2(char const *s, char c)
 {
-    long i = 0;
-    long count = 0;
-    int in_quote = 0;
-    char quote_char = 0;
+	long	i;
+	long	f;
+	long	i_c;
+	char	q;
+	long	count;
 
-    while (s[i])
-    {
-        if (!in_quote && (s[i] == '\'' || s[i] == '\"'))
-        {
-            in_quote = 1;
-            quote_char = s[i];
-            count++; // Count the quoted substring
-        }
-        else if (in_quote && s[i] == quote_char)
-        {
-            in_quote = 0;
-            quote_char = 0;
-        }
-        else if (!in_quote )
-        {
-            // Start of a non-quoted segment
-            count++;
-            // Skip the entire non-quoted segment
-            while (s[i] && s[i] != '\'' && s[i] != '\"')
-                i++;
-            continue; // Avoid incrementing i again
-        }
-        i++;
-    }
-    return (count);
+	i = 0;
+	f = 0;
+	i_c = 0;
+	count = 0;
+	while (s[i])
+	{
+		if ((s[i] == '\'' || s[i] == '\"') && i_c == 0)
+			ft_fix_norminet_1(&q, s + i, &i_c);
+		else if (i_c == 1 && s[i] == q)
+			i_c = !i_c;
+		if (s[i] != c && f == 0 && i_c == 0)
+			ft_fix_norminet_2(&f, &count);
+		else if (s[i] == c)
+			f = 0;
+		i++;
+	}
+	if (i_c == 1)
+		return (-1);
+	return (count);
 }
 
-char	*ft_copy_split4(const char *s, char c, long *i)
+char	*ft_copy_split2(const char *s, char c, long *i)
 {
 	long	j;
 	long	k;
@@ -130,7 +88,8 @@ char	*ft_copy_split4(const char *s, char c, long *i)
 	return (t);
 }
 
-char	**ft_split4(char const *s)
+
+char	**ft_split2(char const *s, char c)
 {
 	long	i;
 	long	k;
@@ -140,29 +99,23 @@ char	**ft_split4(char const *s)
 	k = 0;
 	if (!s)
 		return (NULL);
-    printf(">%ld<",ft_count_split4(s));
-	// if ((ft_count_split4(s, c)) == -1)
-	// 	return (NULL);
-	// t = malloc((ft_count_split4(s, c) + 1) * sizeof(char *));
-	// if (!t)
-	// 	return (NULL);
-	// while (k < ft_count_split4(s, c))
-	// {
-	// 	while (s[i] && s[i] == c)
-	// 		i++;
-	// 	t[k] = ft_copy_split4(s, c, &i);
-	// 	if (!t[k])
-	// 		return (ft_free(t), NULL);
-	// 	k++;
-	// }
-	// t[k] = NULL;
-	// return (t);
-	return (NULL);
+	if ((ft_count_split2(s, c)) == -1)
+		return (NULL);
+	t = malloc((ft_count_split2(s, c) + 1) * sizeof(char *));
+	if (!t)
+		return (NULL);
+	while (k < ft_count_split2(s, c))
+	{
+		while (s[i] && s[i] == c)
+			i++;
+		t[k] = ft_copy_split2(s, c, &i);
+		if (!t[k])
+			return (ft_free(t), NULL);
+		k++;
+	}
+	t[k] = NULL;
+	return (t);
 }
-
-
-
-
 
 void	ft_free(char **t)
 {
@@ -192,6 +145,11 @@ void	ft_print_tab(char **t)
 
 int	main(void)
 {
-	char **t = ft_split4("abc\'\'   \'a\'  \"ab\'c\"abc");
-	ft_print_tab(t);
+	char	**t;
+	int c=ft_count_split2(" \"a   \"                 \'asdf fsdf\'           ", ' ');
+	// char **t = ft_split4("a bc\'\'   \'a\'  \"ab\'c\"abc");
+	// t = ft_split2;
+	// ft_print_tab(t);
+	printf("%d\n", c);
+	return (0);
 }
