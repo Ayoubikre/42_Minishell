@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   swap_utils.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: aakritah <aakritah@student.42.fr>          +#+  +:+       +#+        */
+/*   By: noctis <noctis@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/06/08 12:41:11 by aakritah          #+#    #+#             */
-/*   Updated: 2025/06/08 16:30:12 by aakritah         ###   ########.fr       */
+/*   Updated: 2025/06/09 18:56:56 by noctis           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,11 +26,9 @@ int	ft_toggle_quote(char **ptr, int *s_q, int *d_q)
 	return (0);
 }
 
-int	ft_calcul_total_len_fix_norm(t_extra *x, int f, int *s, char **ptr);
-
 int	ft_calcul_total_len(int s, char *ptr, t_extra *x, int f)
 {
-	int (k), (s_q), d_q = 0;
+	int (s_q), d_q = 0;
 	s_q = 0;
 	while (*ptr)
 	{

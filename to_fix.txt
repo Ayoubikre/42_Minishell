@@ -1,25 +1,22 @@
 
 
-                |------------ export : ------------|
+                |------------ echo : ------------|
 
 
+[noctis@Ayoubikre 42_Minishell]$ echo             a
+a
+[noctis@Ayoubikre 42_Minishell]$ echo         "$a"    a
+ a
+[noctis@Ayoubikre 42_Minishell]$ echo         ""    a
+ a
 
-status : not fixed
+
 
 
 ------------------------------------------------------------------
 
 
-status : not fixed
 
 
 
-
-
-
-
-                |------------ others : ------------|
-
-fix add history if the comand fail
-
-fix the status exist in the expanding -> ft_handle_special_char() and ft_calcul_sepcial_len()
+               

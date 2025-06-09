@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   expand.c                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: aakritah <aakritah@student.42.fr>          +#+  +:+       +#+        */
+/*   By: noctis <noctis@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/08 09:31:09 by aakritah          #+#    #+#             */
-/*   Updated: 2025/06/08 18:09:20 by aakritah         ###   ########.fr       */
+/*   Updated: 2025/06/09 18:39:39 by noctis           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,13 +15,13 @@
 
 int	ft_expanding_list(t_token **data, t_extra *x)
 {
-	char *t;
+	char	*t;
 	t_token	*ptr;
 
 	ptr = *data;
 	while (ptr->type != end_t)
 	{
-		if(!ptr->prev || (ptr->prev && ptr->prev->type!=heredoc_t))
+		if (!ptr->prev || (ptr->prev && ptr->prev->type != heredoc_t))
 		{
 			if (ft_check_dollar(ptr->value))
 				ptr->f = 1;
@@ -39,40 +39,40 @@ int	ft_expanding_list(t_token **data, t_extra *x)
 	return (0);
 }
 
-int	ft_expand(t_token **data, t_extra *x)
+int	ft_re_tokenizing(t_token **data)
 {
 	t_token	*ptr;
 
+	ptr = *data;
+	while (ptr && ptr->next && ptr->type != end_t)
+	{
+		if (ptr->type != ambiguous_t && ptr->type != skip_t)
+			ptr->type = undefiend;
+		ptr = ptr->next;
+	}
+	ft_set_tokens_after_expanding(data);
+	ptr = *data;
+	while (ptr && ptr->next && ptr->type != end_t)
+	{
+		if (ptr->type == ambiguous_t)
+		{
+			free(ptr->value);
+			ptr->value = NULL;
+		}
+		ptr = ptr->next;
+	}
+	return (0);
+}
+
+int	ft_expand(t_token **data, t_extra *x)
+{
 	if (ft_expanding_list(data, x) < 0)
 		return (-1);
-
-		
 	if (ft_fix_list(data) < 0)
 		return (-1);
-
-		
-	// ptr = *data;
-	// while (ptr && ptr->next && ptr->type != end_t)
-	// {
-	// 	if (ptr->type != ambiguous_t && ptr->type != skip_t)
-	// 		ptr->type = undefiend;
-	// 	ptr = ptr->next;
-	// }
-
-	
-	// ft_set_tokens_after_expanding(data);
-
-	
-	// ptr = *data;
-	// while (ptr && ptr->next && ptr->type != end_t)
-	// {
-	// 	if (ptr->type == ambiguous_t)
-	// 	{
-	// 		free(ptr->value);
-	// 		ptr->value = NULL;
-	// 	}
-	// 	ptr = ptr->next;
-	// }
-	
+	if (ft_re_tokenizing(data) < 0)
+		return (-1);
+	if (ft_remove_quotes(data) < 0)
+		return (-1);
 	return (0);
 }

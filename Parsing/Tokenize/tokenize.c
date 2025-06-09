@@ -18,7 +18,7 @@ int	ft_tokenize(char *str, t_token **data, t_extra *x)
 	if (ft_initialize_list(str, data) < 0)
 		return (ft_put_error_tokens(0, 2, x), -1);
 	ft_set_tokens_befor_expanding(data);
-	if (ft_validat_list(data,x) < 0)
+	if (ft_validat_list(data, x) < 0)
 		return (-1);
 	return (0);
 }

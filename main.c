@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   main.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: aakritah <aakritah@student.42.fr>          +#+  +:+       +#+        */
+/*   By: noctis <noctis@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/25 13:18:28 by aakritah          #+#    #+#             */
-/*   Updated: 2025/06/08 12:54:33 by aakritah         ###   ########.fr       */
+/*   Updated: 2025/06/09 20:50:50 by noctis           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,7 +23,7 @@ void	sig_handler(int signal)
 	}
 }
 
-void	signal_init()
+void	signal_init(void)
 {
 	rl_catch_signals = 0;
 	signal(SIGINT, sig_handler);
@@ -50,10 +50,9 @@ int	main(int ac, char **av, char **env)
 			{
 				ft_print_list(data);
 				// exec_cmd(data, &x);
-				// printf("\n > s : %d < \n",data->red_s);
 				ft_free_list(&data);
 			}
-			printf("\n > exit status : %d < \n", x.exit_status);
+			// printf("\n > exit status : %d < \n", x.exit_status);
 			add_history(str);
 		}
 		else if (!str)

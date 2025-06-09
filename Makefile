@@ -1,19 +1,5 @@
 #               ----------------      MAC :    ----------------
 
-CC = cc
-
-# CFLAGS = -Wall -Werror -Wextra -I./libs/readline/include
-
-# CFLAGS = -fsanitize=address -g -I./libs/readline/include
-
-CFLAGS = -I./libs/readline/include
-
-RDFLAGS = -L./libs/readline/lib -lreadline
-
-
-#               ----------------      LNX :    ----------------
-
-
 # CC = cc
 
 # # CFLAGS = -Wall -Werror -Wextra -I./libs/readline/include
@@ -22,7 +8,21 @@ RDFLAGS = -L./libs/readline/lib -lreadline
 
 # CFLAGS = -I./libs/readline/include
 
-# RDFLAGS = -lreadline -lncurses
+# RDFLAGS = -L./libs/readline/lib -lreadline
+
+
+#               ----------------      LNX :    ----------------
+
+
+CC = cc
+
+CFLAGS = -Wall -Werror -Wextra -I./libs/readline/include
+
+# CFLAGS = -fsanitize=address -g -I./libs/readline/include
+
+# CFLAGS = -I./libs/readline/include
+
+RDFLAGS = -lreadline -lncurses
 
 
 #               ----------------                ----------------
@@ -47,10 +47,10 @@ PARSING  =	./main.c \
 			./Parsing/Exp/fix_cas_1.c \
 			./Parsing/Exp/fix_cas_2.c \
 			./Parsing/Exp/set_token.c \
+			./Parsing/Exp/quotes.c \
 			./Parsing/Exp/utils.c \
-			./Parsing/Yard/shunting_yard.c  \
-			./Parsing/Yard/filter_list.c  \
-			./Parsing/Yard/filter_list2.c  \
+			./Parsing/Filter/filter_list.c  \
+			./Parsing/Filter/filter_list2.c  \
 			./Parsing/Utils/ft_split2.c \
 			./Parsing/Utils/ft_split3.c \
 			./Parsing/Utils/ft_split4.c \
