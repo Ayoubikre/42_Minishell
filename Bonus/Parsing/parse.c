@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   parse.c                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: noctis <noctis@student.42.fr>              +#+  +:+       +#+        */
+/*   By: aakritah <aakritah@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/03 02:15:07 by aakritah          #+#    #+#             */
-/*   Updated: 2025/06/09 18:39:35 by noctis           ###   ########.fr       */
+/*   Updated: 2025/06/10 15:01:52 by aakritah         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,16 +29,16 @@ t_token	*ft_parse(char *str, t_extra *x)
 		x->exit_status = 1;
 		return (ft_free_list(&data), NULL);
 	}
-	if (ft_filter_list(&data) < 0)
-	{
-		x->exit_status = 1;
-		return (ft_free_list(&data), NULL);
-	}
-	if (ft_filter_list2(&data) < 0)
-	{
-		x->exit_status = 1;
-		return (ft_free_list(&data), NULL);
-	}
+	// if (ft_filter_list(&data) < 0)
+	// {
+	// 	x->exit_status = 1;
+	// 	return (ft_free_list(&data), NULL);
+	// }
+	// if (ft_filter_list2(&data) < 0)
+	// {
+	// 	x->exit_status = 1;
+	// 	return (ft_free_list(&data), NULL);
+	// }
 	return (data);
 }
 

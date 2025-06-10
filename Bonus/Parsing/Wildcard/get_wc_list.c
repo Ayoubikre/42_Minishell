@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   get_wc_list.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: noctis <noctis@student.42.fr>              +#+  +:+       +#+        */
+/*   By: aakritah <aakritah@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/06/10 00:59:49 by noctis            #+#    #+#             */
-/*   Updated: 2025/06/10 01:41:25 by noctis           ###   ########.fr       */
+/*   Updated: 2025/06/10 15:53:56 by aakritah         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -50,10 +50,38 @@ int ft_get_wc_list_filled(char **t, int s,const  char *cwd)
     closedir(dir);
     return 0;
 }
-
-int	ft_get_wc_list(char *str, t_extra *x, char **t)
+int ft_filter_wc_list(char *str, char **t)
 {
-	int i = 0;
+
+}
+
+void ft_sort_wc_list_final(char **t)
+{
+	int i=0;
+	int j=0;
+	int s=ft_strlen2(t[i]);
+	char *tmp;
+
+	while(i<s)
+	{
+		j=0;
+		while(j<s)
+		{
+			if(ft_strcmp(t[i],t[j])<0)
+			{
+				tmp=t[i];
+				t[i]=t[j];
+				t[j]=tmp;
+			}
+			j++;
+		}
+		i++;
+	}
+
+}
+
+int	ft_get_wc_list(char *str, char **t)
+{
     int s;
 	char cwd[PATH_MAX];
 
@@ -67,5 +95,8 @@ int	ft_get_wc_list(char *str, t_extra *x, char **t)
 		return (-1);
     if(ft_get_wc_list_filled(t, s, cwd)==-1)
             return (ft_free(t), -1);
+	if(ft_filter_wc_list(str,t)==-1)
+            return (ft_free(t), -1);
+	ft_sort_wc_list_final(t);
     return 0;
 }

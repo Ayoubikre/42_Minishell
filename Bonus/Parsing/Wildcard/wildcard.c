@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   wildcard.c                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: noctis <noctis@student.42.fr>              +#+  +:+       +#+        */
+/*   By: aakritah <aakritah@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/06/09 21:26:33 by noctis            #+#    #+#             */
-/*   Updated: 2025/06/10 01:28:57 by noctis           ###   ########.fr       */
+/*   Updated: 2025/06/10 15:08:46 by aakritah         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,29 +31,26 @@ int ft_expanding_wc(t_token **data, t_extra *x)
     char **t;
     t_token *ptr;
     t_token *next;
-    int f;
     
     ptr=*data;
     while(ptr && ft_check_wc_string(ptr->value))
     {
         if(ptr->prev && ptr->prev->type==heredoc_t)
-        {
             ptr=ptr->next;
-            // continue;
-        }
         else
         {
             next=ptr->next;
-            f=ft_get_wc_list(ptr->value,x,t);
-            if(f==-1)
+            if(ft_get_wc_list(ptr->value,t)==-1);
                 return -1;
-       
-            // ft_sort_wc_list(t);
-            // if(ft_add_wc_content(ptr,data,x)==-1)
-            //     return -1;
+            if(ft_check_wc_ambg(ptr, t)==0);
+                if(ft_add_wc_content(data,ptr,next)==-1)
+                    return (ft_free(t),-1);
+            ft_free(t);
             ptr=next;             
         }
     }
+    // if (ft_re_tokenizing(data) < 0)
+	// 	return (-1);
     return 0;
 }
 
@@ -63,8 +60,7 @@ int ft_wildcard(t_token **data, t_extra *x)
 		return (-1);
 	// if (ft_fix_list(data) < 0)
 	// 	return (-1);
-	// if (ft_re_tokenizing(data) < 0)
-	// 	return (-1);
-    
+    // if (ft_re_tokenizing(data) < 0)
+    // 	return (-1);    
     return 0;
 }

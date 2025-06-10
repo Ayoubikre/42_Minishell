@@ -1,19 +1,5 @@
 #               ----------------      MAC :    ----------------
 
-# CC = cc
-
-# # CFLAGS = -Wall -Werror -Wextra -I./libs/readline/include
-
-# # CFLAGS = -fsanitize=address -g -I./libs/readline/include
-
-# CFLAGS = -I./libs/readline/include
-
-# RDFLAGS = -L./libs/readline/lib -lreadline
-
-
-#               ----------------      LNX :    ----------------
-
-
 CC = cc
 
 # CFLAGS = -Wall -Werror -Wextra -I./libs/readline/include
@@ -22,7 +8,21 @@ CC = cc
 
 CFLAGS = -I./libs/readline/include
 
-RDFLAGS = -lreadline -lncurses
+RDFLAGS = -L./libs/readline/lib -lreadline
+
+
+#               ----------------      LNX :    ----------------
+
+
+# CC = cc
+
+# # CFLAGS = -Wall -Werror -Wextra -I./libs/readline/include
+
+# # CFLAGS = -fsanitize=address -g -I./libs/readline/include
+
+# CFLAGS = -I./libs/readline/include
+
+# RDFLAGS = -lreadline -lncurses
 
 
 #               ----------------                ----------------
