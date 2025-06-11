@@ -6,7 +6,7 @@
 /*   By: noctis <noctis@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/03 02:45:32 by aakritah          #+#    #+#             */
-/*   Updated: 2025/06/09 19:01:49 by noctis           ###   ########.fr       */
+/*   Updated: 2025/06/11 01:48:24 by noctis           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -131,9 +131,24 @@ void				ft_copy_exp_value(t_env *env_list, char *var, char *t,
 int					ft_handle_special_char(t_extra *x, char *var, char *t,
 						int *i);
 int					ft_check_dollar(char *t);
-int					ft_check_dollar_2(char *t);
+int					ft_check_q_status(char *t);
 int					ft_strlen_2(char **t);
 int					ft_strcmp(const char *s1, const char *s2);
+
+//------------------------------ Wildcards :
+
+int ft_wildcard(t_token **data, t_extra *x);
+int ft_expanding_wc(t_token **data, t_extra *x);
+int ft_check_wc_string(char *t);
+
+char **ft_get_wc_list(char *str);
+void ft_sort_wc_list_final(char **t);
+int ft_filter_wc_list(char *str, char **t);
+int ft_get_wc_list_filled(char **t, int s,const  char *cwd);
+int	ft_get_wc_list_size(const char *cwd);
+
+int ft_fix_wc_list(t_token **data, t_token **ptr, char **t);
+int ft_add_nodes2(t_token **data, t_token **ptr, char **t);
 
 //------------------------------ Filter 1  :
 int					ft_filter_list(t_token **data);

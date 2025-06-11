@@ -6,7 +6,7 @@
 /*   By: noctis <noctis@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/11 23:54:04 by noctis            #+#    #+#             */
-/*   Updated: 2025/06/09 18:55:32 by noctis           ###   ########.fr       */
+/*   Updated: 2025/06/10 23:36:32 by noctis           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -83,7 +83,7 @@ int	ft_check_if_ambiguous(char *str)
 	i = 0;
 	while (t[i])
 	{
-		f = ft_check_dollar_2(t[i]);
+		f = ft_check_q_status(t[i]);
 		s = ft_count_split2(t[i], ' ');
 		if (f == 0 && s > 1)
 			return (ft_free(t), -2);

@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   get_wc_list.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: aakritah <aakritah@student.42.fr>          +#+  +:+       +#+        */
+/*   By: noctis <noctis@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/06/10 00:59:49 by noctis            #+#    #+#             */
-/*   Updated: 2025/06/10 15:53:56 by aakritah         ###   ########.fr       */
+/*   Updated: 2025/06/11 01:00:44 by noctis           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -50,53 +50,56 @@ int ft_get_wc_list_filled(char **t, int s,const  char *cwd)
     closedir(dir);
     return 0;
 }
-int ft_filter_wc_list(char *str, char **t)
-{
-
-}
 
 void ft_sort_wc_list_final(char **t)
 {
-	int i=0;
-	int j=0;
-	int s=ft_strlen2(t[i]);
+	int i;
+	int s=ft_strlen_2(t);
 	char *tmp;
 
-	while(i<s)
+	while(s>=0)
 	{
-		j=0;
-		while(j<s)
+		i=1;
+		while(i<s)
 		{
-			if(ft_strcmp(t[i],t[j])<0)
+			if(ft_strcmp(t[i],t[i-1])<0)
 			{
 				tmp=t[i];
-				t[i]=t[j];
-				t[j]=tmp;
+				t[i]=t[i-1];
+				t[i-1]=tmp;
 			}
-			j++;
+			i++;
 		}
-		i++;
+		s--;
 	}
-
 }
 
-int	ft_get_wc_list(char *str, char **t)
+char **ft_get_wc_list(char *str)
 {
     int s;
+	char **t;
 	char cwd[PATH_MAX];
 
 	if (!getcwd(cwd, sizeof(cwd)))
-		return (-1);
+		return (NULL);
+  
 	s = ft_get_wc_list_size(cwd);
 	if (s == -1)
-		return (-1);
+		return (NULL);
+		
 	t = malloc((s + 1) * sizeof(char *));
-	if (!t)
-		return (-1);
+	if (!(t))
+		return (NULL);
+	
     if(ft_get_wc_list_filled(t, s, cwd)==-1)
-            return (ft_free(t), -1);
-	if(ft_filter_wc_list(str,t)==-1)
-            return (ft_free(t), -1);
-	ft_sort_wc_list_final(t);
-    return 0;
+            return (ft_free(t), NULL);
+		
+	// t=ft_filter_wc_list(str,t);
+	// if(!t)
+	//     return (ft_free(t), -1);
+
+	ft_sort_wc_list_final(t);	
+    return t;
 }
+
+

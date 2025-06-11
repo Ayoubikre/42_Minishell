@@ -6,7 +6,7 @@
 /*   By: noctis <noctis@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/12 07:59:14 by noctis            #+#    #+#             */
-/*   Updated: 2025/06/09 18:32:39 by noctis           ###   ########.fr       */
+/*   Updated: 2025/06/10 23:36:01 by noctis           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,7 +27,7 @@ int	ft_check_dollar(char *t)
 	return (0);
 }
 
-int	ft_check_dollar_2(char *t)
+int	ft_check_q_status(char *t)
 {
 	int	i;
 
