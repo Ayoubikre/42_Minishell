@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   parse.h                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: noctis <noctis@student.42.fr>              +#+  +:+       +#+        */
+/*   By: aakritah <aakritah@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/03 02:45:32 by aakritah          #+#    #+#             */
-/*   Updated: 2025/06/11 01:48:24 by noctis           ###   ########.fr       */
+/*   Updated: 2025/06/11 21:20:12 by aakritah         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -138,14 +138,16 @@ int					ft_strcmp(const char *s1, const char *s2);
 //------------------------------ Wildcards :
 
 int ft_wildcard(t_token **data, t_extra *x);
-int ft_expanding_wc(t_token **data, t_extra *x);
 int ft_check_wc_string(char *t);
 
 char **ft_get_wc_list(char *str);
 void ft_sort_wc_list_final(char **t);
-int ft_filter_wc_list(char *str, char **t);
 int ft_get_wc_list_filled(char **t, int s,const  char *cwd);
 int	ft_get_wc_list_size(const char *cwd);
+
+
+char	**ft_filter_wc_list(char *str, char **t);
+
 
 int ft_fix_wc_list(t_token **data, t_token **ptr, char **t);
 int ft_add_nodes2(t_token **data, t_token **ptr, char **t);

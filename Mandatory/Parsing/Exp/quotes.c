@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   quotes.c                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: noctis <noctis@student.42.fr>              +#+  +:+       +#+        */
+/*   By: aakritah <aakritah@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/06/09 15:21:54 by noctis            #+#    #+#             */
-/*   Updated: 2025/06/09 19:08:49 by noctis           ###   ########.fr       */
+/*   Updated: 2025/06/11 20:37:56 by aakritah         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -80,7 +80,7 @@ char	*ft_remove_q(char *str)
 	if (!rs)
 		return (ft_free(t), NULL);
 	ft_copy_withe_no_q(rs, t, 0, 0);
-	return (ft_free(t), rs);
+	return (ft_free(t), free(str), rs);
 }
 
 int	ft_remove_quotes(t_token **data)
