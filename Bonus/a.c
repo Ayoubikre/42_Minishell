@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   a.c                                                :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: aakritah <aakritah@student.42.fr>          +#+  +:+       +#+        */
+/*   By: noctis <noctis@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/06/06 13:29:56 by aakritah          #+#    #+#             */
-/*   Updated: 2025/06/11 21:15:11 by aakritah         ###   ########.fr       */
+/*   Updated: 2025/06/12 01:22:37 by noctis           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,6 +18,144 @@
 #include <dirent.h>
 #include <sys/stat.h>
 
+
+// ----------------------------------------------------
+long	ft_count_split2(char const *s, char c);
+void	ft_fix_norminet_2(long *n2, long *n1);
+
+char	*ft_copy_split2(const char *s, char c, long *i);
+void	ft_fix_norminet_1(char *a, char const *b, long *n1);
+
+char	**ft_split2(char const *s, char c)
+{
+	long	i;
+	long	k;
+	char	**t;
+
+	i = 0;
+	k = 0;
+	if (!s)
+		return (NULL);
+	if ((ft_count_split2(s, c)) == -1)
+		return (NULL);
+	t = malloc((ft_count_split2(s, c) + 1) * sizeof(char *));
+	if (!t)
+		return (NULL);
+	while (k < ft_count_split2(s, c))
+	{
+		while (s[i] && s[i] == c)
+			i++;
+		t[k] = ft_copy_split2(s, c, &i);
+		if (!t[k])
+			return ( NULL);
+		k++;
+	}
+	t[k] = NULL;
+	return (t);
+}
+
+long	ft_count_split2(char const *s, char c)
+{
+	long	i;
+	long	f;
+	long	i_c;
+	char	q;
+	long	count;
+
+	i = 0;
+	f = 0;
+	i_c = 0;
+	count = 0;
+	while (s[i])
+	{
+		if ((s[i] == '\'' || s[i] == '\"') && i_c == 0)
+			ft_fix_norminet_1(&q, s + i, &i_c);
+		else if (i_c == 1 && s[i] == q)
+			i_c = !i_c;
+		if (s[i] != c && f == 0 && i_c == 0)
+			ft_fix_norminet_2(&f, &count);
+		else if (s[i] == c)
+			f = 0;
+		i++;
+	}
+	if (i_c == 1)
+		return (-1);
+	return (count);
+}
+
+char	*ft_copy_split2(const char *s, char c, long *i)
+{
+	long	j;
+	long	k;
+	long	i_c;
+	char	q;
+	char	*t;
+
+	i_c = 0;
+	k = 0;
+	j = *i;
+	while (s[j] && (s[j] != c || i_c == 1))
+	{
+		if ((s[j] == '\'' || s[j] == '\"') && i_c == 0)
+			ft_fix_norminet_1(&q, s + j, &i_c);
+		else if (i_c == 1 && s[j] == q)
+			i_c = !i_c;
+		j++;
+	}
+	t = malloc((j - *i + 1) * 1);
+	if (!t)
+		return (NULL);
+	while (*i < j)
+		t[k++] = s[(*i)++];
+	t[k] = '\0';
+	return (t);
+}
+void	ft_fix_norminet_1(char *a, char const *b, long *n1)
+{
+	*a = *b;
+	(*n1) = !(*n1);
+}
+
+void	ft_fix_norminet_2(long *n2, long *n1)
+{
+	(*n1)++;
+	(*n2)++;
+}
+
+
+char	*ft_strrchr(const char *s, int c)
+{
+	size_t	i;
+	size_t	s1;
+	char	*t;
+
+	i = 0;
+	s1 = strlen(s);
+	t = NULL;
+	while (i < s1 + 1)
+	{
+		if (s[i] == (char)c)
+			t = (char *)(s + i);
+		i++;
+	}
+	return (t);
+}
+
+void	ft_print_tab(char **t)
+{
+	int	i;
+
+	i = 0;
+	if (!t)
+		return ;
+	while (t[i])
+	{
+		printf("\n\t\t > %s <\n", t[i]);
+		i++;
+	}
+}
+
+// ----------------------------------------------------
 
 
 // int	ft_consume_1(char *rs, char t, int *i)
@@ -48,36 +186,46 @@ int	ft_valid(char *str, char *t)
 	int		j;
 	int		k;
 	int		f;
-	char	**rs;
+	char	**rs1;
+	char	**rs2;
 
 	i = 0;
 	j = 0;
 	k = 0;
 	f = 0;
-	rs = ft_split4(str);
-	if (!rs)
-		return (-1);
-	while (rs[k])
-	{
-		f = ft_check_q_status(rs[i]);
-		if (f == 0)
-		{
-			i = ft_consume_1(rs[k], t, &j);
-			if (i == -1)
-				return (-1);
-			else if (i == 0)
-				return (0);
-		}
-		else
-		{
-			i = ft_consume_2(rs[k], t, &j);
-			if (i == -1)
-				return (-1);
-			else if (i == 0)
-				return (0);
-		}
-		k++;
-	}
+	// rs = ft_split4(str);
+	// if (!rs2)
+	// 	return (-1);
+	
+	rs1=ft_split2(str, '/');
+	if(!rs1)
+		return -1;
+	ft_print_tab(rs1);
+
+	
+	// while (rs[k])
+	// {
+	// 	f = ft_check_q_status(rs[i]);
+	// 	if(f==0 && ft_strrchr(rs[k], '/'))
+	// 		break;
+	// 	if (f == 0)
+	// 	{
+	// 		i = ft_consume_1(rs[k], t, &j);
+	// 		if (i == -1)
+	// 			return (-1);
+	// 		else if (i == 0)
+	// 			return (0);
+	// 	}
+	// 	else
+	// 	{
+	// 		i = ft_consume_2(rs[k], t, &j);
+	// 		if (i == -1)
+	// 			return (-1);
+	// 		else if (i == 0)
+	// 			return (0);
+	// 	}
+	// 	k++;
+	// }
 	return (1);
 }
 
@@ -137,7 +285,7 @@ int main()
 {
     int i;
     char **rs;
-    char *str="*a*b";
+    char *str="*a/*b";
 
 	char **t = malloc((10 + 1) * sizeof(char *));
     t[0]=strdup("iiiiiaab");
@@ -154,10 +302,6 @@ int main()
     
     rs = ft_filter_wc_list(str, t);
     i=0;
-    while(rs[i])
-    {
-        printf("%s \n", rs[i]);
-        i++;        
-    }
+	// ft_print_tab(rs);
     return 0;
 }
