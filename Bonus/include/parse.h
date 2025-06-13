@@ -6,7 +6,7 @@
 /*   By: aakritah <aakritah@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/03 02:45:32 by aakritah          #+#    #+#             */
-/*   Updated: 2025/06/11 21:20:12 by aakritah         ###   ########.fr       */
+/*   Updated: 2025/06/13 21:44:26 by aakritah         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -71,6 +71,14 @@ typedef struct s_norm
 	char			*var;
 	char			*t;
 }					t_norm;
+
+typedef struct s_wc
+{
+	char			*value;
+	int				f;
+	struct s_wc	*next;
+	struct s_wc	*prev;
+}					t_wc;
 
 //------------------------------ Parsing :
 t_token				*ft_parse(char *str, t_extra *x);
@@ -151,6 +159,25 @@ char	**ft_filter_wc_list(char *str, char **t);
 
 int ft_fix_wc_list(t_token **data, t_token **ptr, char **t);
 int ft_add_nodes2(t_token **data, t_token **ptr, char **t);
+
+
+int	ft_initialize_list2(char *str, t_wc **data);
+void	ft_add_list_end2(t_wc **data, t_wc *n);
+char	*ft_prosses_wc_string(char *t1);
+t_wc	*ft_creat_new_list2(char *str, int i);
+void	ft_free_list2(t_wc **data);
+
+
+
+char	**ft_split5(char const *str);
+int	ft_count_split5(const char *str, char **charset);
+char	*ft_copy_split5(const char *str, char **charset, int *x);
+int	ft_is_special2(const char *str, char **charset, int *len);
+int	ft_skip_token_quoted2(const char *str, char **charset, int *i);
+
+char	*ft_strjoin4(char **s1);
+char				**ft_set_charset2(void);
+
 
 //------------------------------ Filter 1  :
 int					ft_filter_list(t_token **data);

@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   main.h                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: noctis <noctis@student.42.fr>              +#+  +:+       +#+        */
+/*   By: aakritah <aakritah@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/25 13:18:26 by aakritah          #+#    #+#             */
-/*   Updated: 2025/06/10 01:06:51 by noctis           ###   ########.fr       */
+/*   Updated: 2025/06/13 20:38:41 by aakritah         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -37,6 +37,12 @@
 # define CYAN "\033[1;36m"
 # define YELLOW "\033[33m"
 # define MAGENTA "\033[1;35m"
+
+# define GREEN   "\033[1;32m"
+# define BLUE    "\033[1;34m"
+# define WHITE   "\033[1;37m"
+# define GRAY    "\033[0;90m" 
+
 # define RESET "\033[0m"
 
 //------------------------------ Main :
@@ -47,6 +53,7 @@ void	leaks(void);
 void	ft_print_list(t_token *data);
 void	ft_print_list1(t_token *data);
 void	ft_print_tab(char **t);
+void	ft_print_list3(t_wc *data);
 
 #endif
 

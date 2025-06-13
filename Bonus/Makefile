@@ -1,19 +1,5 @@
 #               ----------------      MAC :    ----------------
 
-# CC = cc
-
-# # CFLAGS = -Wall -Werror -Wextra -I./libs/readline/include
-
-# # CFLAGS = -fsanitize=address -g -I./libs/readline/include
-
-# CFLAGS = -I./libs/readline/include
-
-# RDFLAGS = -L./libs/readline/lib -lreadline
-
-
-#               ----------------      LNX :    ----------------
-
-
 CC = cc
 
 # CFLAGS = -Wall -Werror -Wextra -I./libs/readline/include
@@ -22,7 +8,21 @@ CC = cc
 
 CFLAGS = -I./libs/readline/include
 
-RDFLAGS = -lreadline -lncurses
+RDFLAGS = -L./libs/readline/lib -lreadline
+
+
+#               ----------------      LNX :    ----------------
+
+
+# CC = cc
+
+# # CFLAGS = -Wall -Werror -Wextra -I./libs/readline/include
+
+# # CFLAGS = -fsanitize=address -g -I./libs/readline/include
+
+# CFLAGS = -I./libs/readline/include
+
+# RDFLAGS = -lreadline -lncurses
 
 
 #               ----------------                ----------------
@@ -53,11 +53,14 @@ PARSING  =	./main.c \
 			./Parsing/Wildcard/get_wc_list.c \
 			./Parsing/Wildcard/filter.c \
 			./Parsing/Wildcard/fix_wc_list.c \
+			./Parsing/Wildcard/list.c \
 			./Parsing/Filter/filter_list.c  \
 			./Parsing/Filter/filter_list2.c  \
 			./Parsing/Utils/ft_split2.c \
 			./Parsing/Utils/ft_split3.c \
 			./Parsing/Utils/ft_split4.c \
+			./Parsing/Utils/ft_split5.c \
+			./Parsing/Utils/ft_strjoin4.c \
 			./Parsing/Utils/utils1.c \
 
 BUILTINS =	./execution/builtins/builtins.c \

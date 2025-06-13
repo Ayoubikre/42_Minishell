@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   utils_delet.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: anktiri <anktiri@student.42.fr>            +#+  +:+       +#+        */
+/*   By: aakritah <aakritah@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/04 02:49:05 by aakritah          #+#    #+#             */
-/*   Updated: 2025/05/25 20:54:40 by anktiri          ###   ########.fr       */
+/*   Updated: 2025/06/13 21:48:09 by aakritah         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -82,7 +82,25 @@ void	ft_print_list1(t_token *data)
 	ft_printf("\n----------------\n");
 	while (data)
 	{
-		ft_printf(" %s ", data->value);
+		ft_printf(" %s \n", data->value);
+		data = data->next;
+	}
+	ft_printf("\n----------------\n");
+}
+// ----------------------------------------------------
+
+void	ft_print_list3(t_wc *data)
+{
+	if (!data)
+	{
+		ft_printf("nothing\n");
+		return ;
+	}
+	ft_printf("\n----------------\n");
+	while (data)
+	{
+		ft_printf(" %s - %d \n", data->value, data->f);
+		ft_printf(" -- \n");
 		data = data->next;
 	}
 	ft_printf("\n----------------\n");

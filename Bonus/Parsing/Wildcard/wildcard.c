@@ -3,31 +3,32 @@
 /*                                                        :::      ::::::::   */
 /*   wildcard.c                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: noctis <noctis@student.42.fr>              +#+  +:+       +#+        */
+/*   By: aakritah <aakritah@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/06/09 21:26:33 by noctis            #+#    #+#             */
-/*   Updated: 2025/06/13 01:59:17 by noctis           ###   ########.fr       */
+/*   Updated: 2025/06/13 10:50:32 by aakritah         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../include/main.h"
 #include "../../include/parse.h"
 
-// int	ft_check_wc_string(char *t)
-// {
-// 	int	i;
+int	ft_check_wc_string(char *t)
+{
+	int	i;
 
-// 	i = 0;
-// 	if (!t)
-// 		return (0);
-// 	while (t[i] && t[i] != '/')
-// 	{
-// 		if (t[i] == '*')
-// 			return (1);
-// 		i++;
-// 	}
-// 	return (0);
-// }
+	i = 0;
+	if (!t)
+		return (0);
+	// while (t[i] && t[i] != '/')
+	while (t[i])
+	{
+		if (t[i] == '*')
+			return (1);
+		i++;
+	}
+	return (0);
+}
 
 int	ft_wildcard(t_token **data, t_extra *x)
 {
@@ -38,9 +39,7 @@ int	ft_wildcard(t_token **data, t_extra *x)
 	ptr = *data;
 	while (ptr && ptr->type != end_t)
 	{
-		// if (ft_check_wc_string(ptr->value) && (!ptr->prev || (ptr->prev
-		// 			&& ptr->prev->type != heredoc_t)))
-		if (!ptr->prev || (ptr->prev && ptr->prev->type != heredoc_t))
+		if (ft_check_wc_string(ptr->value) && (!ptr->prev || (ptr->prev && ptr->prev->type != heredoc_t)))
 		{
 			ptr->f = 1;
 			t = ft_get_wc_list(ptr->value);

@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   utils1.c                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: noctis <noctis@student.42.fr>              +#+  +:+       +#+        */
+/*   By: aakritah <aakritah@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/04 02:59:30 by aakritah          #+#    #+#             */
-/*   Updated: 2025/06/09 18:43:31 by noctis           ###   ########.fr       */
+/*   Updated: 2025/06/13 19:54:40 by aakritah         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,6 +17,8 @@ void	ft_free(char **t)
 {
 	int	i;
 
+	if(!t)
+		return;
 	i = 0;
 	while (t[i])
 	{
@@ -54,6 +56,18 @@ char	**ft_set_charset(void)
 	charset[5] = "\"";
 	charset[6] = "\'";
 	charset[7] = NULL;
+	return (charset);
+}
+
+char	**ft_set_charset2(void)
+{
+	char	**charset;
+
+	charset = malloc(sizeof(char *) * 2);
+	if (!charset)
+		return (NULL);
+	charset[0] = "*";
+	charset[1] = NULL;
 	return (charset);
 }
 

@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   get_wc_list.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: noctis <noctis@student.42.fr>              +#+  +:+       +#+        */
+/*   By: aakritah <aakritah@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/06/10 00:59:49 by noctis            #+#    #+#             */
-/*   Updated: 2025/06/13 03:05:21 by noctis           ###   ########.fr       */
+/*   Updated: 2025/06/13 21:50:55 by aakritah         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -87,8 +87,10 @@ char	**ft_get_wc_list(char *str)
 {
 	int		s;
 	char	**t;
+	t_wc    *data;
 	char	cwd[PATH_MAX];
 
+	data=NULL;
 	if (!getcwd(cwd, sizeof(cwd)))
 		return (NULL);
 	s = ft_get_wc_list_size(cwd);
@@ -99,12 +101,20 @@ char	**ft_get_wc_list(char *str)
 		return (NULL);
 	if (ft_get_wc_list_filled(t, s, cwd) == -1)
 		return (ft_free(t), NULL);
-	ft_sort_wc_list_final(t);
-	
-	t = ft_filter_wc_list(str, t);
-	if (!t)
+		
+	// ft_sort_wc_list_final(t);
+		
+	if (ft_initialize_list2(str, &data) < 0)
 		return (ft_free(t), NULL);
+
+	ft_print_list3(data);
+	
+	// t = ft_filter_wc_list(str, t);
+	// if (!t)
+	// 	return (ft_free(t), NULL);
 		
 	ft_sort_wc_list_final(t);
-	return (t);
+	return (ft_free_list2(&data), t);
 }
+
+
