@@ -3,37 +3,17 @@
 /*                                                        :::      ::::::::   */
 /*   filter.c                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: aakritah <aakritah@student.42.fr>          +#+  +:+       +#+        */
+/*   By: noctis <noctis@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/06/10 22:59:03 by noctis            #+#    #+#             */
-/*   Updated: 2025/06/11 21:19:26 by aakritah         ###   ########.fr       */
+/*   Updated: 2025/06/13 03:02:35 by noctis           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../include/main.h"
 #include "../../include/parse.h"
 
-// int	ft_consume_1(char *rs, char t, int *i)
-// {
-// }
 
-// int	ft_consume_2(char *rs, char t, int *i)
-// {
-// 	char	*rs2;
-// 	int		s;
-// 	int		k;
-
-// 	rs2 = ft_remove_q(rs);
-// 	if (!rs2)
-// 		return (-1);
-// 	s = ft_strlen(rs2);
-// 	k = ft_strncmp(rs2, t + *i, s);
-// 	if (k != 0)
-// 		return (-1);
-// 	else
-// 		*i += s;
-// 	return (1);
-// }
 
 // int	ft_valid(char *str, char *t)
 // {
@@ -74,54 +54,145 @@
 // 	return (1);
 // }
 
-// int	ft_count_wc_match(char *str, char **t)
-// {
-// 	int	i;
-// 	int	count;
-// 	int	f;
+static int match_wildcard(const char *pattern, const char **filename_ptr)
+{
+    const char *p = pattern;
+    const char *f = *filename_ptr;
+    const char *star_p = NULL;
+    const char *star_f = NULL;
 
-// 	i = 0;
-// 	count = 0;
-// 	while (t[i])
-// 	{
-// 		f = ft_valid(str, t[i]);
-// 		if (f == -1)
-// 			return (-1);
-// 		else if (f == 1)
-// 			count++;
-// 		i++;
-// 	}
-// 	return (count);
-// }
+    while (*f)
+    {
+        if (*p == '*')
+        {
+            star_p = ++p;
+            star_f = f;
+        }
+        else if (*p == *f)
+        {
+            p++;
+            f++;
+        }
+        else if (star_p)
+        {
+            p = star_p;
+            f = ++star_f;
+        }
+        else
+        {
+            return 0;
+        }
+    }
+
+    while (*p == '*')
+        p++;
+
+    if (*p == '\0')
+    {
+        *filename_ptr = f;
+        return 1;
+    }
+
+    return 0;
+}
+
+int ft_valid(const char *pattern, const char *filename)
+{
+    char **split = ft_split4(pattern);
+    if (!split)
+        return 0;
+
+    int i = 0;
+    const char *f = filename;
+
+    while (split[i])
+    {
+        int is_quoted = ft_check_q_status(split[i]);
+        const char *segment = split[i];
+
+        // Debug output
+        printf("[DEBUG] Segment: \"%s\" | Quoted: %d | Filename head: \"%s\"\n",
+               segment, is_quoted, f);
+
+        if (is_quoted)
+        {
+            size_t len = strlen(segment);
+            if (strncmp(f, segment, len) != 0)
+            {
+                printf("[DEBUG] Literal mismatch: \"%s\" vs \"%s\"\n", segment, f);
+                return 0;
+            }
+            f += len;
+        }
+        else
+        {
+            if (!match_wildcard(segment, &f))
+            {
+                printf("[DEBUG] Wildcard mismatch: \"%s\" vs \"%s\"\n", segment, f);
+                return 0;
+            }
+        }
+        i++;
+    }
+
+    if (*f != '\0')
+    {
+        printf("[DEBUG] Leftover filename content: \"%s\"\n", f);
+        return 0;
+    }
+
+    return 1;
+}
+
+int	ft_count_wc_match(char *str, char **t)
+{
+	int	i;
+	int	count;
+	int	f;
+
+	i = 0;
+	count = 0;
+	while (t[i])
+	{
+		f = ft_valid(str, t[i]);
+		if (f == -1)
+			return (-1);
+		else if (f == 1)
+			count++;
+		i++;
+	}
+	return (count);
+}
 
 char	**ft_filter_wc_list(char *str, char **t)
 {
-	// int		i;
-	// int		j;
-	// int		s;
-	// int		f;
-	// char	**t2;
+	int		i;
+	int		j;
+	int		s;
+	int		f;
+	char	**t2;
 
-	// s = ft_count_wc_match(str, t);
-	// if (s == -1)
-	// 	return (ft_free(t), NULL);
-	// t2 = malloc((s + 1) * sizeof(char *));
-	// if (!t2)
-	// 	return (ft_free(t), NULL);
-	// i = 0;
-	// j = 0;
-	// while (t[i])
-	// {
-	// 	f = ft_valid(str, t[i]);
-	// 	if (f == -1)
-	// 		return (ft_free(t2), ft_free(t), NULL);
-	// 	else if (f == 1)
-	// 	{
-	// 		t2[j] = ft_strdup(t[i]);
-	// 		i++;
-	// 	}
-	// 	j++;
-	// }
-	// t2[j] = NULL;
-	// return (ft_free(t), t2);
+	s = ft_count_wc_match(str, t);
+	if (s == -1)
+		return (ft_free(t), NULL);
+	t2 = malloc((s + 1) * sizeof(char *));
+	if (!t2)
+		return (ft_free(t), NULL);
+	i = 0;
+	j = 0;
+	while (t[i])
+	{
+		f = ft_valid(str, t[i]);
+		if (f == -1)
+			return (ft_free(t2), ft_free(t), NULL);
+		else if (f == 1)
+		{
+			t2[j] = ft_strdup(t[i]);
+			j++;
+		}
+		i++;
+	}
+	t2[j] = NULL;
+	return (ft_free(t), t2);
 }
+

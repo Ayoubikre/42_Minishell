@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   get_wc_list.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: aakritah <aakritah@student.42.fr>          +#+  +:+       +#+        */
+/*   By: noctis <noctis@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/06/10 00:59:49 by noctis            #+#    #+#             */
-/*   Updated: 2025/06/11 21:19:33 by aakritah         ###   ########.fr       */
+/*   Updated: 2025/06/13 03:05:21 by noctis           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -100,9 +100,11 @@ char	**ft_get_wc_list(char *str)
 	if (ft_get_wc_list_filled(t, s, cwd) == -1)
 		return (ft_free(t), NULL);
 	ft_sort_wc_list_final(t);
-	// t = ft_filter_wc_list(str, t);
-	// if (!t)
-	// 	return (ft_free(t), -1);
+	
+	t = ft_filter_wc_list(str, t);
+	if (!t)
+		return (ft_free(t), NULL);
+		
 	ft_sort_wc_list_final(t);
 	return (t);
 }

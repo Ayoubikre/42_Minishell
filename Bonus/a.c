@@ -6,7 +6,7 @@
 /*   By: noctis <noctis@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/06/06 13:29:56 by aakritah          #+#    #+#             */
-/*   Updated: 2025/06/12 01:22:37 by noctis           ###   ########.fr       */
+/*   Updated: 2025/06/13 02:51:43 by noctis           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,106 +20,92 @@
 
 
 // ----------------------------------------------------
-long	ft_count_split2(char const *s, char c);
-void	ft_fix_norminet_2(long *n2, long *n1);
+char	*ft_copy_split4(char const *s, int *k);
 
-char	*ft_copy_split2(const char *s, char c, long *i);
-void	ft_fix_norminet_1(char *a, char const *b, long *n1);
+int	ft_count_split4(char const *s);
 
-char	**ft_split2(char const *s, char c)
+
+
+char	**ft_split4(char const *str)
 {
-	long	i;
-	long	k;
+	int		i;
+	int		s;
+	int		k;
 	char	**t;
 
+	if (!str)
+		return (NULL);
 	i = 0;
 	k = 0;
-	if (!s)
-		return (NULL);
-	if ((ft_count_split2(s, c)) == -1)
-		return (NULL);
-	t = malloc((ft_count_split2(s, c) + 1) * sizeof(char *));
+	s = ft_count_split4(str);
+	t = malloc((s + 1) * sizeof(char *));
 	if (!t)
 		return (NULL);
-	while (k < ft_count_split2(s, c))
+	while (i < s)
 	{
-		while (s[i] && s[i] == c)
-			i++;
-		t[k] = ft_copy_split2(s, c, &i);
-		if (!t[k])
+		t[i] = ft_copy_split4(str, &k);
+		if (!t[i])
 			return ( NULL);
-		k++;
+		i++;
 	}
-	t[k] = NULL;
+	t[i] = NULL;
 	return (t);
 }
 
-long	ft_count_split2(char const *s, char c)
+int	ft_count_split4(char const *s)
 {
-	long	i;
-	long	f;
-	long	i_c;
-	char	q;
-	long	count;
+	int		i;
+	int		count;
+	char	q_c;
 
 	i = 0;
-	f = 0;
-	i_c = 0;
 	count = 0;
+	q_c = 0;
 	while (s[i])
 	{
-		if ((s[i] == '\'' || s[i] == '\"') && i_c == 0)
-			ft_fix_norminet_1(&q, s + i, &i_c);
-		else if (i_c == 1 && s[i] == q)
-			i_c = !i_c;
-		if (s[i] != c && f == 0 && i_c == 0)
-			ft_fix_norminet_2(&f, &count);
-		else if (s[i] == c)
-			f = 0;
-		i++;
+		count++;
+		if (s[i] == '\'' || s[i] == '\"')
+		{
+			q_c = s[i++];
+			while (s[i] && s[i] != q_c)
+				i++;
+			i++;
+		}
+		else
+		{
+			while (s[i] && !(s[i] == '\'' || s[i] == '\"'))
+				i++;
+		}
 	}
-	if (i_c == 1)
-		return (-1);
 	return (count);
 }
 
-char	*ft_copy_split2(const char *s, char c, long *i)
+char	*ft_copy_split4(char const *s, int *k)
 {
-	long	j;
-	long	k;
-	long	i_c;
-	char	q;
+	int		i;
+	int		j;
 	char	*t;
+	char	q_c;
 
-	i_c = 0;
-	k = 0;
-	j = *i;
-	while (s[j] && (s[j] != c || i_c == 1))
+	i = (*k);
+	if (s[*k] == '\'' || s[*k] == '\"')
 	{
-		if ((s[j] == '\'' || s[j] == '\"') && i_c == 0)
-			ft_fix_norminet_1(&q, s + j, &i_c);
-		else if (i_c == 1 && s[j] == q)
-			i_c = !i_c;
-		j++;
+		q_c = s[(*k)++];
+		while (s[*k] && s[*k] != q_c)
+			(*k)++;
+		(*k)++;
 	}
-	t = malloc((j - *i + 1) * 1);
+	else
+		while (s[*k] && !(s[*k] == '\'' || s[*k] == '\"'))
+			(*k)++;
+	t = malloc((((*k) - i + 1) + 1));
 	if (!t)
 		return (NULL);
-	while (*i < j)
-		t[k++] = s[(*i)++];
-	t[k] = '\0';
+	j = 0;
+	while (i < *k)
+		t[j++] = s[i++];
+	t[j] = '\0';
 	return (t);
-}
-void	ft_fix_norminet_1(char *a, char const *b, long *n1)
-{
-	*a = *b;
-	(*n1) = !(*n1);
-}
-
-void	ft_fix_norminet_2(long *n2, long *n1)
-{
-	(*n1)++;
-	(*n2)++;
 }
 
 
@@ -154,80 +140,194 @@ void	ft_print_tab(char **t)
 		i++;
 	}
 }
+int	ft_check_q_status(char *t)
+{
+	int	i;
 
+	if (!t)
+		return (0);
+	if (t[0] == '\"')
+		i = 2;
+	else if (t[0] == '\'')
+		i = 1;
+	else
+		i = 0;
+	return (i);
+}
+int	ft_check_slash(char *t)
+{
+	int	i;
+
+	i = 0;
+	while (t[i])
+	{
+		if (t[i] == '/')
+			return (1);
+		i++;
+	}
+	return (0);
+}
 // ----------------------------------------------------
 
 
-// int	ft_consume_1(char *rs, char t, int *i)
-// {
-// }
+// // int	ft_consume_1(char *rs, char t, int *i)
+// // {
+// // }
 
-// int	ft_consume_2(char *rs, char t, int *i)
+// // int	ft_consume_2(char *rs, char t, int *i)
+// // {
+// // 	char	*rs2;
+// // 	int		s;
+// // 	int		k;
+
+// // 	rs2 = ft_remove_q(rs);
+// // 	if (!rs2)
+// // 		return (-1);
+// // 	s = ft_strlen(rs2);
+// // 	k = ft_strncmp(rs2, t + *i, s);
+// // 	if (k != 0)
+// // 		return (-1);
+// // 	else
+// // 		*i += s;
+// // 	return (1);
+// // }
+
+// int	ft_valid(char *str, char *t)
 // {
-// 	char	*rs2;
-// 	int		s;
+// 	int		i;
+// 	int		j;
 // 	int		k;
+// 	int		f_q;
+// 	int		f_s;
+// 	int		valid;
+	
+// 	char	**rs1;
+// 	char	**rs2;
+// 	char *tmp;
 
-// 	rs2 = ft_remove_q(rs);
-// 	if (!rs2)
-// 		return (-1);
-// 	s = ft_strlen(rs2);
-// 	k = ft_strncmp(rs2, t + *i, s);
-// 	if (k != 0)
-// 		return (-1);
-// 	else
-// 		*i += s;
+// 	i = 0;
+// 	j = 0;
+// 	k = 0;
+// 	f_q = 0;
+// 	f_s = 0;
+// 	valid = 1;
+
+
+// 	rs1=ft_split4(str);
+// 	if(!rs1)
+// 		return -1;
+	
+// 	while(rs1[i])
+// 	{
+// 		f_q=ft_check_q_status(rs1[i]);
+// 		// f_s=ft_check_slash(rs1[i]);
+// 		j=0;
+
+// 		if(f_q!=0)
+// 		{
+// 			// tmp=ft_remove_q(rs[i]);
+// 			while(*t)
+// 			{
+// 				printf("%c - %c\n", *t, rs1[i][j]);
+// 				// int s=strlen(rs[i]);
+// 				if(*t!=rs1[i][j])
+// 					return 0;
+// 				j++;
+// 				t++;
+// 			}
+			
+// 		}
+// 		else
+// 		{
+// 			while
+
+
+// 		}
+// 		i++;
+// 	}
+
 // 	return (1);
 // }
 
-int	ft_valid(char *str, char *t)
+
+int match_with_star(const char *pattern, const char **filename_ptr)
 {
-	int		i;
-	int		j;
-	int		k;
-	int		f;
-	char	**rs1;
-	char	**rs2;
+    const char *p = pattern;
+    const char *f = *filename_ptr;
+    const char *star_p = NULL;
+    const char *star_f = NULL;
 
-	i = 0;
-	j = 0;
-	k = 0;
-	f = 0;
-	// rs = ft_split4(str);
-	// if (!rs2)
-	// 	return (-1);
-	
-	rs1=ft_split2(str, '/');
-	if(!rs1)
-		return -1;
-	ft_print_tab(rs1);
+    while (*f && *p)
+    {
+        if (*p == '*')
+        {
+            star_p = ++p;
+            star_f = f;
+        }
+        else if (*p == *f)
+        {
+            p++;
+            f++;
+        }
+        else if (star_p)
+        {
+            p = star_p;
+            f = ++star_f;
+        }
+        else
+        {
+            return 0;
+        }
+    }
 
-	
-	// while (rs[k])
-	// {
-	// 	f = ft_check_q_status(rs[i]);
-	// 	if(f==0 && ft_strrchr(rs[k], '/'))
-	// 		break;
-	// 	if (f == 0)
-	// 	{
-	// 		i = ft_consume_1(rs[k], t, &j);
-	// 		if (i == -1)
-	// 			return (-1);
-	// 		else if (i == 0)
-	// 			return (0);
-	// 	}
-	// 	else
-	// 	{
-	// 		i = ft_consume_2(rs[k], t, &j);
-	// 		if (i == -1)
-	// 			return (-1);
-	// 		else if (i == 0)
-	// 			return (0);
-	// 	}
-	// 	k++;
-	// }
-	return (1);
+    // Skip remaining * in pattern
+    while (*p == '*') p++;
+
+    if (*p == '\0')
+    {
+        *filename_ptr = f; // advance filename if match succeeds
+        return 1;
+    }
+
+    return 0;
 }
+
+
+int ft_valid( char *pattern,  char *filename)
+{
+	
+char **chunks = ft_split4(pattern); // ["u", "*", "u"]
+int i = 0;
+const char *f = filename;
+
+while (chunks[i])
+{
+    int is_quoted = ft_check_q_status(chunks[i]);
+
+    if (is_quoted)
+    {
+        // Match chunk literally (including any '*')
+        int len = strlen(chunks[i]);
+        if (strncmp(f, chunks[i], len) != 0)
+            return 0;
+        f += len;
+		// f+=2;
+    }
+    else
+    {
+        // Chunk may contain '*'
+        if (!match_with_star(chunks[i], &f))
+            return 0;
+    }
+    i++;
+}
+
+return *f == '\0';
+
+    }
+
+	
+
 
 int	ft_count_wc_match(char *str, char **t)
 {
@@ -285,12 +385,14 @@ int main()
 {
     int i;
     char **rs;
-    char *str="*a/*b";
+    char **rs1;
+    // char *str="*a\'/*\'/\'*b\'\"\"";
+    char *str="u*ii*ii*u";
 
 	char **t = malloc((10 + 1) * sizeof(char *));
-    t[0]=strdup("iiiiiaab");
+    t[0]=strdup("usdfasdfiifsdfaiiiaaaiu");
     t[1]=strdup("..a..b");
-    t[2]=strdup("ab");
+    t[2]=strdup("u*u");
     t[3]=strdup("ab.");
     t[4]=strdup("kldjsfa");
     t[5]=strdup("..");
@@ -300,8 +402,15 @@ int main()
     t[9]=strdup("asdsklfjbdsf");
     t[10]=NULL;
     
-    rs = ft_filter_wc_list(str, t);
-    i=0;
+    // rs = ft_filter_wc_list(str, t);
+    // i=0;
 	// ft_print_tab(rs);
+
+	if(ft_valid(str, t[2])== 1)
+		printf("valid\n");
+	else
+		printf("not valid\n");
+
+
     return 0;
 }
