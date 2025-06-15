@@ -6,7 +6,7 @@
 /*   By: aakritah <aakritah@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/06/10 22:59:03 by noctis            #+#    #+#             */
-/*   Updated: 2025/06/13 21:41:44 by aakritah         ###   ########.fr       */
+/*   Updated: 2025/06/15 18:57:27 by aakritah         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -68,8 +68,8 @@ char	**ft_filter_wc_list(char *str, char **t)
 		return (ft_free(t), NULL);
 
         
-	if (ft_initialize_list2(str, &data) < 0)
-		return (ft_free(t2), ft_free(t), NULL);
+	// if (ft_initialize_list2(str, &data) < 0)
+	// 	return (ft_free(t2), ft_free(t), NULL);
 
 
 	// i = 0;

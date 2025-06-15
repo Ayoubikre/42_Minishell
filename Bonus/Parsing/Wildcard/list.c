@@ -6,12 +6,13 @@
 /*   By: aakritah <aakritah@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/06/13 21:41:25 by aakritah          #+#    #+#             */
-/*   Updated: 2025/06/13 21:54:28 by aakritah         ###   ########.fr       */
+/*   Updated: 2025/06/15 19:00:17 by aakritah         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../include/main.h"
 #include "../../include/parse.h"
+
 
 void	ft_free_list2(t_wc **data)
 {
@@ -49,7 +50,7 @@ t_wc	*ft_creat_new_list2(char *str, int i)
 char	*ft_prosses_wc_string(char *t1)
 {
 	int		i;
-	char	*rs;
+	char	*tmp;
 	char	**s1;
 
 	if (!t1)
@@ -65,10 +66,10 @@ char	*ft_prosses_wc_string(char *t1)
 			return (ft_free(s1), NULL);
 		i++;
 	}
-	rs = ft_strjoin4(s1);
-	if (!rs)
+	tmp = ft_strjoin4(s1);
+	if (!tmp)
 		return (ft_free(s1), NULL);
-	return (rs);
+	return (ft_free(s1), tmp);
 }
 
 void	ft_add_list_end2(t_wc **data, t_wc *n)
@@ -90,11 +91,11 @@ void	ft_add_list_end2(t_wc **data, t_wc *n)
 	return ;
 }
 
-int	ft_initialize_list2(char *str, t_wc **data)
+int	ft_cmd_list(char *str, t_wc **data)
 {
 	int		i;
 	char	**t1;
-	char	*rs;
+	char	*tmp;
 
 	t1 = ft_split5(str);
 	if (!t1)
@@ -108,11 +109,11 @@ int	ft_initialize_list2(char *str, t_wc **data)
 		}
 		else
 		{
-			rs = ft_prosses_wc_string(t1[i]);
-			if (!rs)
+			tmp = ft_prosses_wc_string(t1[i]);
+			if (!tmp)
 				return (ft_free(t1), ft_free_list2(data), -1);
-			ft_add_list_end2(data, ft_creat_new_list2(rs, 0));
-			free(rs);
+			ft_add_list_end2(data, ft_creat_new_list2(tmp, 0));
+			free(tmp);
 		}
 		i++;
 	}
