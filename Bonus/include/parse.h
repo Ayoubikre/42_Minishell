@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   parse.h                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: aakritah <aakritah@student.42.fr>          +#+  +:+       +#+        */
+/*   By: noctis <noctis@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/03 02:45:32 by aakritah          #+#    #+#             */
-/*   Updated: 2025/06/13 21:44:26 by aakritah         ###   ########.fr       */
+/*   Updated: 2025/06/15 04:09:00 by noctis           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -150,8 +150,9 @@ int ft_check_wc_string(char *t);
 
 char **ft_get_wc_list(char *str);
 void ft_sort_wc_list_final(char **t);
-int ft_get_wc_list_filled(char **t, int s,const  char *cwd);
-int	ft_get_wc_list_size(const char *cwd);
+int	ft_get_wc_list_filled(char **t, int s, const char *cwd, char *str);
+int	ft_get_wc_list_size(const char *cwd, char *str);
+int ft_is_hidden(char *t);
 
 
 char	**ft_filter_wc_list(char *str, char **t);

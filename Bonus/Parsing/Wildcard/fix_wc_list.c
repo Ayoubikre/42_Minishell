@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   fix_wc_list.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: aakritah <aakritah@student.42.fr>          +#+  +:+       +#+        */
+/*   By: noctis <noctis@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/06/11 01:07:20 by noctis            #+#    #+#             */
-/*   Updated: 2025/06/11 20:00:52 by aakritah         ###   ########.fr       */
+/*   Updated: 2025/06/15 03:39:03 by noctis           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -42,7 +42,8 @@ int	ft_add_nodes2(t_token **data, t_token **ptr, char **t)
 int	ft_fix_wc_list(t_token **data, t_token **ptr, char **t)
 {
 	t_token	*next;
-
+	
+	//return quots sould not be removed for file name from DIR .
 	next = (*ptr)->next;
 	if (ft_strlen_2(t) == 1)
 	{

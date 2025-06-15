@@ -6,7 +6,7 @@
 /*   By: noctis <noctis@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/08 09:31:09 by aakritah          #+#    #+#             */
-/*   Updated: 2025/06/13 02:59:20 by noctis           ###   ########.fr       */
+/*   Updated: 2025/06/15 03:47:40 by noctis           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -74,7 +74,7 @@ int	ft_expand(t_token **data, t_extra *x)
 		return (-1);
 	if (ft_wildcard(data,x) < 0)
 		return (-1);
-	if (ft_remove_quotes(data) < 0)
-		return (-1);
+	// if (ft_remove_quotes(data) < 0)
+	// 	return (-1);
 	return (0);
 }

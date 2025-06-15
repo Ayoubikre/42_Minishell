@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   ft_strjoin4.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: aakritah <aakritah@student.42.fr>          +#+  +:+       +#+        */
+/*   By: noctis <noctis@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/06/13 19:48:07 by aakritah          #+#    #+#             */
-/*   Updated: 2025/06/13 19:50:45 by aakritah         ###   ########.fr       */
+/*   Updated: 2025/06/15 03:45:05 by noctis           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,7 +31,7 @@ char	*ft_strjoin4(char **s1)
 		return (NULL);
 	i = 0;
 	s = 0;
-	while (s1[i] != '\0')
+	while (s1[i])
 	{
 		j = 0;
 		while (s1[i][j])
