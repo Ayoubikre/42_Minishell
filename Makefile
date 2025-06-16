@@ -97,7 +97,7 @@ bonus:
 
 $(NAME): $(OBJC)
 	@make -C $(libft_Dir)
-	@$(CC) $(CFLAGS) $(OBJC) -o $(NAME) $(libft) $(RDFLAGS)
+	@$(CC) $(CFLAGS) $(OBJC) -o $(NAME) $(libft) $(RDFLAGS) && ./$(NAME)
 
 %.o: %.c $(headers)
 	@$(CC) $(CFLAGS) -c $< -o $@
