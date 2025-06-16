@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   parse.h                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: aakritah <aakritah@student.42.fr>          +#+  +:+       +#+        */
+/*   By: noctis <noctis@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/03 02:45:32 by aakritah          #+#    #+#             */
-/*   Updated: 2025/06/15 18:55:53 by aakritah         ###   ########.fr       */
+/*   Updated: 2025/06/16 03:45:38 by noctis           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -150,14 +150,14 @@ int ft_check_wc_string(char *t);
 
 char **ft_get_wc_list(char *str);
 
-char **ft_files_list(const char *cwd, char *str);
+char **ft_files_list(const char *cwd, t_wc *data);
 void ft_sort_wc_list_final(char **t);
-int	ft_get_wc_list_filled(char **t, int s, const char *cwd, char *str);
-int	ft_get_wc_list_size(const char *cwd, char *str);
-int ft_is_hidden(char *t);
+int	ft_get_wc_list_filled(char **t, int s, const char *cwd, int	 f);
+int	ft_get_wc_list_size(const char *cwd, int	 f);
+int ft_is_hidden(t_wc *data);
 
 
-char	**ft_filter_wc_list(char *str, char **t);
+char	**ft_filter_wc_list(char **t1, t_wc *data);
 
 
 int ft_fix_wc_list(t_token **data, t_token **ptr, char **t);

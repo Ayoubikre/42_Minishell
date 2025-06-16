@@ -6,7 +6,7 @@
 /*   By: noctis <noctis@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/06/11 01:07:20 by noctis            #+#    #+#             */
-/*   Updated: 2025/06/15 03:39:03 by noctis           ###   ########.fr       */
+/*   Updated: 2025/06/16 03:41:00 by noctis           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -45,6 +45,7 @@ int	ft_fix_wc_list(t_token **data, t_token **ptr, char **t)
 	
 	//return quots sould not be removed for file name from DIR .
 	next = (*ptr)->next;
+	// add len == 0 remove q of the res , and set flag to 2 so we dont remove qouts later 
 	if (ft_strlen_2(t) == 1)
 	{
 		free((*ptr)->value);

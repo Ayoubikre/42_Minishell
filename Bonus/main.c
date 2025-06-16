@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   main.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: aakritah <aakritah@student.42.fr>          +#+  +:+       +#+        */
+/*   By: noctis <noctis@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/25 13:18:28 by aakritah          #+#    #+#             */
-/*   Updated: 2025/06/11 20:40:37 by aakritah         ###   ########.fr       */
+/*   Updated: 2025/06/16 03:59:42 by noctis           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -36,7 +36,7 @@ int	main(int ac, char **av, char **env)
 	t_token	*data;
 	t_extra	x;
 
-	atexit(leaks);
+	// atexit(leaks);
 	(void)ac, (void)av;
 	// signal_init();
 	init_extra(&x, env);
@@ -48,7 +48,7 @@ int	main(int ac, char **av, char **env)
 			data = ft_parse(str, &x);
 			if (data)
 			{
-				ft_print_list(data);
+				// ft_print_list(data);
 				// exec_cmd(data, &x);
 				ft_free_list(&data);
 			}
