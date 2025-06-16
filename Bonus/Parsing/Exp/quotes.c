@@ -6,7 +6,7 @@
 /*   By: aakritah <aakritah@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/06/09 15:21:54 by noctis            #+#    #+#             */
-/*   Updated: 2025/06/11 20:36:19 by aakritah         ###   ########.fr       */
+/*   Updated: 2025/06/16 15:50:01 by aakritah         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -91,7 +91,7 @@ int	ft_remove_quotes(t_token **data)
 	ptr = *data;
 	while (ptr && ptr->type != end_t)
 	{
-		if (ptr->prev && ptr->prev->type == heredoc_t)
+		if (ptr->f == 2 || (ptr->prev && ptr->prev->type == heredoc_t))
 		{
 			ptr = ptr->next;
 			continue ;

@@ -6,7 +6,7 @@
 /*   By: aakritah <aakritah@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/06/09 21:26:33 by noctis            #+#    #+#             */
-/*   Updated: 2025/06/13 10:50:32 by aakritah         ###   ########.fr       */
+/*   Updated: 2025/06/16 16:42:27 by aakritah         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,7 +20,6 @@ int	ft_check_wc_string(char *t)
 	i = 0;
 	if (!t)
 		return (0);
-	// while (t[i] && t[i] != '/')
 	while (t[i])
 	{
 		if (t[i] == '*')
@@ -30,18 +29,17 @@ int	ft_check_wc_string(char *t)
 	return (0);
 }
 
-int	ft_wildcard(t_token **data, t_extra *x)
+int	ft_wildcard(t_token **data)
 {
 	char	**t;
 	t_token	*ptr;
-	t_token	*next;
 
 	ptr = *data;
 	while (ptr && ptr->type != end_t)
 	{
-		if (ft_check_wc_string(ptr->value) && (!ptr->prev || (ptr->prev && ptr->prev->type != heredoc_t)))
+		if (ft_check_wc_string(ptr->value) && (!ptr->prev || (ptr->prev
+					&& ptr->prev->type != heredoc_t)))
 		{
-			ptr->f = 1;
 			t = ft_get_wc_list(ptr->value);
 			if (!t)
 				return (-1);

@@ -2,11 +2,11 @@
 
 CC = cc
 
-# CFLAGS = -Wall -Werror -Wextra -I./libs/readline/include
+CFLAGS = -Wall -Werror -Wextra -I./libs/readline/include
 
 # CFLAGS = -fsanitize=address -g -I./libs/readline/include
 
-CFLAGS = -I./libs/readline/include
+# CFLAGS = -I./libs/readline/include
 
 RDFLAGS = -L./libs/readline/lib -lreadline
 

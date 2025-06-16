@@ -6,7 +6,7 @@
 /*   By: aakritah <aakritah@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/04 02:59:30 by aakritah          #+#    #+#             */
-/*   Updated: 2025/06/13 19:54:40 by aakritah         ###   ########.fr       */
+/*   Updated: 2025/06/16 16:09:15 by aakritah         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,8 +17,8 @@ void	ft_free(char **t)
 {
 	int	i;
 
-	if(!t)
-		return;
+	if (!t)
+		return ;
 	i = 0;
 	while (t[i])
 	{
@@ -69,52 +69,4 @@ char	**ft_set_charset2(void)
 	charset[0] = "*";
 	charset[1] = NULL;
 	return (charset);
-}
-
-void	ft_push(t_token **data, t_token **a)
-{
-	t_token	*ptr;
-	t_token	*last;
-
-	if (!data || !*data)
-		return ;
-	ptr = *data;
-	(*data) = (*data)->next;
-	if (*data)
-		(*data)->prev = NULL;
-	ptr->next = NULL;
-	ptr->prev = NULL;
-	if (!*a)
-		*a = ptr;
-	else
-	{
-		last = ft_last_list(*a);
-		last->next = ptr;
-		ptr->prev = last;
-	}
-}
-
-void	ft_pop(t_token **b, t_token **a)
-{
-	t_token	*ptr;
-	t_token	*last;
-
-	if (!b || !*b || !a)
-		return ;
-	last = ft_last_list(*b);
-	ptr = NULL;
-	if (last->prev)
-		last->prev->next = NULL;
-	else
-		*b = NULL;
-	last->next = NULL;
-	last->prev = NULL;
-	if (!*a)
-		*a = last;
-	else
-	{
-		ptr = ft_last_list(*a);
-		ptr->next = last;
-		last->prev = ptr;
-	}
 }

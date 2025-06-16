@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   parse.h                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: noctis <noctis@student.42.fr>              +#+  +:+       +#+        */
+/*   By: aakritah <aakritah@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/03 02:45:32 by aakritah          #+#    #+#             */
-/*   Updated: 2025/06/10 23:37:08 by noctis           ###   ########.fr       */
+/*   Updated: 2025/06/16 16:54:49 by aakritah         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -168,7 +168,6 @@ char				*ft_copy_split4(char const *s, int *k);
 void				ft_free(char **t);
 void				ft_free2(char **t, int s);
 char				**ft_set_charset(void);
-void				ft_push(t_token **data, t_token **a);
-void				ft_pop(t_token **b, t_token **a);
+
 
 #endif

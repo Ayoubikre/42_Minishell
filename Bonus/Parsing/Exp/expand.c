@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   expand.c                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: noctis <noctis@student.42.fr>              +#+  +:+       +#+        */
+/*   By: aakritah <aakritah@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/08 09:31:09 by aakritah          #+#    #+#             */
-/*   Updated: 2025/06/15 03:47:40 by noctis           ###   ########.fr       */
+/*   Updated: 2025/06/16 16:19:05 by aakritah         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -72,9 +72,9 @@ int	ft_expand(t_token **data, t_extra *x)
 		return (-1);
 	if (ft_re_tokenizing(data) < 0)
 		return (-1);
-	if (ft_wildcard(data,x) < 0)
+	if (ft_wildcard(data) < 0)
 		return (-1);
-	// if (ft_remove_quotes(data) < 0)
-	// 	return (-1);
+	if (ft_remove_quotes(data) < 0)
+		return (-1);
 	return (0);
 }

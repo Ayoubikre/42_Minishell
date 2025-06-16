@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   parse.h                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: noctis <noctis@student.42.fr>              +#+  +:+       +#+        */
+/*   By: aakritah <aakritah@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/03 02:45:32 by aakritah          #+#    #+#             */
-/*   Updated: 2025/06/16 03:45:38 by noctis           ###   ########.fr       */
+/*   Updated: 2025/06/16 16:57:19 by aakritah         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -76,8 +76,8 @@ typedef struct s_wc
 {
 	char			*value;
 	int				f;
-	struct s_wc	*next;
-	struct s_wc	*prev;
+	struct s_wc		*next;
+	struct s_wc		*prev;
 }					t_wc;
 
 //------------------------------ Parsing :
@@ -144,43 +144,32 @@ int					ft_strlen_2(char **t);
 int					ft_strcmp(const char *s1, const char *s2);
 
 //------------------------------ Wildcards :
+int					ft_wildcard(t_token **data);
+int					ft_check_wc_string(char *t);
 
-int ft_wildcard(t_token **data, t_extra *x);
-int ft_check_wc_string(char *t);
+char				**ft_get_wc_list(char *str);
+void				ft_sort_wc_list_final(char **t);
 
-char **ft_get_wc_list(char *str);
+int					ft_cmd_list(char *str, t_wc **data);
+void				ft_add_list_end2(t_wc **data, t_wc *n);
+char				*ft_prosses_wc_string(char *t1);
+t_wc				*ft_creat_new_list2(char *str, int i);
+void				ft_free_list2(t_wc **data);
 
-char **ft_files_list(const char *cwd, t_wc *data);
-void ft_sort_wc_list_final(char **t);
-int	ft_get_wc_list_filled(char **t, int s, const char *cwd, int	 f);
-int	ft_get_wc_list_size(const char *cwd, int	 f);
-int ft_is_hidden(t_wc *data);
+char				**ft_files_list(const char *cwd, t_wc *data);
+int					ft_get_wc_list_filled(char **t, const char *cwd, int f);
+int					ft_copy_wc_string(char **t, int *i, char *str);
+int					ft_get_wc_list_size(const char *cwd, int f);
+int					ft_is_hidden(t_wc *data);
 
+char				**ft_filter_wc_list(char **t1, t_wc *data, int i, int j);
+int					ft_count_wc_match(char **t1, t_wc *data);
+int					ft_valide(char *t, t_wc *data);
+int					ft_consume(char *t, int *i, t_wc *ptr, size_t s1);
 
-char	**ft_filter_wc_list(char **t1, t_wc *data);
-
-
-int ft_fix_wc_list(t_token **data, t_token **ptr, char **t);
-int ft_add_nodes2(t_token **data, t_token **ptr, char **t);
-
-
-int		ft_cmd_list(char *str, t_wc **data);
-void	ft_add_list_end2(t_wc **data, t_wc *n);
-char	*ft_prosses_wc_string(char *t1);
-t_wc	*ft_creat_new_list2(char *str, int i);
-void	ft_free_list2(t_wc **data);
-
-
-
-char	**ft_split5(char const *str);
-int	ft_count_split5(const char *str, char **charset);
-char	*ft_copy_split5(const char *str, char **charset, int *x);
-int	ft_is_special2(const char *str, char **charset, int *len);
-int	ft_skip_token_quoted2(const char *str, char **charset, int *i);
-
-char	*ft_strjoin4(char **s1);
-char				**ft_set_charset2(void);
-
+int					ft_fix_wc_list(t_token **data, t_token **ptr, char **t);
+int					ft_add_nodes2(t_token **data, t_token **ptr, char **t);
+void				ft_set_mini_tokens2(t_token **new);
 
 //------------------------------ Filter 1  :
 int					ft_filter_list(t_token **data);
@@ -209,13 +198,23 @@ char				*ft_copy_split3(const char *str, char **charset, int *x);
 int					ft_skip_token_quoted(const char *str, char **charset,
 						int *i);
 int					ft_is_special(const char *str, char **charset, int *len);
+
 char				**ft_split4(char const *str);
 int					ft_count_split4(char const *s);
 char				*ft_copy_split4(char const *s, int *k);
+
+char				**ft_split5(char const *str);
+int					ft_count_split5(const char *str, char **charset);
+char				*ft_copy_split5(const char *str, char **charset, int *x);
+int					ft_is_special2(const char *str, char **charset, int *len);
+int					ft_skip_token_quoted2(const char *str, char **charset,
+						int *i);
+
+char				*ft_strjoin4(char **s1);
+
 void				ft_free(char **t);
 void				ft_free2(char **t, int s);
 char				**ft_set_charset(void);
-void				ft_push(t_token **data, t_token **a);
-void				ft_pop(t_token **b, t_token **a);
+char				**ft_set_charset2(void);
 
 #endif

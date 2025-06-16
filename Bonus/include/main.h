@@ -6,7 +6,7 @@
 /*   By: aakritah <aakritah@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/25 13:18:26 by aakritah          #+#    #+#             */
-/*   Updated: 2025/06/13 20:38:41 by aakritah         ###   ########.fr       */
+/*   Updated: 2025/06/16 16:58:00 by aakritah         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,20 +17,20 @@
 # include "../libs/42_Libft/libft.h"
 # include "./parse.h"
 # include "./builtins.h"
+# include <dirent.h>
 # include <fcntl.h>
 # include <stdio.h>
 # include <stdlib.h>
 # include <unistd.h>
-# include <dirent.h>
 
 # ifdef __linux__
-# include <linux/limits.h>
+#  include <linux/limits.h>
 #  include <readline/history.h>
 #  include <readline/readline.h>
 # else
-#include <limits.h>
 #  include "../libs/readline/history.h"
 #  include "../libs/readline/readline.h"
+#  include <limits.h>
 # endif
 
 # define RED "\033[1;31m"
@@ -38,10 +38,10 @@
 # define YELLOW "\033[33m"
 # define MAGENTA "\033[1;35m"
 
-# define GREEN   "\033[1;32m"
-# define BLUE    "\033[1;34m"
-# define WHITE   "\033[1;37m"
-# define GRAY    "\033[0;90m" 
+# define GREEN "\033[1;32m"
+# define BLUE "\033[1;34m"
+# define WHITE "\033[1;37m"
+# define GRAY "\033[0;90m"
 
 # define RESET "\033[0m"
 

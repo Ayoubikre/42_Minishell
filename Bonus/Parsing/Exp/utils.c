@@ -46,8 +46,8 @@ int	ft_strlen_2(char **t)
 {
 	int	s;
 
-	if(!t)
-		return 0;
+	if (!t)
+		return (0);
 	s = 0;
 	while (t[s])
 		s++;

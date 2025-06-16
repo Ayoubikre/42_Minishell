@@ -13,7 +13,6 @@
 #include "../../include/main.h"
 #include "../../include/parse.h"
 
-
 void	ft_free_list2(t_wc **data)
 {
 	t_wc	*ptr;
