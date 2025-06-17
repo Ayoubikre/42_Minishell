@@ -31,7 +31,7 @@ PACKAGE_TARNAME = readline
 srcdir = .
 
 top_srcdir = .
-BUILD_DIR = /Users/aakritah/Code/Projet.G/42_Minishell/readline
+BUILD_DIR = /home/noctis/Documents/V-Code/Projet.G/42_Minishell/readline
 
 INSTALL = /usr/bin/install -c
 INSTALL_PROGRAM = ${INSTALL}
@@ -48,7 +48,7 @@ MV = mv
 
 SHELL = /bin/sh
 
-prefix = /Users/aakritah/Code/Projet.G/42_Minishell/readline
+prefix = /home/noctis/Documents/V-Code/Projet.G/42_Minishell/readline
 exec_prefix = ${prefix}
 
 datarootdir = ${prefix}/share
@@ -81,7 +81,7 @@ CPPFLAGS =
 DEFS = -DHAVE_CONFIG_H 
 LOCAL_DEFS = 
 
-TERMCAP_LIB = -ltermcap
+TERMCAP_LIB = -ltinfo
 
 # For libraries which include headers from other libraries.
 INCLUDES = -I. -I$(srcdir)

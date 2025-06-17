@@ -22,7 +22,7 @@ topdir = ..
 srcdir = .
 
 
-prefix = /Users/aakritah/Code/Projet.G/42_Minishell/readline
+prefix = /home/noctis/Documents/V-Code/Projet.G/42_Minishell/readline
 
 datarootdir = ${prefix}/share
 
@@ -49,7 +49,7 @@ RM = rm -f
 INSTALL = /usr/bin/install -c
 INSTALL_DATA = ${INSTALL} -m 644
 
-BUILD_DIR = /Users/aakritah/Code/Projet.G/42_Minishell/readline
+BUILD_DIR = /home/noctis/Documents/V-Code/Projet.G/42_Minishell/readline
 TEXINPUTDIR = $(srcdir)
 
 MAKEINFO    = LANGUAGE= makeinfo

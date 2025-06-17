@@ -1,4 +1,4 @@
-prefix=/Users/aakritah/Code/Projet.G/42_Minishell/readline
+prefix=/home/noctis/Documents/V-Code/Projet.G/42_Minishell/readline
 exec_prefix=${prefix}
 libdir=${exec_prefix}/lib
 includedir=${prefix}/include

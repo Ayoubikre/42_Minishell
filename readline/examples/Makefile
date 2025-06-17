@@ -21,7 +21,7 @@ RL_LIBRARY_VERSION = 8.2
 SHELL = /bin/sh
 RM = rm -f
 
-prefix = /Users/aakritah/Code/Projet.G/42_Minishell/readline
+prefix = /home/noctis/Documents/V-Code/Projet.G/42_Minishell/readline
 exec_prefix = ${prefix}
 
 datarootdir = ${prefix}/share
@@ -32,7 +32,7 @@ datadir = ${datarootdir}
 
 top_srcdir = ..
 #BUILD_DIR = .
-BUILD_DIR = /Users/aakritah/Code/Projet.G/42_Minishell/readline
+BUILD_DIR = /home/noctis/Documents/V-Code/Projet.G/42_Minishell/readline
 installdir = $(datadir)/readline
 
 INSTALL = /usr/bin/install -c
@@ -63,7 +63,7 @@ ASAN_XLDFLAGS = -fsanitize=address
 READLINE_LIB = ../libreadline.a
 HISTORY_LIB = ../libhistory.a
 
-TERMCAP_LIB = -ltermcap
+TERMCAP_LIB = -ltinfo
 
 .c.o:
 	${RM} $@
