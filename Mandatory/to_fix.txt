@@ -10,3 +10,7 @@ $adsfa > z4 "seg"  /  exit_status 0
 
 
 ------------------------------------------------------------------
+
+pipes_count()
+has_heredoc()
+setup_redirections()
