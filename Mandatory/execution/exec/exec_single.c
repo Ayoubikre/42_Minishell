@@ -3,14 +3,39 @@
 /*                                                        :::      ::::::::   */
 /*   exec_single.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: anktiri <anktiri@student.42.fr>            +#+  +:+       +#+        */
+/*   By: noctis <noctis@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/25 17:13:15 by anktiri           #+#    #+#             */
-/*   Updated: 2025/06/17 21:50:05 by anktiri          ###   ########.fr       */
+/*   Updated: 2025/06/18 13:33:04 by noctis           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../include/builtins.h"
+
+int	restore_std_fds(t_extra *x)
+{
+	if (x->stdin_backup != -1)
+	{
+		if (ft_dup2(x->stdin_backup, STDIN_FILENO) != 0)
+		{
+			x->exit_status = ERROR;
+			return (ERROR);
+		}
+		close(x->stdin_backup);
+		x->stdin_backup = -1;
+	}
+	if (x->stdout_backup != -1)
+	{
+		if (ft_dup2(x->stdout_backup, STDOUT_FILENO) != 0)
+		{
+			x->exit_status = ERROR;
+			return (ERROR);
+		}
+		close(x->stdout_backup);
+		x->stdout_backup = -1;
+	}
+	return (SUCCESS);
+}
 
 int	exec_builtin(t_token *data, t_extra x)
 {
