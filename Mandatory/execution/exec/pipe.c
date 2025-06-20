@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   pipe.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: noctis <noctis@student.42.fr>              +#+  +:+       +#+        */
+/*   By: aakritah <aakritah@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/06/13 13:49:37 by anktiri           #+#    #+#             */
-/*   Updated: 2025/06/18 14:11:22 by noctis           ###   ########.fr       */
+/*   Updated: 2025/06/19 15:27:45 by aakritah         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -66,12 +66,12 @@ void close_pipe_in_parent(t_extra *x)
     x->cmd_index++;
 }
 
-int	free_pipes(t_extra *x, int i)
+int	free_pipes(t_extra *x, int i) // seg
 {
 	int	a;
 
 	a = 0;
-	while (a < i)
+	while ( a < i)
 	{
 		if (x->pipefd[a])
 			free(x->pipefd[a]);

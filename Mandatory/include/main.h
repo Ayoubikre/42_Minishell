@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   main.h                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: noctis <noctis@student.42.fr>              +#+  +:+       +#+        */
+/*   By: aakritah <aakritah@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/25 13:18:26 by aakritah          #+#    #+#             */
-/*   Updated: 2025/06/17 23:49:51 by noctis           ###   ########.fr       */
+/*   Updated: 2025/06/19 17:52:08 by aakritah         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,7 +22,6 @@
 # include <stdlib.h>
 # include <unistd.h>
 #include <signal.h>
-#include <sys/wait.h>
 
 # ifdef __linux__
 #  include <readline/history.h>

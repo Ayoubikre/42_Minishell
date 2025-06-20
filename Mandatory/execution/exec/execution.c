@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   execution.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: anktiri <anktiri@student.42.fr>            +#+  +:+       +#+        */
+/*   By: aakritah <aakritah@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/24 19:11:52 by anktiri           #+#    #+#             */
-/*   Updated: 2025/06/17 21:49:12 by anktiri          ###   ########.fr       */
+/*   Updated: 2025/06/19 20:50:21 by aakritah         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,7 +21,7 @@ int	init_execution_vars(t_token *data, t_extra *x)
 	if (x->stdout_backup == -1)
 		return (ERROR);
 	x->pipe_count = pipes_count(data);//later
-	// printf(">%d<\n",x->pipe_count);
+	printf("> pipe count : %d<\n",x->pipe_count);
 	x->cmd_count = x->pipe_count + 1;
 	x->cmd_index = 0;
 	return (SUCCESS);
@@ -41,12 +41,12 @@ int	ft_execution(t_token *data, t_extra *x)
 		return (exec_single(data, x));
 	if (exec_external(data, x) != 0)
 		return (ERROR);
-	while (a < x->cmd_count)
-	{
-		wait(&status);
-		if (WIFEXITED(status))
-			waitpid(-1, &x->exit_status, 0);
-		a++;
-	}
+	// while (a < x->cmd_count)
+	// {
+	// 	wait(&status);
+	// 	if (WIFEXITED(status))
+	// 		waitpid(-1, &x->exit_status, 0);
+	// 	a++;
+	// }
 	return (cleanup_execution_vars(x));
 }

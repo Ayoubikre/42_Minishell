@@ -3,23 +3,16 @@
 /*                                                        :::      ::::::::   */
 /*   heredoc.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: anktiri <anktiri@student.42.fr>            +#+  +:+       +#+        */
+/*   By: aakritah <aakritah@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/06/01 12:22:54 by anktiri           #+#    #+#             */
-/*   Updated: 2025/06/17 17:41:54 by anktiri          ###   ########.fr       */
+/*   Updated: 2025/06/19 18:09:06 by aakritah         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../include/builtins.h"
 
-void	print_error(char *file, char *error_msg)
-{
-	ft_putstr_fd("minishell: ", STDERR_FILENO);
-	ft_putstr_fd(file, STDERR_FILENO);
-	ft_putstr_fd(": ", STDERR_FILENO);
-	ft_putstr_fd(error_msg, STDERR_FILENO);
-	ft_putstr_fd("\n", STDERR_FILENO);
-}
+
 
 int	has_heredoc(char **c_red)
 {

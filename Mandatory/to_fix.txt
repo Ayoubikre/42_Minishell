@@ -8,5 +8,14 @@ red errors input / output/ ambgues + exit status
  
 $adsfa > z4 "seg"  /  exit_status 0 
 
+shle lv go from 1->3 
+exit_status 
+herdoc
 
 ------------------------------------------------------------------
+
+
+|------------  parsing to add to bonus later: ------------|
+
+herdoc table + init and free of the table in the linked list.
+add the building fix in "int	ft_check_buildin_cmd(char *t)"

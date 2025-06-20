@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   helpers.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: noctis <noctis@student.42.fr>              +#+  +:+       +#+        */
+/*   By: aakritah <aakritah@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/25 18:18:51 by anktiri           #+#    #+#             */
-/*   Updated: 2025/06/18 13:31:28 by noctis           ###   ########.fr       */
+/*   Updated: 2025/06/19 18:10:55 by aakritah         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -63,3 +63,11 @@ int	cleanup_execution_vars(t_extra *x)
 	return (x->exit_status);
 }
 
+void	print_error(char *file, char *error_msg)
+{
+	ft_putstr_fd("minishell: ", STDERR_FILENO);
+	ft_putstr_fd(file, STDERR_FILENO);
+	ft_putstr_fd(": ", STDERR_FILENO);
+	ft_putstr_fd(error_msg, STDERR_FILENO);
+	ft_putstr_fd("\n", STDERR_FILENO);
+}
