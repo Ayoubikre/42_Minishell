@@ -6,7 +6,7 @@
 /*   By: aakritah <aakritah@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/06/01 12:22:54 by anktiri           #+#    #+#             */
-/*   Updated: 2025/06/20 13:54:07 by aakritah         ###   ########.fr       */
+/*   Updated: 2025/06/21 17:59:02 by aakritah         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -134,26 +134,46 @@ int	count_heredoc(t_token *data)
 // 	return (SUCCESS);
 // }
 
-
 // -----------------------------------------------------------------
 
+// ft_strcmp2()
+
+int	ft_check_q_status2(char *t)
+{
+	int		i;
+	int		f;
+	char	**s1;
+
+	s1 = ft_split4(t);
+	if (!s1)
+		return (NULL);
+	i = 0;
+	while (s1[i])
+	{
+		f = ft_check_q_status(s1[i]);
+		if (f != 0)
+			return (ft_free(s1), f);
+		i++;
+	}
+	return (ft_free(s1), 0);
+}
 
 int	filter_heredoc_line(char **t, char *del, t_extra *x)
 {
-	int		i;
 	int		f1;
+	int		f2;
 	char	*t1;
 	char	*t2;
 
-	i = 0;
 	t1 = ft_strdup(del);
 	if (!t1)
 		return (-1);
-	f1 = ft_check_q_status(t1);
+	f1 = ft_check_q_status2(t1);
 	t1 = ft_remove_q(t1);
 	if (f1 != 0) // no expanding
 	{
-		return (ft_strcmp(*t, del));
+		f2 = ft_strcmp(*t, t1);
+		return (free(t1), f2);
 	}
 	else // expand
 	{
@@ -162,13 +182,12 @@ int	filter_heredoc_line(char **t, char *del, t_extra *x)
 			return (-1);
 		free(*t);
 		*t = ft_swap_value(0, t2, x, 0);
-		return (ft_strcmp(*t, del));
+		f2 = ft_strcmp(*t, t1);
+		return (free(t1), f2);
 	}
 }
 
-
 // -----------------------------------------------------------------
-
 
 int	handle_heredoc1(char *del, t_token *data, t_extra *x)
 {
