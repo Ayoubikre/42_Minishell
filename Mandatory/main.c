@@ -6,7 +6,7 @@
 /*   By: aakritah <aakritah@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/25 13:18:28 by aakritah          #+#    #+#             */
-/*   Updated: 2025/06/20 13:31:49 by aakritah         ###   ########.fr       */
+/*   Updated: 2025/06/21 12:54:22 by aakritah         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,8 +33,8 @@ int	main(int ac, char **av, char **env)
 			data = ft_parse(str, &x);
 			if (data)
 			{
-				ft_print_list(data);
-				// ft_execution(data, &x);
+				// ft_print_list(data);
+				ft_execution(data, &x);
 				ft_free_list(&data);
 			}
 			printf("> exit status : %d < \n", x.exit_status);

@@ -1,298 +1,179 @@
-/* ************************************************************************** */
-/*                                                                            */
-/*                                                        :::      ::::::::   */
-/*   a.c                                                :+:      :+:    :+:   */
-/*                                                    +:+ +:+         +:+     */
-/*   By: aakritah <aakritah@student.42.fr>          +#+  +:+       +#+        */
-/*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2025/06/01 12:22:54 by anktiri           #+#    #+#             */
-/*   Updated: 2025/06/21 17:59:02 by aakritah         ###   ########.fr       */
-/*                                                                            */
-/* ************************************************************************** */
-
-#include "../../include/builtins.h"
-
-void	print_error(char *file, char *error_msg)
+char	**ft_split2(char const *s)
 {
-	ft_putstr_fd("minishell: ", STDERR_FILENO);
-	ft_putstr_fd(file, STDERR_FILENO);
-	ft_putstr_fd(": ", STDERR_FILENO);
-	ft_putstr_fd(error_msg, STDERR_FILENO);
-	ft_putstr_fd("\n", STDERR_FILENO);
-}
-
-int	has_heredoc(char **c_red)
-{
-	int	a;
-
-	if (!c_red)
-		return (ERROR);
-	a = 0;
-	while (c_red[a])
-	{
-		if (ft_strcmp(c_red[a], "<<") == 0)
-			return (ERROR);
-		a++;
-	}
-	return (SUCCESS);
-}
-
-int	count_heredoc(t_token *data)
-{
-	int	i;
-	int	count;
+	long	i;
+	long	k;
+	char	**t;
 
 	i = 0;
-	count = 0;
-	while (i < data->red_s)
+	k = 0;
+	if (!s)
+		return (NULL);
+	printf(">count : %ld<\n",ft_count_split2(s));
+	if ((ft_count_split2(s)) == -1)
+		return (NULL);
+	t = malloc((ft_count_split2(s) + 1) * sizeof(char *));
+	if (!t)
+		return (NULL);
+	while (k < ft_count_split2(s))
 	{
-		if (ft_strcmp(data->c_red[i], "<<") == 0)
-			count++;
+		while (s[i] && ft_isspace(s[i]))
+			i++;
+		t[k] = ft_copy_split2(s, &i);
+		if (!t[k])
+			return (ft_free(t), NULL);
+		k++;
+	}
+	t[k] = NULL;
+	return (t);
+}
+
+long	ft_count_split2(char const *s)
+{
+	long	i;
+	long	f;
+	long	i_c;
+	char	q;
+	long	count;
+
+	i = 0;
+	f = 0;
+	i_c = 0;
+	count = 0;
+	while (s[i])
+	{
+		if ((s[i] == '\'' || s[i] == '\"') && i_c == 0)
+			ft_fix_norminet_1(&q, s + i, &i_c);
+		else if (i_c == 1 && s[i] == q)
+			i_c = !i_c;
+		if (ft_isspace(s[i]) == 0 && f == 0 && i_c == 0)
+			ft_fix_norminet_2(&f, &count);
+		else if (ft_isspace(s[i]))
+			f = 0;
 		i++;
 	}
+	if (i_c == 1)
+		return (-1);
 	return (count);
 }
 
-// -----------------------------------------------------------------
+char	*ft_copy_split2(const char *s, long *i)
+{
+	long	j;
+	long	k;
+	long	i_c;
+	char	q;
+	char	*t;
 
-// int	handle_heredoc(char *del, int *pipefd)
-// {
-// 	char	*line;
+	i_c = 0;
+	k = 0;
+	j = *i;
+	while (s[j] && (ft_isspace(s[j]) == 0  || i_c == 1))
+	{
+		if ((s[j] == '\'' || s[j] == '\"') && i_c == 0)
+			ft_fix_norminet_1(&q, s + j, &i_c);
+		else if (i_c == 1 && s[j] == q)
+			i_c = !i_c;
+		j++;
+	}
+	t = malloc((j - *i + 1) * 1);
+	if (!t)
+		return (NULL);
+	while (*i < j)
+		t[k++] = s[(*i)++];
+	t[k] = '\0';
+	return (t);
+}
 
-// 	while (1)
-// 	{
-// 		line = readline("> ");
-// 		if (!line)
-// 			break ;
-// 		// filter 1
-// 		if (ft_strcmp(line, del) == 0)
-// 		{
-// 			free(line);
-// 			break ;
-// 		}
-// 		// filter 2
-// 		ft_putstr_fd(line, pipefd[1]);
-// 		ft_putstr_fd("\n", pipefd[1]);
-// 		free(line);
-// 	}
-// 	close(pipefd[0]);
-// 	close(pipefd[1]);
-// 	return (SUCCESS);
-// }
+void	ft_fix_norminet_1(char *a, char const *b, long *n1)
+{
+	*a = *b;
+	(*n1) = !(*n1);
+}
 
-// int	process_heredoc(t_token *data, t_extra *x)
-// {
-// 	int	a;
+void	ft_fix_norminet_2(long *n2, long *n1)
+{
+	(*n1)++;
+	(*n2)++;
+}
 
-// 	a = 0;
-// 	while (a < data->red_s)
-// 	{
-// 		if (ft_strcmp(data->c_red[a], "<<") == 0)
-// 		{
-// 			if (data->pi_doc[0] != -1)
-// 				close(data->pi_doc[0]);
-// 			if (handle_heredoc(data->c_red[++a], data->pi_doc) != 0)
-// 				return (ERROR);
-// 		}
-// 		else
-// 			a++;
-// 	}
-// 	return ((x->exit_status = 0));
-// }
 
-// int	setup_heredoc(t_token *data, t_extra *x)
-// {
-// 	t_token	*current;
-// 	pid_t	pid;
-// 	int		pipefd[2];
+// ----------
 
-// 		if (pipe(pipefd) == -1)
-// 			return ((perror("pipe")), ERROR);
-// 	current = data;
-// 	while (current)
-// 	{
-// 		pid = fork();
-// 		if (pid == 0)
-// 		{
-// 			signal_init_child();
-// 			if (current->c_red && has_heredoc(current->c_red))
-// 			{
-// 				if (process_heredoc(current, pipefd, x) != 0)
-// 					exit(ERROR);
-// 			}
-// 			close(pipefd[0]);
-// 			close(pipefd[1]);
-// 			exit(SUCCESS);
-// 		}
-// 		else if (pid)
-// 			wait(&x->exit_status);
-// 		current->pi_doc = pipefd[0];
-// 		close(pipefd[0]);
-// 		close(pipefd[1]);
-// 		current = current->next;
-// 	}
-// 	return (SUCCESS);
-// }
 
-// -----------------------------------------------------------------
+int ft_isspace(int c)
+{
+	if((9 <= c && c <= 13) || c == 32)
+		return 1;
+	return 0;
+}
 
-// ft_strcmp2()
+// ----------
 
-int	ft_check_q_status2(char *t)
+
+int	ft_check_string(char *str)
+{
+	int	i;
+
+	i = 0;
+	while (ft_isspace(str[i]))
+		i++;
+	if (str[i] == '\0')
+		return (0);
+	return (1);
+}
+
+// ----------
+
+
+int	ft_check_if_ambiguous(char *str)
 {
 	int		i;
+	int		s;
 	int		f;
-	char	**s1;
+	char	**t;
 
-	s1 = ft_split4(t);
-	if (!s1)
-		return (NULL);
+	t = ft_split4(str);
+	if (!t)
+		return (-1);
 	i = 0;
-	while (s1[i])
+	while (t[i])
 	{
-		f = ft_check_q_status(s1[i]);
-		if (f != 0)
-			return (ft_free(s1), f);
+		f = ft_check_q_status(t[i]);
+		s = ft_count_split2(t[i]);
+		if (f == 0 && s > 1)
+			return (ft_free(t), -2);
 		i++;
 	}
-	return (ft_free(s1), 0);
+	return (ft_free(t), 0);
 }
 
-int	filter_heredoc_line(char **t, char *del, t_extra *x)
-{
-	int		f1;
-	int		f2;
-	char	*t1;
-	char	*t2;
+// ----------
 
-	t1 = ft_strdup(del);
-	if (!t1)
+
+int	ft_check_buildin_cmd(char *t)
+{
+	char	*tmp1;
+	char	*tmp2;
+
+	tmp1 = ft_strdup(t);
+	if (!tmp1)
 		return (-1);
-	f1 = ft_check_q_status2(t1);
-	t1 = ft_remove_q(t1);
-	if (f1 != 0) // no expanding
-	{
-		f2 = ft_strcmp(*t, t1);
-		return (free(t1), f2);
-	}
-	else // expand
-	{
-		t2 = ft_strdup(*t);
-		if (!t2)
-			return (-1);
-		free(*t);
-		*t = ft_swap_value(0, t2, x, 0);
-		f2 = ft_strcmp(*t, t1);
-		return (free(t1), f2);
-	}
-}
-
-// -----------------------------------------------------------------
-
-int	handle_heredoc1(char *del, t_token *data, t_extra *x)
-{
-	char	*line;
-	int		f;
-
-	while (1)
-	{
-		line = readline("> ");
-		if (!line)
-			break ;
-		f = filter_heredoc_line(&line, del, x);
-		if (f == -1)
-			return (-1);
-		if (f == 0)
-			break ;
-		free(line);
-	}
-	return (SUCCESS);
-}
-
-int	handle_heredoc2(char *del, t_token *data, t_extra *x)
-{
-	char	*line;
-	int		f;
-
-	while (1)
-	{
-		line = readline("> ");
-		if (!line)
-			break ;
-		f = filter_heredoc_line(&line, del, x);
-		if (f == -1)
-			return (-1);
-		if (f == 0)
-			break ;
-		ft_putstr_fd(line, data->pi_doc[1]);
-		ft_putstr_fd("\n", data->pi_doc[1]);
-		free(line);
-	}
-	close(data->pi_doc[0]);
-	close(data->pi_doc[1]);
-	return (SUCCESS);
-}
-
-int	process_heredoc(t_token *data, t_extra *x)
-{
-	int	a;
-	int	c2;
-	int	count;
-
-	a = 0;
-	c2 = 0;
-	count = count_heredoc(data);
-	while (a < data->red_s)
-	{
-		if (ft_strcmp(data->c_red[a], "<<") == 0)
-		{
-			if (c2 == (count - 1))
-			{
-				if (handle_heredoc2(data->c_red[++a], data, x) != 0)
-					return (ERROR);
-				c2++;
-			}
-			else
-			{
-				if (handle_heredoc1(data->c_red[++a], data, x) != 0)
-					return (ERROR);
-				c2++;
-			}
-		}
-		else
-			a++;
-	}
-	return ((x->exit_status = 0));
-}
-
-int	setup_heredoc(t_token *data, t_extra *x)
-{
-	t_token	*current;
-	pid_t	pid;
-
-	current = data;
-	while (current)
-	{
-		if (has_heredoc(current->c_red))
-		{
-			if (pipe(current->pi_doc) == -1)
-				return ((perror("pipe")), ERROR);
-			pid = fork();
-			if (pid == 0)
-			{
-				signal_init_child();
-				if (current->c_red)
-				{
-					if (process_heredoc(current, x) != 0)
-						exit(ERROR);
-				}
-				exit(SUCCESS);
-			}
-			else if (pid)
-				wait(&x->exit_status);
-			close(current->pi_doc[1]);
-		}
-		current = current->next;
-	}
-	return (SUCCESS);
+	tmp2 = ft_remove_q(tmp1);
+	if (!tmp1)
+		return (free(tmp1), -1);
+	if (ft_check_word("echo", tmp2) == 0)
+		return (free(tmp2), 0);
+	else if (ft_check_word("cd", tmp2) == 0)
+		return (free(tmp2), 0);
+	else if (ft_check_word("pwd", tmp2) == 0)
+		return (free(tmp2), 0);
+	else if (ft_check_word("export", tmp2) == 0)
+		return (free(tmp2), 0);
+	else if (ft_check_word("unset", tmp2) == 0)
+		return (free(tmp2), 0);
+	else if (ft_check_word("env", tmp2) == 0)
+		return (free(tmp2), 0);
+	else if (ft_check_word("exit", tmp2) == 0)
+		return (free(tmp2), 0);
+	return (free(tmp2), -1);
 }

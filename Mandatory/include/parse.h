@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   parse.h                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: anktiri <anktiri@student.42.fr>            +#+  +:+       +#+        */
+/*   By: aakritah <aakritah@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/03 02:45:32 by aakritah          #+#    #+#             */
-/*   Updated: 2025/06/17 17:07:18 by anktiri          ###   ########.fr       */
+/*   Updated: 2025/06/21 13:02:01 by aakritah         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -62,7 +62,7 @@ typedef struct s_token
 	char			**c_arg;
 	int				red_s;
 	char			**c_red;
-	int				*pi_doc;
+	int				pi_doc[2];
 	struct s_token	*next;
 	struct s_token	*prev;
 }					t_token;
@@ -151,9 +151,9 @@ int					ft_filter_cas_2(t_token **ptr);
 void				ft_free_arg_node2(t_token **data);
 
 //------------------------------ Utils :
-char				**ft_split2(char const *s, char c);
-long				ft_count_split2(char const *s, char c);
-char				*ft_copy_split2(const char *s, char c, long *i);
+char				**ft_split2(char const *s);
+long				ft_count_split2(char const *s);
+char				*ft_copy_split2(const char *s, long *i);
 void				ft_fix_norminet_1(char *a, char const *b, long *n1);
 void				ft_fix_norminet_2(long *n2, long *n1);
 
@@ -169,5 +169,6 @@ char				*ft_copy_split4(char const *s, int *k);
 void				ft_free(char **t);
 void				ft_free2(char **t, int s);
 char				**ft_set_charset(void);
+int					ft_isspace(int c);
 
 #endif

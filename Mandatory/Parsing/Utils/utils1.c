@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   utils1.c                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: anktiri <anktiri@student.42.fr>            +#+  +:+       +#+        */
+/*   By: aakritah <aakritah@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/04 02:59:30 by aakritah          #+#    #+#             */
-/*   Updated: 2025/06/17 17:10:53 by anktiri          ###   ########.fr       */
+/*   Updated: 2025/06/21 12:06:01 by aakritah         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -55,4 +55,10 @@ char	**ft_set_charset(void)
 	charset[6] = "\'";
 	charset[7] = NULL;
 	return (charset);
+}
+int ft_isspace(int c)
+{
+	if((9 <= c && c <= 13) || c == 32)
+		return 1;
+	return 0;
 }
