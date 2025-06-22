@@ -6,7 +6,7 @@
 /*   By: aakritah <aakritah@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/03 02:45:32 by aakritah          #+#    #+#             */
-/*   Updated: 2025/06/21 13:02:01 by aakritah         ###   ########.fr       */
+/*   Updated: 2025/06/22 21:52:47 by aakritah         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -170,5 +170,7 @@ void				ft_free(char **t);
 void				ft_free2(char **t, int s);
 char				**ft_set_charset(void);
 int					ft_isspace(int c);
+
+int ft_check_ptr_status(char *ptr, int s_q, int d_q);
 
 #endif
