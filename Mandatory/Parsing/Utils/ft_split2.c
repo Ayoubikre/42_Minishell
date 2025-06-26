@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   ft_split2.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: aakritah <aakritah@student.42.fr>          +#+  +:+       +#+        */
+/*   By: anktiri <anktiri@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/04 02:37:10 by aakritah          #+#    #+#             */
-/*   Updated: 2025/06/21 12:46:32 by aakritah         ###   ########.fr       */
+/*   Updated: 2025/06/21 20:39:01 by anktiri          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,7 +23,6 @@ char	**ft_split2(char const *s)
 	k = 0;
 	if (!s)
 		return (NULL);
-	printf(">count : %ld<\n",ft_count_split2(s));
 	if ((ft_count_split2(s)) == -1)
 		return (NULL);
 	t = malloc((ft_count_split2(s) + 1) * sizeof(char *));
@@ -82,7 +81,7 @@ char	*ft_copy_split2(const char *s, long *i)
 	i_c = 0;
 	k = 0;
 	j = *i;
-	while (s[j] && (ft_isspace(s[j]) == 0  || i_c == 1))
+	while (s[j] && (ft_isspace(s[j]) == 0 || i_c == 1))
 	{
 		if ((s[j] == '\'' || s[j] == '\"') && i_c == 0)
 			ft_fix_norminet_1(&q, s + j, &i_c);

@@ -6,22 +6,23 @@
 /*   By: aakritah <aakritah@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/25 13:18:26 by aakritah          #+#    #+#             */
-/*   Updated: 2025/06/19 17:52:08 by aakritah         ###   ########.fr       */
+/*   Updated: 2025/06/26 21:51:14 by aakritah         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #ifndef MAIN_H
 # define MAIN_H
 
-// delet later
-# include "../libs/42_Libft/libft.h"
+# include "../../42_Libft/libft.h"
 # include "./parse.h"
 # include "./builtins.h"
+# include <errno.h>
 # include <fcntl.h>
+# include <signal.h>
 # include <stdio.h>
 # include <stdlib.h>
+# include <sys/stat.h>
 # include <unistd.h>
-#include <signal.h>
 
 # ifdef __linux__
 #  include <readline/history.h>
@@ -45,19 +46,8 @@
 // Global signal variable
 extern volatile sig_atomic_t	g_signal_received;
 
-// Function declarations
-void							signal_init_interactive(void);
-void							signal_init_child(void);
-void							handle_signal_in_main(void);
-
 //------------------------------ Main :
 int								main(int ac, char **av, char **env);
-
-//------------------------------ Delet Later :
-void							leaks(void);
-void							ft_print_list(t_token *data);
-void							ft_print_list1(t_token *data);
-void							ft_print_tab(char **t);
 
 #endif
 

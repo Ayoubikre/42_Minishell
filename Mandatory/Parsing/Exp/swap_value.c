@@ -6,26 +6,12 @@
 /*   By: aakritah <aakritah@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/06/08 12:41:18 by aakritah          #+#    #+#             */
-/*   Updated: 2025/06/22 21:52:04 by aakritah         ###   ########.fr       */
+/*   Updated: 2025/06/26 19:26:51 by aakritah         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../include/main.h"
 #include "../../include/parse.h"
-int ft_check_ptr_status(char *ptr, int s_q, int d_q)
-{
-	if(s_q==1|| d_q==1)
-	{
-		if(*ptr=='\'' ||*ptr=='\"' )
-			return 0;
-	}
-	else
-	{
-		if(*ptr == '\0')
-			return 0;
-	}
-	return 1;
-}
 
 char	*ft_swap_value(int i, char *ptr, t_extra *x, int f)
 {
@@ -40,7 +26,8 @@ char	*ft_swap_value(int i, char *ptr, t_extra *x, int f)
 	while (*ptr)
 	{
 		ft_toggle_quote(&ptr, &s_q, &d_q);
-		if (*ptr == '$' && ft_check_ptr_status(ptr + 1, s_q, d_q) &&ft_check_ptr_value(*(ptr + 1), 0) && !s_q)
+		if (*ptr == '$' && ft_check_ptr_status(ptr + 1, s_q, d_q)
+			&& ft_check_ptr_value(*(ptr + 1), 0) && !s_q)
 		{
 			n_data.var = (ptr++, ft_get_expand_name(&ptr, &f));
 			if (!n_data.var)
@@ -110,8 +97,6 @@ void	ft_copy_exp_value(t_env *env_list, char *var, char *t, int *i)
 	{
 		if (ft_strcmp(var, env->name) == 0)
 		{
-						printf("\n>line %s : <\n",env->value);
-
 			j = 0;
 			while (env->value[j])
 			{
@@ -133,11 +118,9 @@ int	ft_handle_special_char(t_extra *x, char *var, char *t, int *i)
 	s = 0;
 	if (ft_strcmp(var, "?") == 0)
 	{
-
 		tmp = ft_itoa(x->exit_status);
 		if (!tmp)
 			return (-1);
-					printf("\n>line %s : <\n",tmp);
 		while (tmp[s])
 		{
 			t[*i] = tmp[s];
