@@ -6,7 +6,7 @@
 /*   By: aakritah <aakritah@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/24 19:11:52 by anktiri           #+#    #+#             */
-/*   Updated: 2025/06/26 21:19:34 by aakritah         ###   ########.fr       */
+/*   Updated: 2025/06/27 20:14:17 by aakritah         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -38,11 +38,7 @@ int	ft_execution(t_token *data, t_extra *x)
 	if (x->cmd_count == 1 && data->type == b_cmd_t)
 		return (exec_single(data, x));
 	signal_init_exec();
-	if (exec_external(data, x) != 0)
-	{
-		signal_init_interactive();
-		return (x->exit_status);
-	}
+	exec_external(data, x);
 	signal_init_interactive();
 	return (cleanup_execution_vars(data, x));
 }
