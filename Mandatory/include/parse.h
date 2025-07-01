@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   parse.h                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: anktiri <anktiri@student.42.fr>            +#+  +:+       +#+        */
+/*   By: aakritah <aakritah@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/03 02:45:32 by aakritah          #+#    #+#             */
-/*   Updated: 2025/06/27 21:28:07 by anktiri          ###   ########.fr       */
+/*   Updated: 2025/07/01 11:59:15 by aakritah         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -50,6 +50,8 @@ typedef struct s_extra
 	int				cmd_count;
 	int				cmd_index;
 	int				**pipefd;
+	pid_t			*child_pids;
+	int				max_children; 
 }					t_extra;
 
 typedef struct s_token
@@ -71,6 +73,14 @@ typedef struct s_norm
 	char			*var;
 	char			*t;
 }					t_norm;
+
+//------------------------------ tmp :
+int	ft__is_marque(char *t);
+
+int	ft_remove_quotes2(t_token **data);
+char	*ft_filter_exp(t_extra *x, char *str, int f2);
+char	*ft_strjoin4(char **s1);
+
 
 //------------------------------ Parsing :
 t_token				*ft_parse(char *str, t_extra *x);

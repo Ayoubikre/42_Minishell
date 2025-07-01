@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   main.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: anktiri <anktiri@student.42.fr>            +#+  +:+       +#+        */
+/*   By: aakritah <aakritah@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/25 13:18:28 by aakritah          #+#    #+#             */
-/*   Updated: 2025/06/28 18:48:08 by anktiri          ###   ########.fr       */
+/*   Updated: 2025/07/01 12:11:37 by aakritah         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,6 +14,10 @@
 
 volatile sig_atomic_t	g_signal_received = 0;
 
+void tt()
+{
+	system("leaks minishell");
+}
 int	main_engine(char *str, t_extra *x)
 {
 	t_token	*data;
@@ -23,7 +27,8 @@ int	main_engine(char *str, t_extra *x)
 		data = ft_parse(str, x);
 		if (data)
 		{
-			x->exit_status = ft_execution(data, x);
+			ft_print_list(data);
+			// x->exit_status = ft_execution(data, x);
 			ft_free_list(&data);
 		}
 		add_history(str);
@@ -43,6 +48,7 @@ int	main(int ac, char **av, char **env)
 	t_extra	x;
 	int		continue_loop;
 
+	atexit(tt);
 	(void)ac, (void)av;
 	signal_init_interactive();
 	init_extra(&x, env);

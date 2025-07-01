@@ -1,33 +1,13 @@
-#               ----------------      MAC :    ----------------
-
 CC = cc
 
 CFLAGS = -Wall -Werror -Wextra -I$(HOME)/readline/include
-# CFLAGS = -Wall -Werror -Wextra -I$(HOME)/goinfre/homebrew/Cellar/readline/8.2.13/include
 
-# CFLAGS = -fsanitize=address -g -I$(HOME)/goinfre/homebrew/Cellar/readline/8.2.13/include
-
-# CFLAGS = -I./libs/readline/include
+# CFLAGS = -fsanitize=address -g -I$(HOME)/readline/include
 
 LDFLAGS = -L$(HOME)/readline/lib
-# LDFLAGS = -L$(HOME)/goinfre/homebrew/Cellar/readline/8.2.13/lib
+
 LDLIBS  = -lreadline -lncurses
 
-#               ----------------      LNX :    ----------------
-
-
-# CC = cc
-
-# CFLAGS = -Wall -Werror -Wextra -I./libs/readline/include
-
-# # CFLAGS = -fsanitize=address -g -I./libs/readline/include
-
-# # CFLAGS = -I./libs/readline/include
-
-# RDFLAGS = -lreadline -lncurses
-
-
-#               ----------------                ----------------
 # Mandatory 
 
 headers  =	./Mandatory/include/main.h \
@@ -49,6 +29,8 @@ PARSING  =	./Mandatory/main.c \
 			./Mandatory/Parsing/Exp/fix_cas_2.c \
 			./Mandatory/Parsing/Exp/set_token.c \
 			./Mandatory/Parsing/Exp/quotes.c \
+			./Mandatory/Parsing/Exp/quotes2.c \
+			./Mandatory/Parsing/Exp/filter_exp.c \
 			./Mandatory/Parsing/Exp/utils.c \
 			./Mandatory/Parsing/Filter/filter_list.c  \
 			./Mandatory/Parsing/Filter/filter_list2.c  \
@@ -57,6 +39,7 @@ PARSING  =	./Mandatory/main.c \
 			./Mandatory/Parsing/Utils/ft_split4.c \
 			./Mandatory/Parsing/Utils/utils1.c \
 			./Mandatory/Parsing/Utils/utils2.c \
+			./Mandatory/Parsing/Utils/ft_strjoin4.c \
 
 BUILTINS =	./Mandatory/execution/builtins/pwd.c \
 			./Mandatory/execution/builtins/cd.c \
@@ -74,7 +57,8 @@ BUILTINS =	./Mandatory/execution/builtins/pwd.c \
 
 EXEC = 		./Mandatory/execution/exec/execution.c \
 			./Mandatory/execution/exec/exec_external.c \
-			./Mandatory/execution/exec/exec_ext_utils.c \
+			./Mandatory/execution/exec/exec_external_utils.c \
+			./Mandatory/execution/exec/exec_external_utils2.c \
 			./Mandatory/execution/exec/exec_single.c \
 			./Mandatory/execution/exec/helpers.c \
 			./Mandatory/execution/exec/redirection.c \
@@ -83,6 +67,7 @@ EXEC = 		./Mandatory/execution/exec/execution.c \
 			./Mandatory/execution/exec/here_utils.c \
 			./Mandatory/execution/exec/pipe.c \
 			./Mandatory/execution/exec/pipe_utils.c \
+			./Mandatory/execution/exec/pipe_utils2.c \
 			./Mandatory/execution/signal/signals.c \
 			./Mandatory/execution/signal/signals_utils.c \
 
@@ -119,6 +104,8 @@ PARSING_B  =	./Bonus/main_bonus.c \
 			./Bonus/Parsing/Exp/fix_cas_2_bonus.c \
 			./Bonus/Parsing/Exp/set_token_bonus.c \
 			./Bonus/Parsing/Exp/quotes_bonus.c \
+			./Bonus/Parsing/Exp/quotes2_bonus.c \
+			./Bonus/Parsing/Exp/filter_exp_bonus.c \
 			./Bonus/Parsing/Exp/utils_bonus.c \
 			./Bonus/Parsing/Wildcard/wildcard_bonus.c \
 			./Bonus/Parsing/Wildcard/get_wc_list_bonus.c \
@@ -152,7 +139,8 @@ BUILTINS_B =	./Bonus/execution/builtins/pwd_bonus.c \
 
 EXEC_B = 		./Bonus/execution/exec/execution_bonus.c \
 			./Bonus/execution/exec/exec_external_bonus.c \
-			./Bonus/execution/exec/exec_ext_utils_bonus.c \
+			./Bonus/execution/exec/exec_external_utils_bonus.c \
+			./Bonus/execution/exec/exec_external_utils2_bonus.c \
 			./Bonus/execution/exec/exec_single_bonus.c \
 			./Bonus/execution/exec/helpers_bonus.c \
 			./Bonus/execution/exec/redirection_bonus.c \
@@ -161,6 +149,7 @@ EXEC_B = 		./Bonus/execution/exec/execution_bonus.c \
 			./Bonus/execution/exec/here_utils_bonus.c \
 			./Bonus/execution/exec/pipe_bonus.c \
 			./Bonus/execution/exec/pipe_utils_bonus.c \
+			./Bonus/execution/exec/pipe_utils2_bonus.c \
 			./Bonus/execution/signal/signals_bonus.c \
 			./Bonus/execution/signal/signals_utils_bonus.c \
 
@@ -228,7 +217,7 @@ $(NAME_B): $(OBJC_B)
 	@$(CC) $(CFLAGS) $(LDFLAGS) $(OBJC_B) -o $(NAME_B) $(libft_B) $(LDLIBS)
 	@echo "$(GREEN)✅ Minishell Bonus compiled successfully!$(RESET)"
 
-Bonus/%.o: Bonus/%.c $(headers) $(libft_DIR_B)/libft.h
+Bonus/%.o: Bonus/%.c $(headers_B) $(libft_DIR_B)/libft.h
 	@$(CC) $(CFLAGS) -c $< -o $@
 
 clean:

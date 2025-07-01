@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   main_bonus.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: anktiri <anktiri@student.42.fr>            +#+  +:+       +#+        */
+/*   By: aakritah <aakritah@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/25 13:18:28 by aakritah          #+#    #+#             */
-/*   Updated: 2025/06/28 19:07:31 by anktiri          ###   ########.fr       */
+/*   Updated: 2025/07/01 12:16:02 by aakritah         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,7 +23,8 @@ int	main_engine(char *str, t_extra *x)
 		data = ft_parse(str, x);
 		if (data)
 		{
-			x->exit_status = ft_execution(data, x);
+			ft_print_list(data);
+			// x->exit_status = ft_execution(data, x);
 			ft_free_list(&data);
 		}
 		add_history(str);
