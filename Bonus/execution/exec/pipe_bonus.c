@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   pipe_bonus.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: anktiri <anktiri@student.42.fr>            +#+  +:+       +#+        */
+/*   By: aakritah <aakritah@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/06/13 13:49:37 by anktiri           #+#    #+#             */
-/*   Updated: 2025/06/30 17:49:51 by anktiri          ###   ########.fr       */
+/*   Updated: 2025/07/01 14:55:11 by aakritah         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -59,7 +59,6 @@ static int	create_all_pipes(t_extra *x)
 	{
 		if (pipe(x->pipefd[a]) == -1)
 		{
-			ft_putstr_fd("pipe creation failed\n", STDERR_FILENO);
 			i = 0;
 			while (i < a)
 			{
