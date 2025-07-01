@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   exec_external_utils2.c                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: anktiri <anktiri@student.42.fr>            +#+  +:+       +#+        */
+/*   By: aakritah <aakritah@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/06/30 16:49:04 by anktiri           #+#    #+#             */
-/*   Updated: 2025/06/30 16:58:05 by anktiri          ###   ########.fr       */
+/*   Updated: 2025/07/01 20:46:49 by aakritah         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -78,7 +78,14 @@ void	exec_child(t_token *data, t_extra *x)
 static int	process_command(t_token *current, t_extra *x, int *cmd_idx)
 {
 	pid_t	pid;
-
+	
+	if (setup_heredoc(current, x) != 0)
+	{
+		close(current->pi_doc[0]);
+		close (x->stdin_backup);
+		close (x->stdout_backup);
+		return (ERROR);
+	}
 	if (current->type == b_cmd_t || current->type == cmd_t)
 	{
 		pid = fork();

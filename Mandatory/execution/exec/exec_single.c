@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   exec_single.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: anktiri <anktiri@student.42.fr>            +#+  +:+       +#+        */
+/*   By: aakritah <aakritah@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/25 17:13:15 by anktiri           #+#    #+#             */
-/*   Updated: 2025/06/27 22:20:59 by anktiri          ###   ########.fr       */
+/*   Updated: 2025/07/01 20:46:32 by aakritah         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -35,6 +35,13 @@ int	exec_builtin(t_token *data, t_extra *x)
 
 int	exec_single(t_token *data, t_extra *x)
 {
+	if (setup_heredoc(data, x) != 0)
+	{
+		close(data->pi_doc[0]);
+		close (x->stdin_backup);
+		close (x->stdout_backup);
+		return (ERROR);
+	}
 	if (setup_redirections(data, x) != 0)
 	{
 		restore_std_fds(x);

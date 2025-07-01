@@ -6,7 +6,7 @@
 /*   By: aakritah <aakritah@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/06/01 12:22:54 by anktiri           #+#    #+#             */
-/*   Updated: 2025/07/01 12:29:06 by aakritah         ###   ########.fr       */
+/*   Updated: 2025/07/01 20:47:02 by aakritah         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -128,17 +128,17 @@ int	handle_single_heredoc(t_token *current, t_extra *x)
 
 int	setup_heredoc(t_token *data, t_extra *x)
 {
-	t_token	*current;
+	// t_token	*current;
 
-	current = data;
-	while (current)
-	{
-		if (has_heredoc(current->c_red))
+	// current = data;
+	// while (current)
+	// {
+		if (has_heredoc(data->c_red))
 		{
-			if (handle_single_heredoc(current, x) != SUCCESS)
+			if (handle_single_heredoc(data, x) != SUCCESS)
 				return (ERROR);
 		}
-		current = current->next;
-	}
+		// current = current->next;
+	// }
 	return (SUCCESS);
 }
