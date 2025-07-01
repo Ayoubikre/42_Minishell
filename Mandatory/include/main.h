@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   main.h                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: anktiri <anktiri@student.42.fr>            +#+  +:+       +#+        */
+/*   By: aakritah <aakritah@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/25 13:18:26 by aakritah          #+#    #+#             */
-/*   Updated: 2025/06/30 16:59:31 by anktiri          ###   ########.fr       */
+/*   Updated: 2025/07/01 20:57:42 by aakritah         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,9 +23,11 @@
 # include <string.h>
 # include <stdlib.h>
 # include <sys/stat.h>
+# include <sys/wait.h>
 # include <unistd.h>
 # include <readline/history.h>
 # include <readline/readline.h>
+
 # define RED "\e[1;31m"
 # define CYAN "\e[1;36m"
 # define YELLOW "\e[33m"
