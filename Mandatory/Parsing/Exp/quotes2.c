@@ -6,7 +6,7 @@
 /*   By: aakritah <aakritah@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/07/01 05:13:55 by noctis            #+#    #+#             */
-/*   Updated: 2025/07/01 12:01:38 by aakritah         ###   ########.fr       */
+/*   Updated: 2025/07/01 13:17:55 by aakritah         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -93,9 +93,9 @@ char	*ft_remove_q2(char *str)
 	s = ft_count_size2(t);
 	rs = malloc(s + 1);
 	if (!rs)
-		return (ft_free(t), NULL);
+		return (ft_free(t), free(str), str = NULL, NULL);
 	ft_copy_withe_no_q2(rs, t, 0, 0);
-	return (ft_free(t), free(str), rs);
+	return (ft_free(t), free(str), str = NULL, rs);
 }
 
 int	ft_remove_quotes2(t_token **data)
